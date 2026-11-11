@@ -2,375 +2,443 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PvPWorld</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PvPWorld</title>
 
-<link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
 
-<style>
-  :root {
-    --bg: #060d1f;
-    --surface: #0c1830;
-    --surface-2: #112243;
-    --line: #1b3260;
-    --text: #e6edfb;
-    --muted: #8da2cc;
-    --accent: #3b82f6;
-    --accent-hover: #5b9bff;
-  }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+    html {
+      scroll-behavior: smooth;
+    }
 
-  html {
-    scroll-behavior: smooth;
-  }
+    body {
+      background: #101722;
+      color: #f0f2f5;
+      font-family: 'Minecraftia', monospace;
+      font-size: 13px;
+    }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Minecraftia', monospace;
-    line-height: 1.8;
-    font-size: 12px;
-  }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
+    .wrap {
+      width: 90%;
+      max-width: 1100px;
+      margin: auto;
+    }
 
-  a:focus-visible, button:focus-visible {
-    outline: 2px solid var(--accent-hover);
-    outline-offset: 3px;
-  }
+    header {
+      background: #151f2d;
+      border-bottom: 1px solid #293548;
+      padding: 20px 0;
+    }
 
-  .wrap {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  /* Header */
-
-  header {
-    border-bottom: 1px solid var(--line);
-    position: sticky;
-    top: 0;
-    background: rgba(6,13,31,.92);
-    backdrop-filter: blur(8px);
-    z-index: 10;
-  }
-
-  nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 64px;
-  }
-
-  .logo {
-    font-weight: 800;
-    font-size: 1.25rem;
-    letter-spacing: -0.02em;
-  }
-
-  .logo span {
-    color: var(--accent);
-  }
-
-  nav ul {
-    display: flex;
-    gap: 20px;
-    list-style: none;
-    flex-wrap: wrap;
-  }
-
-  nav ul a {
-    color: var(--muted);
-    font-size: .85rem;
-    transition: color .2s;
-  }
-
-  nav ul a:hover {
-    color: var(--text);
-  }
-
-  /* Buttons */
-
-  .btn {
-    display: inline-block;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: .85rem;
-    border: 1px solid var(--accent);
-    background: var(--accent);
-    color: #fff;
-    transition: background .2s, border-color .2s;
-    cursor: pointer;
-  }
-
-  .btn:hover {
-    background: var(--accent-hover);
-    border-color: var(--accent-hover);
-  }
-
-  .btn.ghost {
-    background: transparent;
-    color: var(--text);
-    border-color: var(--line);
-  }
-
-  .btn.ghost:hover {
-    border-color: var(--accent);
-  }
-
-  /* Hero */
-
-  .hero {
-    padding: 120px 0 100px;
-    text-align: center;
-  }
-
-  .hero h1 {
-    font-size: clamp(1.5rem, 5vw, 3rem);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1.5;
-  }
-
-  .hero p {
-    color: var(--muted);
-    font-size: .9rem;
-    max-width: 650px;
-    margin: 20px auto 36px;
-  }
-
-  .hero .actions {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  /* Sections */
-
-  section.block {
-    padding: 80px 0;
-    border-top: 1px solid var(--line);
-    scroll-margin-top: 64px;
-  }
-
-  .block h2 {
-    font-size: 1.5rem;
-    letter-spacing: -0.02em;
-    margin-bottom: 8px;
-  }
-
-  .block .sub {
-    color: var(--muted);
-    margin-bottom: 36px;
-    max-width: 650px;
-    font-size: .85rem;
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 16px;
-  }
-
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 24px;
-  }
-
-  .card h3 {
-    font-size: .95rem;
-    margin-bottom: 6px;
-  }
-
-  .card p {
-    color: var(--muted);
-    font-size: .8rem;
-  }
-
-  /* Most Kills */
-
-  .kills-card {
-    position: relative;
-    overflow: hidden;
-    background: #292f39;
-    border: 1px solid #414956;
-    border-radius: 16px;
-    padding: 28px;
-    min-height: 260px;
-  }
-
-  .kills-card h2 {
-    color: #f0f2f5;
-    margin-bottom: 8px;
-  }
-
-  .kills-card .sub {
-    color: #b0bac8;
-    margin-bottom: 20px;
-  }
-
-  .kills-list {
-    list-style: none;
-    max-width: 500px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .kills-list li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 0;
-    border-bottom: 1px solid #48515e;
-    color: #f0f2f5;
-    font-size: .8rem;
-  }
-
-  .kills-list li:last-child {
-    border-bottom: none;
-  }
-
-  .kill-count {
-    color: #c2cad6;
-    font-weight: 700;
-    white-space: nowrap;
-  }
-
-  .mace-image {
-    position: absolute;
-    width: 155px;
-    height: 155px;
-    object-fit: contain;
-    top: 12px;
-    right: 18px;
-    mix-blend-mode: screen;
-    transition: transform .3s ease;
-    pointer-events: none;
-  }
-
-  .kills-card:hover .mace-image {
-    transform: scale(1.12) rotate(6deg);
-  }
-
-  /* Footer */
-
-  footer {
-    border-top: 1px solid var(--line);
-    padding: 32px 0;
-    color: var(--muted);
-    font-size: .75rem;
-  }
-
-  footer .wrap {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  /* Mobile */
-
-  @media (max-width: 640px) {
     nav {
-      flex-direction: column;
-      justify-content: center;
-      gap: 8px;
-      padding-top: 12px;
-      padding-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: #b9a4ff;
     }
 
     nav ul {
-      gap: 12px;
-      justify-content: center;
+      display: flex;
+      list-style: none;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    nav a:hover {
+      color: #b9a4ff;
     }
 
     .hero {
-      padding: 80px 0 64px;
+      padding: 100px 0 90px;
+      text-align: center;
     }
 
-    .mace-image {
-      width: 95px;
-      height: 95px;
-      opacity: .8;
+    .hero h1 {
+      font-size: clamp(25px, 5vw, 42px);
+      margin-bottom: 22px;
     }
+
+    .hero h1 span {
+      color: #b9a4ff;
+    }
+
+    .hero p {
+      color: #aab5c5;
+      line-height: 2;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .actions a {
+      background: #8b72d6;
+      padding: 14px 20px;
+      border-radius: 8px;
+      transition: .2s;
+    }
+
+    .actions a:hover {
+      background: #a18bea;
+      transform: translateY(-3px);
+    }
+
+    .actions .ghost {
+      background: #202d40;
+      border: 1px solid #39485e;
+    }
+
+    .block {
+      padding: 55px 0;
+    }
+
+    .block h2 {
+      font-size: 20px;
+      margin-bottom: 25px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #192536;
+      border: 1px solid #2d3b50;
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .card h3 {
+      margin-bottom: 12px;
+      color: #c5b5ff;
+    }
+
+    .card p {
+      color: #aab5c5;
+      line-height: 1.9;
+    }
+
+    /* Most Kills */
 
     .kills-card {
-      padding: 20px;
+      position: relative;
+      overflow: hidden;
+      background: #292f39;
+      border: 1px solid #414956;
+      border-radius: 16px;
+      padding: 28px;
+      min-height: 260px;
+    }
+
+    .kills-card h2 {
+      color: #f0f2f5;
+      margin-bottom: 8px;
+    }
+
+    .kills-card .sub {
+      color: #b0bac8;
+      margin-bottom: 20px;
     }
 
     .kills-list {
-      max-width: 100%;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
+      list-style: none;
+      max-width: 500px;
+      position: relative;
+      z-index: 1;
     }
 
-    * {
-      transition: none !important;
+    .kills-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid #48515e;
+      color: #f0f2f5;
+      font-size: .8rem;
     }
-  }
-</style>
+
+    .kills-list li:last-child {
+      border-bottom: none;
+    }
+
+    .kill-count {
+      color: #c2cad6;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .mace-image {
+      position: absolute;
+      width: 155px;
+      height: 155px;
+      object-fit: contain;
+      top: 12px;
+      right: 18px;
+      mix-blend-mode: screen;
+      transition: transform .3s ease;
+      pointer-events: none;
+    }
+
+    .kills-card:hover .mace-image {
+      transform: scale(1.12) rotate(6deg);
+    }
+
+    /* News */
+
+    .news-card {
+      background: #192536;
+      border: 1px solid #2d3b50;
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .news-card h3 {
+      color: #c5b5ff;
+      margin-bottom: 12px;
+    }
+
+    .news-card p {
+      color: #aab5c5;
+      line-height: 1.9;
+    }
+
+    /* Weekly Events */
+
+    .events-intro {
+      color: #aab5c5;
+      line-height: 1.8;
+      margin-top: -12px;
+      margin-bottom: 25px;
+    }
+
+    .event-card {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 25px;
+      align-items: center;
+      background: #192536;
+      border: 1px solid #35445b;
+      border-radius: 14px;
+      padding: 20px;
+      transition: border-color .25s ease, transform .25s ease;
+    }
+
+    .event-card:hover {
+      border-color: #8b72d6;
+      transform: translateY(-3px);
+    }
+
+    .event-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform .3s ease;
+    }
+
+    .event-image:hover {
+      transform: scale(1.06) rotate(-3deg);
+    }
+
+    .event-info h3 {
+      color: #c5b5ff;
+      font-size: 17px;
+      margin-bottom: 14px;
+    }
+
+    .event-details {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .event-details span {
+      color: #d0c5ff;
+      font-size: 11px;
+    }
+
+    .event-info p {
+      color: #aab5c5;
+      line-height: 1.9;
+    }
+
+    .event-label {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 7px 11px;
+      background: #30294a;
+      color: #c5b5ff;
+      border-radius: 6px;
+      font-size: 10px;
+    }
+
+    /* Server IP */
+
+    .server-box {
+      background: #192536;
+      border: 1px solid #2d3b50;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 15px;
+    }
+
+    .server-box h3 {
+      color: #c5b5ff;
+      margin-bottom: 12px;
+    }
+
+    .server-box p {
+      color: #aab5c5;
+      margin-bottom: 15px;
+      overflow-wrap: anywhere;
+    }
+
+    button {
+      background: #8b72d6;
+      color: white;
+      border: none;
+      padding: 11px 16px;
+      border-radius: 7px;
+      font-family: inherit;
+      font-size: 10px;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    button:hover {
+      background: #a18bea;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 15px;
+      color: #78869a;
+      border-top: 1px solid #293548;
+      font-size: 10px;
+      line-height: 2;
+    }
+
+    @media (max-width: 640px) {
+      nav {
+        flex-direction: column;
+      }
+
+      nav ul {
+        justify-content: center;
+        gap: 14px;
+      }
+
+      .hero {
+        padding: 70px 0;
+      }
+
+      .event-card {
+        grid-template-columns: 1fr;
+      }
+
+      .event-image {
+        height: 200px;
+      }
+
+      .mace-image {
+        width: 95px;
+        height: 95px;
+        opacity: .8;
+      }
+
+      .kills-card {
+        padding: 20px;
+      }
+
+      .kills-list {
+        max-width: 100%;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-  <nav class="wrap">
-    <a href="#top" class="logo">PvP<span>World</span></a>
+  <!-- Navigation -->
 
-    <ul>
-      <li><a href="#modes">Teams</a></li>
-      <li><a href="#kills">Most Kills</a></li>
-      <li><a href="#news">News</a></li>
-      <li><a href="#community">Server IP</a></li>
-    </ul>
-  </nav>
-</header>
+  <header>
+    <div class="wrap">
+      <nav>
+        <div class="logo">PvPWorld</div>
 
-<main id="top">
+        <ul>
+          <li><a href="#teams">Teams</a></li>
+          <li><a href="#kills">Most Kills</a></li>
+          <li><a href="#news">News</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#server">Server IP</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
   <!-- Hero -->
 
-  <div class="wrap hero">
-    <h1>PVP. Survival. Teams. The perfect combo.</h1>
+  <section class="hero">
+    <div class="wrap">
+      <h1>PVP. Survival. <span>Teams.</span></h1>
 
-    <p>
-      A Minecraft server to play with your friends and become the strongest,
-      with many popular plugins such as Lifesteal.
-    </p>
+      <p>
+        PVP. Survival. Teams. The perfect combo.
+        A Minecraft server to play with your friends and become
+        the strongest, with many popular plugins such as Lifesteal.
+      </p>
 
-    <div class="actions">
-      <a href="https://discord.gg/eQzZXcjs6" class="btn">Join the discord</a>
-      <a href="#modes" class="btn ghost">Check out the teams</a>
+      <div class="actions">
+        <a href="https://discord.gg/eQzZXcjs6"
+           target="_blank"
+           rel="noopener noreferrer">
+          Join Our Discord
+        </a>
+
+        <a href="#teams" class="ghost">Check out the teams</a>
+      </div>
     </div>
-  </div>
+  </section>
 
   <!-- Teams -->
 
-  <section class="block" id="modes">
+  <section class="block" id="teams">
     <div class="wrap">
       <h2>Teams</h2>
-      <p class="sub">Most popular teams on the server as of now</p>
 
       <div class="grid">
+
         <div class="card">
           <h3>bottles</h3>
           <p>Tiao, Shadox, Coder</p>
@@ -385,6 +453,7 @@
           <h3>nan</h3>
           <p>nan</p>
         </div>
+
       </div>
     </div>
   </section>
@@ -407,18 +476,18 @@
 
         <ol class="kills-list">
           <li>
-            <span>1. Sicksike</span>
-            <span class="kill-count">0 kills</span>
+            <span>1. Tiao</span>
+            <span class="kill-count">350 kills</span>
           </li>
 
           <li>
-            <span>2. tiao9000Twitch</span>
-            <span class="kill-count">0 kills</span>
+            <span>2. Shadox</span>
+            <span class="kill-count">275 kills</span>
           </li>
 
           <li>
-            <span>3. Coni</span>
-            <span class="kill-count">0 kills</span>
+            <span>3. Coder</span>
+            <span class="kill-count">190 kills</span>
           </li>
         </ol>
 
@@ -431,56 +500,90 @@
   <section class="block" id="news">
     <div class="wrap">
       <h2>News</h2>
-      <p class="sub">Updates, events, and patch notes go here.</p>
 
       <div class="grid">
-        <div class="card">
+
+        <div class="news-card">
           <h3>Lifesteal</h3>
-          <p>We have added the lifesteal plugin now!!</p>
+          <p>We have added the Lifesteal plugin now!!</p>
         </div>
 
-        <div class="card">
+        <div class="news-card">
           <h3>Tiao</h3>
+          <p>Server news and updates from Tiao.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Weekly Events -->
+
+  <section class="block" id="events">
+    <div class="wrap">
+
+      <h2>Weekly Events</h2>
+      <p class="events-intro">
+        Check out the upcoming events on PvPWorld.
+      </p>
+
+      <div class="event-card">
+
+        <img
+          class="event-image"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPN_MVh-N4E-kaAtZB_njvXRbsDMmibAK02uTU24G2m9zNQMntShT-m4yW&s=10"
+          alt="PvPWorld weekly event"
+        >
+
+        <div class="event-info">
+
+          <h3>Weekly PvP Event</h3>
+
+          <div class="event-details">
+            <span>📅 Coming Soon!</span>
+            <span>🕒 Time: Coming Soon!</span>
+            <span>🏆 Weekly Prize: Coming Soon!</span>
+          </div>
+
           <p>
-            Tiao has officially become the Minecraft server's biggest menace.
-            Bro has crashed the server more times than anyone can count.
-            Every time things start running smoothly, Tiao somehow finds a way
-            to bring the entire server to its knees. The server sees him join
-            and starts fighting for its life. At this point, the restart button
-            probably has PTSD. Whether it's lag, chaos, or just Tiao doing Tiao
-            things, one thing is certain: the server's uptime has a personal
-            enemy, and his name is Tiao. 💀
+            Join us for our weekly PvP tournament!
+            Fight against other players, prove your skills,
+            and compete for prizes.
           </p>
+
+          <span class="event-label">UPCOMING EVENT</span>
+
         </div>
       </div>
+
     </div>
   </section>
 
   <!-- Server IP -->
 
-  <section class="block" id="community">
+  <section class="block" id="server">
     <div class="wrap">
-      <h2>Server IP</h2>
-      <p class="sub">Join us on Java or Bedrock Edition.</p>
+
+      <h2>Join PvPWorld</h2>
 
       <div class="grid">
 
-        <div class="card">
+        <div class="server-box">
           <h3>Java Edition</h3>
           <p>play2.eternalzero.cloud:26419</p>
-          <br>
-          <button class="btn" onclick="copyAddress('play2.eternalzero.cloud:26419', this)">
-            Copy Java IP
+
+          <button onclick="copyAddress('play2.eternalzero.cloud:26419', this)">
+            Copy IP
           </button>
         </div>
 
-        <div class="card">
+        <div class="server-box">
           <h3>Bedrock Edition</h3>
           <p>play2.eternalzero.cloud</p>
           <p>Port: 55831</p>
-          <br>
-          <button class="btn" onclick="copyAddress('play2.eternalzero.cloud', this)">
-            Copy Bedrock IP
+
+          <button onclick="copyAddress('play2.eternalzero.cloud', this)">
+            Copy IP
           </button>
         </div>
 
@@ -488,34 +591,34 @@
     </div>
   </section>
 
-</main>
+  <!-- Footer -->
 
-<footer>
-  <div class="wrap">
-    <span>&copy; 2026 PvPWorld</span>
-    <span>Not affiliated with Mojang or Microsoft.</span>
-  </div>
-</footer>
+  <footer>
+    © 2026 PvPWorld<br>
+    Not affiliated with Mojang or Microsoft.
+  </footer>
 
-<script>
-function copyAddress(address, button) {
-  const originalText = button.textContent;
+  <!-- Copy IP Script -->
 
-  navigator.clipboard.writeText(address).then(() => {
-    button.textContent = "Copied!";
+  <script>
+    function copyAddress(address, button) {
+      const originalText = button.textContent;
 
-    setTimeout(() => {
-      button.textContent = originalText;
-    }, 1800);
-  }).catch(() => {
-    button.textContent = "Copy failed";
+      navigator.clipboard.writeText(address).then(() => {
+        button.textContent = "Copied!";
 
-    setTimeout(() => {
-      button.textContent = originalText;
-    }, 1800);
-  });
-}
-</script>
+        setTimeout(() => {
+          button.textContent = originalText;
+        }, 1800);
+      }).catch(() => {
+        button.textContent = "Copy failed";
+
+        setTimeout(() => {
+          button.textContent = originalText;
+        }, 1800);
+      });
+    }
+  </script>
 
 </body>
 </html>
