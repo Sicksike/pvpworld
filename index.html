@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PvPWorld</title>
 
+  <!-- Website font -->
   <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/avif"
+    href="https://user54606.na.imgto.link/public/20261111/9f4dc652ec67205b06cb67bd-pvp-world-logo.avif">
 
   <style>
     * {
@@ -113,6 +117,15 @@
       border: 1px solid #39485e;
     }
 
+    .actions .events-button {
+      background: #303c50;
+      border: 1px solid #52627b;
+    }
+
+    .actions .events-button:hover {
+      background: #465570;
+    }
+
     .block {
       padding: 55px 0;
     }
@@ -143,6 +156,74 @@
     .card p {
       color: #aab5c5;
       line-height: 1.9;
+    }
+
+    /* Top 3 Players */
+
+    .top-players {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .player-card {
+      background: #202a38;
+      border: 1px solid #394658;
+      border-radius: 14px;
+      padding: 24px 15px;
+      text-align: center;
+      transition: transform .25s ease, background .25s ease,
+                  border-color .25s ease, box-shadow .25s ease;
+    }
+
+    .player-card:hover {
+      transform: scale(1.045);
+      background: #303d50;
+      border-color: #a18bea;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, .25);
+    }
+
+    .player-card img {
+      width: 135px;
+      height: 135px;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto 15px;
+    }
+
+    .player-place {
+      color: #b9a4ff;
+      font-size: 11px;
+      margin-bottom: 12px;
+    }
+
+    .player-card h3 {
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .first-place {
+      border-color: #c5a94d;
+    }
+
+    .first-place .player-place {
+      color: #f1d477;
+    }
+
+    .second-place {
+      border-color: #9ba8b8;
+    }
+
+    .second-place .player-place {
+      color: #c5d0df;
+    }
+
+    .third-place {
+      border-color: #a97855;
+    }
+
+    .third-place .player-place {
+      color: #d9a47e;
     }
 
     /* Most Kills */
@@ -362,6 +443,15 @@
         padding: 70px 0;
       }
 
+      .top-players {
+        grid-template-columns: 1fr;
+      }
+
+      .player-card img {
+        width: 120px;
+        height: 120px;
+      }
+
       .event-card {
         grid-template-columns: 1fr;
       }
@@ -398,6 +488,7 @@
 
         <ul>
           <li><a href="#teams">Teams</a></li>
+          <li><a href="#top-players">Top Players</a></li>
           <li><a href="#kills">Most Kills</a></li>
           <li><a href="#news">News</a></li>
           <li><a href="#events">Events</a></li>
@@ -427,6 +518,8 @@
         </a>
 
         <a href="#teams" class="ghost">Check out the teams</a>
+
+        <a href="#events" class="events-button">Weekly Events</a>
       </div>
     </div>
   </section>
@@ -452,6 +545,55 @@
         <div class="card">
           <h3>nan</h3>
           <p>nan</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Top 3 Players Overall -->
+
+  <section class="block" id="top-players">
+    <div class="wrap">
+
+      <h2>Top 3 Players Overall</h2>
+
+      <div class="top-players">
+
+        <!-- 1st Place -->
+
+        <div class="player-card first-place">
+          <img
+            src="https://user54606.na.imgto.link/public/20261111/be277e0a369bc7714295224b-avatarbody6.avif"
+            alt="Sicksike Minecraft skin"
+          >
+
+          <div class="player-place">1ST PLACE</div>
+          <h3>Sicksike</h3>
+        </div>
+
+        <!-- 2nd Place -->
+
+        <div class="player-card second-place">
+          <img
+            src="https://user54606.na.imgto.link/public/20261111/b9b0830cb3ce416fe083727e-avatarbody4.avif"
+            alt="tiao9000Twitch Minecraft skin"
+          >
+
+          <div class="player-place">2ND PLACE</div>
+          <h3>tiao9000Twitch</h3>
+        </div>
+
+        <!-- 3rd Place -->
+
+        <div class="player-card third-place">
+          <img
+            src="https://user54606.na.imgto.link/public/20261111/5efb4898ef49635f5b33eedb-avatarbody5-1.avif"
+            alt="Coni_loves_chili Minecraft skin"
+          >
+
+          <div class="player-place">3RD PLACE</div>
+          <h3>Coni_loves_chili</h3>
         </div>
 
       </div>
@@ -537,12 +679,11 @@
 
         <div class="event-info">
 
-          <h3>Weekly PvP Event</h3>
+          <h3>Weekly PvP Tournament</h3>
 
           <div class="event-details">
-            <span>📅 Coming Soon!</span>
-            <span>🕒 Time: Coming Soon!</span>
-            <span>🏆 Weekly Prize: Coming Soon!</span>
+            <span>📅 Saturday, November 14</span>
+            <span>🕒 3:00 PM PST</span>
           </div>
 
           <p>
