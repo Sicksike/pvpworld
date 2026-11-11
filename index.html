@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PvPWorld</title>
 
-  <!-- Website font -->
   <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
 
   <!-- Favicon -->
@@ -163,7 +162,8 @@
     .top-players {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      gap: 24px;
+      align-items: center;
     }
 
     .player-card {
@@ -202,12 +202,25 @@
       overflow-wrap: anywhere;
     }
 
+    /* First place in the middle and slightly bigger */
+
     .first-place {
       border-color: #c5a94d;
+      transform: scale(1.07);
+      z-index: 1;
+    }
+
+    .first-place:hover {
+      transform: scale(1.12);
     }
 
     .first-place .player-place {
       color: #f1d477;
+    }
+
+    .first-place img {
+      width: 150px;
+      height: 150px;
     }
 
     .second-place {
@@ -445,11 +458,25 @@
 
       .top-players {
         grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .first-place {
+        transform: scale(1.03);
+      }
+
+      .first-place:hover {
+        transform: scale(1.07);
       }
 
       .player-card img {
         width: 120px;
         height: 120px;
+      }
+
+      .first-place img {
+        width: 140px;
+        height: 140px;
       }
 
       .event-card {
@@ -487,9 +514,9 @@
         <div class="logo">PvPWorld</div>
 
         <ul>
-          <li><a href="#teams">Teams</a></li>
           <li><a href="#top-players">Top Players</a></li>
           <li><a href="#kills">Most Kills</a></li>
+          <li><a href="#teams">Teams</a></li>
           <li><a href="#news">News</a></li>
           <li><a href="#events">Events</a></li>
           <li><a href="#server">Server IP</a></li>
@@ -524,33 +551,6 @@
     </div>
   </section>
 
-  <!-- Teams -->
-
-  <section class="block" id="teams">
-    <div class="wrap">
-      <h2>Teams</h2>
-
-      <div class="grid">
-
-        <div class="card">
-          <h3>bottles</h3>
-          <p>Tiao, Shadox, Coder</p>
-        </div>
-
-        <div class="card">
-          <h3>LemenDogs</h3>
-          <p>Coni, Conixion, Limeh, Miku</p>
-        </div>
-
-        <div class="card">
-          <h3>nan</h3>
-          <p>nan</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
   <!-- Top 3 Players Overall -->
 
   <section class="block" id="top-players">
@@ -559,18 +559,6 @@
       <h2>Top 3 Players Overall</h2>
 
       <div class="top-players">
-
-        <!-- 1st Place -->
-
-        <div class="player-card first-place">
-          <img
-            src="https://user54606.na.imgto.link/public/20261111/be277e0a369bc7714295224b-avatarbody6.avif"
-            alt="Sicksike Minecraft skin"
-          >
-
-          <div class="player-place">1ST PLACE</div>
-          <h3>Sicksike</h3>
-        </div>
 
         <!-- 2nd Place -->
 
@@ -582,6 +570,18 @@
 
           <div class="player-place">2ND PLACE</div>
           <h3>tiao9000Twitch</h3>
+        </div>
+
+        <!-- 1st Place -->
+
+        <div class="player-card first-place">
+          <img
+            src="https://user54606.na.imgto.link/public/20261111/be277e0a369bc7714295224b-avatarbody6.avif"
+            alt="Sicksike Minecraft skin"
+          >
+
+          <div class="player-place">1ST PLACE</div>
+          <h3>Sicksike</h3>
         </div>
 
         <!-- 3rd Place -->
@@ -618,20 +618,47 @@
 
         <ol class="kills-list">
           <li>
-            <span>1. Tiao</span>
-            <span class="kill-count">350 kills</span>
+            <span>1. Sicksike</span>
+            <span class="kill-count">0 kills</span>
           </li>
 
           <li>
-            <span>2. Shadox</span>
-            <span class="kill-count">275 kills</span>
+            <span>2. tiao9000Twitch</span>
+            <span class="kill-count">0 kills</span>
           </li>
 
           <li>
-            <span>3. Coder</span>
-            <span class="kill-count">190 kills</span>
+            <span>3. Coni</span>
+            <span class="kill-count">0 kills</span>
           </li>
         </ol>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Teams -->
+
+  <section class="block" id="teams">
+    <div class="wrap">
+      <h2>Teams</h2>
+
+      <div class="grid">
+
+        <div class="card">
+          <h3>bottles</h3>
+          <p>Tiao, Shadox, Coder</p>
+        </div>
+
+        <div class="card">
+          <h3>LemenDogs</h3>
+          <p>Coni, Conixion, Limeh, Miku</p>
+        </div>
+
+        <div class="card">
+          <h3>nan</h3>
+          <p>nan</p>
+        </div>
 
       </div>
     </div>
@@ -679,11 +706,11 @@
 
         <div class="event-info">
 
-          <h3>Weekly PvP Tournament</h3>
+          <h3>SERVER OPENING</h3>
 
           <div class="event-details">
             <span>📅 Saturday, November 14</span>
-            <span>🕒 3:00 PM PST</span>
+            <span>🕒 4:00 PM PST</span>
           </div>
 
           <p>
