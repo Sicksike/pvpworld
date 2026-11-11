@@ -84,8 +84,8 @@
 <main id="top">
   <!-- Hero -->
   <div class="wrap hero">
-    <h1>Minecraft PvP, all in one place.</h1>
-    <p>A server to play on with your friends with many popular plugins such as lifesteal.</p>
+    <h1>PVP. Survival. Teams. The perfect combo.</h1>
+    <p>A Minecraft server to play with your friends and become the strongest, with many popular plugins such as Lifesteal.</p>
     <div class="actions">
       <a href="https://discord.gg/eQzZXcjs6" class="btn">Join the discord</a>
       <a href="#modes" class="btn ghost">Check out the teams</a>
@@ -98,8 +98,8 @@
       <h2>Teams</h2>
       <p class="sub">Most popular teams on the server as of now</p>
       <div class="grid">
-        <div class="card"><h3>TSS</h3><p>Tiao, Shadox, Seattle</p></div>
-        <div class="card"><h3>nan</h3><p>nan</p></div>
+        <div class="card"><h3>bottles</h3><p>Tiao, Shadox, Coder</p></div>
+        <div class="card"><h3>LemenDogs</h3><p>Coni, Conixion, Limeh, Miku</p></div>
         <div class="card"><h3>nan</h3><p>nan</p></div>
       </div>
     </div>
@@ -112,7 +112,7 @@
       <p class="sub">Updates, events, and patch notes go here.</p>
       <div class="grid">
         <div class="card"><h3>Lifesteal</h3><p>We have added the lifesteal plugin now!!</p></div>
-        <div class="card"><h3>Tiao</h3></h3><p>Tiao has officially become the Minecraft server's biggest menace. Bro has crashed the server more times than anyone can count. Every time things start running smoothly, Tiao somehow finds a way to bring the entire server to its knees. The server sees him join and starts fighting for its life. At this point, the restart button probably has PTSD. Whether it's lag, chaos, or just Tiao doing Tiao things, one thing is certain: the server's uptime has a personal enemy, and his name is Tiao. 💀</p></div>
+        <div class="card"><h3>Tiao</h3><p>Tiao has officially become the Minecraft server's biggest menace. Bro has crashed the server more times than anyone can count. Every time things start running smoothly, Tiao somehow finds a way to bring the entire server to its knees. The server sees him join and starts fighting for its life. At this point, the restart button probably has PTSD. Whether it's lag, chaos, or just Tiao doing Tiao things, one thing is certain: the server's uptime has a personal enemy, and his name is Tiao. 💀</p></div>
       </div>
     </div>
   </section>
@@ -121,8 +121,24 @@
   <section class="block" id="community">
     <div class="wrap">
       <h2>Server IP</h2>
-      <p class="sub">Server IP is: play2.eternalzero.cloud:26419</p>
-      <a href="#" class="btn" id="copy-ip">Copy IP</a>
+      <p class="sub">Join us on Java or Bedrock Edition.</p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Java Edition</h3>
+          <p>play2.eternalzero.cloud:26419</p>
+          <br>
+          <button class="btn" onclick="copyAddress('play2.eternalzero.cloud:26419', this)">Copy Java IP</button>
+        </div>
+
+        <div class="card">
+          <h3>Bedrock Edition</h3>
+          <p>play2.eternalzero.cloud</p>
+          <p>Port: 55831</p>
+          <br>
+          <button class="btn" onclick="copyAddress('play2.eternalzero.cloud', this)">Copy Bedrock IP</button>
+        </div>
+      </div>
     </div>
   </section>
 </main>
@@ -134,18 +150,23 @@
   </div>
 </footer>
 <script>
-    const ip = "play2.eternalzero.cloud:26419";
-    document.getElementById("copy-ip").addEventListener("click", async () => {
-      const button = document.getElementById("copy-ip");
-      try {
-        await navigator.clipboard.writeText(ip);
-        button.textContent = "IP copied!";
-      } catch {
-        button.textContent = ip;
-      }
-      setTimeout(() => button.textContent = "Copy server IP", 1800);
-    });
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+function copyAddress(address, button) {
+  const originalText = button.textContent;
+
+  navigator.clipboard.writeText(address).then(() => {
+    button.textContent = "Copied!";
+
+    setTimeout(() => {
+      button.textContent = originalText;
+    }, 1800);
+  }).catch(() => {
+    button.textContent = "Copy failed";
+
+    setTimeout(() => {
+      button.textContent = originalText;
+    }, 1800);
+  });
+}
+</script>
 </body>
 </html>
