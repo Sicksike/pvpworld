@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,6 +39,60 @@
       width: 90%;
       max-width: 1100px;
       margin: auto;
+    }
+
+    /* SERVER STATUS BAR */
+
+    .status-bar {
+      background: #101722;
+      border-bottom: 1px solid #293548;
+      padding: 10px 0;
+      text-align: center;
+      font-size: 10px;
+      color: #aab5c5;
+    }
+
+    .status-content {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #e6c66c;
+      display: inline-block;
+      box-shadow: 0 0 8px rgba(230, 198, 108, .5);
+    }
+
+    .status-dot.online {
+      background: #55df91;
+      box-shadow: 0 0 8px rgba(85, 223, 145, .6);
+    }
+
+    .status-dot.offline {
+      background: #ff7070;
+      box-shadow: 0 0 8px rgba(255, 112, 112, .5);
+    }
+
+    .status-dot.checking {
+      background: #e6c66c;
+      box-shadow: 0 0 8px rgba(230, 198, 108, .5);
+    }
+
+    #server-status-text {
+      color: #e6c66c;
+    }
+
+    #server-status-text.online {
+      color: #55df91;
+    }
+
+    #server-status-text.offline {
+      color: #ff7070;
     }
 
     header {
@@ -201,8 +256,6 @@
       font-size: 12px;
       overflow-wrap: anywhere;
     }
-
-    /* First place in the middle and slightly bigger */
 
     .first-place {
       border-color: #c5a94d;
@@ -506,6 +559,16 @@
 
 <body>
 
+  <!-- Small Server Status Indicator -->
+
+  <div class="status-bar">
+    <div class="status-content">
+      <span id="server-status-dot" class="status-dot checking"></span>
+      <span>SERVER STATUS:</span>
+      <span id="server-status-text">CHECKING...</span>
+    </div>
+  </div>
+
   <!-- Navigation -->
 
   <header>
@@ -767,9 +830,11 @@
     Not affiliated with Mojang or Microsoft.
   </footer>
 
-  <!-- Copy IP Script -->
+  <!-- Scripts -->
 
   <script>
+    // Copy IP
+
     function copyAddress(address, button) {
       const originalText = button.textContent;
 
@@ -787,6 +852,50 @@
         }, 1800);
       });
     }
+
+    // PvPWorld Server Status
+
+    async function updateServerStatus() {
+      const dot = document.getElementById("server-status-dot");
+      const statusText = document.getElementById("server-status-text");
+
+      try {
+        const address = "play2.eternalzero.cloud:26419";
+
+        const response = await fetch(
+          "https://api.mcsrvstat.us/3/" + encodeURIComponent(address)
+        );
+
+        if (!response.ok) {
+          throw new Error("Status API unavailable");
+        }
+
+        const data = await response.json();
+
+        if (data.online === true) {
+          dot.className = "status-dot online";
+          statusText.className = "online";
+          statusText.textContent = "ONLINE";
+        } else if (data.online === false) {
+          dot.className = "status-dot offline";
+          statusText.className = "offline";
+          statusText.textContent = "OFFLINE";
+        } else {
+          throw new Error("Unknown server response");
+        }
+
+      } catch (error) {
+        dot.className = "status-dot checking";
+        statusText.className = "";
+        statusText.textContent = "STATUS UNAVAILABLE";
+      }
+    }
+
+    // Check immediately when the page loads
+    updateServerStatus();
+
+    // Check again every 5 minutes
+    setInterval(updateServerStatus, 300000);
   </script>
 
 </body>
