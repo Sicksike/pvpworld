@@ -1,10 +1,13 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PvPWorld</title>
+
 <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
+
 <style>
   :root {
     --bg: #060d1f;
@@ -16,65 +19,326 @@
     --accent: #3b82f6;
     --accent-hover: #5b9bff;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Minecraftia', monospace;    line-height: 1.6;
+    font-family: 'Minecraftia', monospace;
+    line-height: 1.8;
+    font-size: 12px;
   }
-  a { color: inherit; text-decoration: none; }
-  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-hover); outline-offset: 3px; }
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent-hover);
+    outline-offset: 3px;
+  }
+
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
 
   /* Header */
-  header { border-bottom: 1px solid var(--line); position: sticky; top: 0; background: rgba(6,13,31,.92); backdrop-filter: blur(8px); z-index: 10; }
-  nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-  .logo { font-weight: 800; font-size: 1.25rem; letter-spacing: -0.02em; }
-  .logo span { color: var(--accent); }
-  nav ul { display: flex; gap: 28px; list-style: none; }
-  nav ul a { color: var(--muted); font-size: .95rem; transition: color .2s; }
-  nav ul a:hover { color: var(--text); }
+
+  header {
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(6,13,31,.92);
+    backdrop-filter: blur(8px);
+    z-index: 10;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 64px;
+  }
+
+  .logo {
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+  }
+
+  .logo span {
+    color: var(--accent);
+  }
+
+  nav ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+
+  nav ul a {
+    color: var(--muted);
+    font-size: .85rem;
+    transition: color .2s;
+  }
+
+  nav ul a:hover {
+    color: var(--text);
+  }
 
   /* Buttons */
-  .btn { display: inline-block; padding: 12px 24px; border-radius: 8px; font-weight: 600; font-size: .95rem; border: 1px solid var(--accent); background: var(--accent); color: #fff; transition: background .2s, border-color .2s; }
-  .btn:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
-  .btn.ghost { background: transparent; color: var(--text); border-color: var(--line); }
-  .btn.ghost:hover { border-color: var(--accent); }
+
+  .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: .85rem;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    transition: background .2s, border-color .2s;
+    cursor: pointer;
+  }
+
+  .btn:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+  }
+
+  .btn.ghost {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--line);
+  }
+
+  .btn.ghost:hover {
+    border-color: var(--accent);
+  }
 
   /* Hero */
-  .hero { padding: 120px 0 100px; text-align: center; }
-  .hero h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; }
-  .hero p { color: var(--muted); font-size: 1.15rem; max-width: 520px; margin: 20px auto 36px; }
-  .hero .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  .hero {
+    padding: 120px 0 100px;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.5;
+  }
+
+  .hero p {
+    color: var(--muted);
+    font-size: .9rem;
+    max-width: 650px;
+    margin: 20px auto 36px;
+  }
+
+  .hero .actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 
   /* Sections */
-  section.block { padding: 80px 0; border-top: 1px solid var(--line); scroll-margin-top: 64px; }
-  .block h2 { font-size: 1.75rem; letter-spacing: -0.02em; margin-bottom: 8px; }
-  .block .sub { color: var(--muted); margin-bottom: 36px; max-width: 520px; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
-  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 24px; }
-  .card h3 { font-size: 1.05rem; margin-bottom: 6px; }
-  .card p { color: var(--muted); font-size: .95rem; }
+
+  section.block {
+    padding: 80px 0;
+    border-top: 1px solid var(--line);
+    scroll-margin-top: 64px;
+  }
+
+  .block h2 {
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .block .sub {
+    color: var(--muted);
+    margin-bottom: 36px;
+    max-width: 650px;
+    font-size: .85rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  .card h3 {
+    font-size: .95rem;
+    margin-bottom: 6px;
+  }
+
+  .card p {
+    color: var(--muted);
+    font-size: .8rem;
+  }
+
+  /* Most Kills */
+
+  .kills-card {
+    position: relative;
+    overflow: hidden;
+    background: #292f39;
+    border: 1px solid #414956;
+    border-radius: 16px;
+    padding: 28px;
+    min-height: 260px;
+  }
+
+  .kills-card h2 {
+    color: #f0f2f5;
+    margin-bottom: 8px;
+  }
+
+  .kills-card .sub {
+    color: #b0bac8;
+    margin-bottom: 20px;
+  }
+
+  .kills-list {
+    list-style: none;
+    max-width: 500px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .kills-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #48515e;
+    color: #f0f2f5;
+    font-size: .8rem;
+  }
+
+  .kills-list li:last-child {
+    border-bottom: none;
+  }
+
+  .kill-count {
+    color: #c2cad6;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .mace-image {
+    position: absolute;
+    width: 155px;
+    height: 155px;
+    object-fit: contain;
+    top: 12px;
+    right: 18px;
+    mix-blend-mode: screen;
+    transition: transform .3s ease;
+    pointer-events: none;
+  }
+
+  .kills-card:hover .mace-image {
+    transform: scale(1.12) rotate(6deg);
+  }
 
   /* Footer */
-  footer { border-top: 1px solid var(--line); padding: 32px 0; color: var(--muted); font-size: .9rem; }
-  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 32px 0;
+    color: var(--muted);
+    font-size: .75rem;
+  }
+
+  footer .wrap {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* Mobile */
 
   @media (max-width: 640px) {
-    nav ul { gap: 16px; }
-    .hero { padding: 80px 0 64px; }
+    nav {
+      flex-direction: column;
+      justify-content: center;
+      gap: 8px;
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+
+    nav ul {
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .hero {
+      padding: 80px 0 64px;
+    }
+
+    .mace-image {
+      width: 95px;
+      height: 95px;
+      opacity: .8;
+    }
+
+    .kills-card {
+      padding: 20px;
+    }
+
+    .kills-list {
+      max-width: 100%;
+    }
   }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    * {
+      transition: none !important;
+    }
+  }
 </style>
 </head>
+
 <body>
 
 <header>
   <nav class="wrap">
     <a href="#top" class="logo">PvP<span>World</span></a>
+
     <ul>
       <li><a href="#modes">Teams</a></li>
+      <li><a href="#kills">Most Kills</a></li>
       <li><a href="#news">News</a></li>
       <li><a href="#community">Server IP</a></li>
     </ul>
@@ -82,53 +346,132 @@
 </header>
 
 <main id="top">
+
   <!-- Hero -->
+
   <div class="wrap hero">
     <h1>PVP. Survival. Teams. The perfect combo.</h1>
-    <p>A Minecraft server to play with your friends and become the strongest, with many popular plugins such as Lifesteal.</p>
+
+    <p>
+      A Minecraft server to play with your friends and become the strongest,
+      with many popular plugins such as Lifesteal.
+    </p>
+
     <div class="actions">
       <a href="https://discord.gg/eQzZXcjs6" class="btn">Join the discord</a>
       <a href="#modes" class="btn ghost">Check out the teams</a>
     </div>
   </div>
 
-  <!-- Game modes -->
+  <!-- Teams -->
+
   <section class="block" id="modes">
     <div class="wrap">
       <h2>Teams</h2>
       <p class="sub">Most popular teams on the server as of now</p>
+
       <div class="grid">
-        <div class="card"><h3>bottles</h3><p>Tiao, Shadox, Coder</p></div>
-        <div class="card"><h3>LemenDogs</h3><p>Coni, Conixion, Limeh, Miku</p></div>
-        <div class="card"><h3>nan</h3><p>nan</p></div>
+        <div class="card">
+          <h3>bottles</h3>
+          <p>Tiao, Shadox, Coder</p>
+        </div>
+
+        <div class="card">
+          <h3>LemenDogs</h3>
+          <p>Coni, Conixion, Limeh, Miku</p>
+        </div>
+
+        <div class="card">
+          <h3>nan</h3>
+          <p>nan</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Most Kills -->
+
+  <section class="block" id="kills">
+    <div class="wrap">
+
+      <div class="kills-card">
+
+        <h2>Most Kills</h2>
+        <p class="sub">The top players on PvPWorld.</p>
+
+        <img
+          class="mace-image"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8E6d43SywWHFTD43PI6PQW800LzDD2At0oXn6BX_5YYM7iDAT8_z14qY&s=10"
+          alt="Minecraft mace"
+        >
+
+        <ol class="kills-list">
+          <li>
+            <span>1. Sicksike</span>
+            <span class="kill-count">0 kills</span>
+          </li>
+
+          <li>
+            <span>2. tiao9000Twitch</span>
+            <span class="kill-count">0 kills</span>
+          </li>
+
+          <li>
+            <span>3. Coni</span>
+            <span class="kill-count">0 kills</span>
+          </li>
+        </ol>
+
       </div>
     </div>
   </section>
 
   <!-- News -->
+
   <section class="block" id="news">
     <div class="wrap">
       <h2>News</h2>
       <p class="sub">Updates, events, and patch notes go here.</p>
+
       <div class="grid">
-        <div class="card"><h3>Lifesteal</h3><p>We have added the lifesteal plugin now!!</p></div>
-        <div class="card"><h3>Tiao</h3><p>Tiao has officially become the Minecraft server's biggest menace. Bro has crashed the server more times than anyone can count. Every time things start running smoothly, Tiao somehow finds a way to bring the entire server to its knees. The server sees him join and starts fighting for its life. At this point, the restart button probably has PTSD. Whether it's lag, chaos, or just Tiao doing Tiao things, one thing is certain: the server's uptime has a personal enemy, and his name is Tiao. 💀</p></div>
+        <div class="card">
+          <h3>Lifesteal</h3>
+          <p>We have added the lifesteal plugin now!!</p>
+        </div>
+
+        <div class="card">
+          <h3>Tiao</h3>
+          <p>
+            Tiao has officially become the Minecraft server's biggest menace.
+            Bro has crashed the server more times than anyone can count.
+            Every time things start running smoothly, Tiao somehow finds a way
+            to bring the entire server to its knees. The server sees him join
+            and starts fighting for its life. At this point, the restart button
+            probably has PTSD. Whether it's lag, chaos, or just Tiao doing Tiao
+            things, one thing is certain: the server's uptime has a personal
+            enemy, and his name is Tiao. 💀
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Community -->
+  <!-- Server IP -->
+
   <section class="block" id="community">
     <div class="wrap">
       <h2>Server IP</h2>
       <p class="sub">Join us on Java or Bedrock Edition.</p>
 
       <div class="grid">
+
         <div class="card">
           <h3>Java Edition</h3>
           <p>play2.eternalzero.cloud:26419</p>
           <br>
-          <button class="btn" onclick="copyAddress('play2.eternalzero.cloud:26419', this)">Copy Java IP</button>
+          <button class="btn" onclick="copyAddress('play2.eternalzero.cloud:26419', this)">
+            Copy Java IP
+          </button>
         </div>
 
         <div class="card">
@@ -136,11 +479,15 @@
           <p>play2.eternalzero.cloud</p>
           <p>Port: 55831</p>
           <br>
-          <button class="btn" onclick="copyAddress('play2.eternalzero.cloud', this)">Copy Bedrock IP</button>
+          <button class="btn" onclick="copyAddress('play2.eternalzero.cloud', this)">
+            Copy Bedrock IP
+          </button>
         </div>
+
       </div>
     </div>
   </section>
+
 </main>
 
 <footer>
@@ -149,6 +496,7 @@
     <span>Not affiliated with Mojang or Microsoft.</span>
   </div>
 </footer>
+
 <script>
 function copyAddress(address, button) {
   const originalText = button.textContent;
@@ -168,5 +516,6 @@ function copyAddress(address, button) {
   });
 }
 </script>
+
 </body>
 </html>
