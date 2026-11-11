@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Vote | PvPWorld</title>
+
+<link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
+
+<link rel="icon" type="image/avif"
+href="https://user54606.na.imgto.link/public/20261111/9f4dc652ec67205b06cb67bd-pvp-world-logo.avif">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #101b2b;
+    color: #e8edf5;
+    font-family: 'Minecraftia', monospace;
+    min-height: 100vh;
+}
+
+header {
+    background: #172438;
+    border-bottom: 1px solid #34445b;
+    padding: 22px;
+    text-align: center;
+}
+
+header h1 {
+    color: #c5b5ff;
+    font-size: 25px;
+}
+
+header p {
+    color: #aab5c5;
+    font-size: 10px;
+    margin-top: 12px;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 11px 18px;
+    background: #29384e;
+    color: #e8edf5;
+    text-decoration: none;
+    border: 1px solid #465873;
+    border-radius: 7px;
+    font-size: 10px;
+    transition: .2s ease;
+}
+
+.back-button:hover {
+    background: #3b4d68;
+    transform: scale(1.04);
+}
+
+.container {
+    max-width: 1050px;
+    margin: 65px auto;
+    padding: 0 22px;
+}
+
+.container h2 {
+    text-align: center;
+    font-size: 19px;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.description {
+    text-align: center;
+    color: #aab5c5;
+    font-size: 10px;
+    line-height: 2;
+    margin-bottom: 38px;
+}
+
+.vote-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.vote-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 155px;
+    padding: 25px;
+    background: #19283b;
+    border: 1px solid #35465f;
+    border-radius: 13px;
+    text-decoration: none;
+    color: #e8edf5;
+    text-align: center;
+    transition:
+        transform .22s ease,
+        background .22s ease,
+        border-color .22s ease,
+        box-shadow .22s ease;
+}
+
+.vote-box:hover {
+    transform: scale(1.045);
+    background: #293a54;
+    border-color: #a18bea;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .25);
+}
+
+.vote-number {
+    color: #b9a4ff;
+    font-size: 22px;
+    margin-bottom: 17px;
+}
+
+.vote-box h3 {
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.vote-box p {
+    color: #aab5c5;
+    font-size: 9px;
+    line-height: 1.8;
+}
+
+footer {
+    text-align: center;
+    color: #78869a;
+    font-size: 9px;
+    padding: 35px 15px;
+    margin-top: 70px;
+    border-top: 1px solid #28384e;
+}
+
+@media (max-width: 700px) {
+    .vote-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 450px) {
+    .vote-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        margin-top: 40px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>PvPWorld</h1>
+    <p>Support the server by voting!</p>
+
+    <a href="index.html" class="back-button">
+        Back to Home
+    </a>
+</header>
+
+<main class="container">
+
+    <h2>Vote for PvPWorld</h2>
+
+    <p class="description">
+        Vote for our server on the websites below.
+        Every vote helps support PvPWorld!
+    </p>
+
+    <div class="vote-grid">
+
+        <a class="vote-box" href="https://example.com" target="_blank" rel="noopener noreferrer">
+            <div class="vote-number">01</div>
+            <h3>Vote Site 1</h3>
+            <p>Click here to vote</p>
+        </a>
+
+        <a class="vote-box" href="https://example.com" target="_blank" rel="noopener noreferrer">
+            <div class="vote-number">02</div>
+            <h3>Vote Site 2</h3>
+            <p>Click here to vote</p>
+        </a>
+
+        <a class="vote-box" href="https://example.com" target="_blank" rel="noopener noreferrer">
+            <div class="vote-number">03</div>
+            <h3>Vote Site 3</h3>
+            <p>Click here to vote</p>
+        </a>
+
+        <a class="vote-box" href="https://example.com" target="_blank" rel="noopener noreferrer">
+            <div class="vote-number">04</div>
+            <h3>Vote Site 4</h3>
+            <p>Click here to vote</p>
+        </a>
+
+        <a class="vote-box" href="https://example.com" target="_blank" rel="noopener noreferrer">
+            <div class="vote-number">05</div>
+            <h3>Vote Site 5</h3>
+            <p>Click here to vote</p>
+        </a>
+
+        <a class="vote-box" href="https://example.com" target="_blank" rel="noopener noreferrer">
+            <div class="vote-number">06</div>
+            <h3>Vote Site 6</h3>
+            <p>Click here to vote</p>
+        </a>
+
+        <a class="vote-box" href="https://example.com" target="_blank" rel="noopener noreferrer">
+            <div class="vote-number">07</div>
+            <h3>Vote Site 7</h3>
+            <p>Click here to vote</p>
+        </a>
+
+    </div>
+</main>
+
+<footer>
+    © 2026 PvPWorld<br><br>
+    Not affiliated with Mojang or Microsoft.
+</footer>
+
+</body>
+</html
