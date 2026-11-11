@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Server Rules | PvPWorld</title>
+
+  <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
+
+  <link rel="icon" type="image/avif"
+    href="https://user54606.na.imgto.link/public/20261111/9f4dc652ec67205b06cb67bd-pvp-world-logo.avif">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #101722;
+      color: #f0f2f5;
+      font-family: 'Minecraftia', monospace;
+      font-size: 13px;
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Header */
+
+    header {
+      background: #151f2d;
+      border-bottom: 1px solid #293548;
+      padding: 18px 0;
+    }
+
+    .header-content {
+      width: 90%;
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      color: #b9a4ff;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .back-button {
+      background: #202d40;
+      border: 1px solid #39485e;
+      padding: 11px 17px;
+      border-radius: 7px;
+      font-size: 10px;
+      transition: .2s ease;
+    }
+
+    .back-button:hover {
+      background: #35445d;
+      border-color: #a18bea;
+      transform: scale(1.04);
+    }
+
+    /* Main content */
+
+    .container {
+      width: 90%;
+      max-width: 900px;
+      margin: 55px auto 80px;
+    }
+
+    .page-heading {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .page-heading h1 {
+      color: #c5b5ff;
+      font-size: clamp(22px, 4vw, 32px);
+      margin-bottom: 17px;
+    }
+
+    .page-heading p {
+      color: #aab5c5;
+      line-height: 1.9;
+      font-size: 11px;
+    }
+
+    /* Rules heading */
+
+    .rules-heading {
+      color: #b9a4ff;
+      font-size: 17px;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    /* Rule boxes */
+
+    .rules-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .rule-box {
+      background: #192536;
+      border: 1px solid #35445b;
+      border-radius: 15px;
+      padding: 24px;
+      transition:
+        transform .23s ease,
+        background .23s ease,
+        border-color .23s ease,
+        box-shadow .23s ease;
+    }
+
+    .rule-box:hover {
+      transform: scale(1.025);
+      background: #293a54;
+      border-color: #a18bea;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, .25);
+    }
+
+    .rule-box h3 {
+      color: #c5b5ff;
+      font-size: 14px;
+      margin-bottom: 13px;
+    }
+
+    .rule-box h3::before {
+      content: "•";
+      color: #a18bea;
+      margin-right: 12px;
+    }
+
+    .rule-box p {
+      color: #aab5c5;
+      font-size: 11px;
+      line-height: 1.9;
+    }
+
+    /* Footer */
+
+    footer {
+      text-align: center;
+      padding: 30px 15px;
+      color: #78869a;
+      border-top: 1px solid #293548;
+      font-size: 10px;
+      line-height: 2;
+    }
+
+    /* Mobile */
+
+    @media (max-width: 600px) {
+      .header-content {
+        flex-direction: column;
+      }
+
+      .container {
+        margin-top: 40px;
+      }
+
+      .rule-box {
+        padding: 21px;
+      }
+
+      .rule-box:hover {
+        transform: scale(1.015);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+
+  <header>
+    <div class="header-content">
+      <div class="logo">PvPWorld</div>
+
+      <a href="index.html" class="back-button">
+        Back to Home
+      </a>
+    </div>
+  </header>
+
+  <!-- Rules -->
+
+  <main class="container">
+
+    <div class="page-heading">
+      <h1>⚖ Server Rules</h1>
+
+      <p>
+        Please read and follow all rules to ensure a great
+        experience for everyone.
+      </p>
+    </div>
+
+    <h2 class="rules-heading">
+      🛡 Survival Server Rules
+    </h2>
+
+    <div class="rules-list">
+
+      <!-- Rule 1 -->
+
+      <div class="rule-box">
+        <h3>Spamming</h3>
+
+        <p>
+          Sending 4+ repeated or similar messages results in a mute.
+        </p>
+      </div>
+
+      <!-- Rule 2 -->
+
+      <div class="rule-box">
+        <h3>Racism & Hate Speech</h3>
+
+        <p>
+          Any racial remarks or hate speech can result in long mutes
+          and eventual bans.
+        </p>
+      </div>
+
+      <!-- Rule 3 -->
+
+      <div class="rule-box">
+        <h3>Hacking & Cheating</h3>
+
+        <p>
+          Using hacked clients, unfair advantages, or unauthorized
+          modifications is prohibited and can result in a ban.
+        </p>
+      </div>
+
+      <!-- Rule 4 -->
+
+      <div class="rule-box">
+        <h3>Exploiting Bugs</h3>
+
+        <p>
+          Abusing server bugs or glitches for an unfair advantage
+          is not allowed. Report any bugs to staff.
+        </p>
+      </div>
+
+      <!-- Rule 5 -->
+
+      <div class="rule-box">
+        <h3>Harassment & Threats</h3>
+
+        <p>
+          Targeted harassment, threats, or continuously making
+          another player's experience unpleasant is prohibited.
+        </p>
+      </div>
+
+      <!-- Rule 6 -->
+
+      <div class="rule-box">
+        <h3>Advertising</h3>
+
+        <p>
+          Advertising other Minecraft servers, websites, or
+          communities without staff permission is not allowed.
+        </p>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+
+  <footer>
+    © 2026 PvPWorld<br>
+    Not affiliated with Mojang or Microsoft.
+  </footer>
+
+</body>
+</html>
