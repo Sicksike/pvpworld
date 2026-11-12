@@ -569,7 +569,7 @@
       line-height: 2;
     }
 
-    /* WARPING AND STRETCHING BLOB */
+    /* SLOW, SOFT WARPING BLOB */
 
     .blob {
       position: absolute;
@@ -595,12 +595,12 @@
       z-index: -1;
       pointer-events: none;
       animation:
-        blobFloat 19s ease-in-out infinite,
-        blobWarp 13s ease-in-out infinite alternate;
+        blobFloat 28s ease-in-out infinite,
+        blobWarp 24s ease-in-out infinite alternate;
       will-change: transform, border-radius;
     }
 
-    /* Extra inner color movement makes the blob look fluid */
+    /* Gentle movement inside the blob */
 
     .blob::before {
       content: "";
@@ -608,11 +608,11 @@
       inset: 0;
       border-radius: inherit;
       background:
-        radial-gradient(ellipse at 25% 35%, rgba(221, 204, 255, 0.35), transparent 35%),
-        radial-gradient(ellipse at 75% 65%, rgba(70, 83, 190, 0.55), transparent 45%),
-        radial-gradient(ellipse at 55% 20%, rgba(180, 154, 255, 0.25), transparent 40%);
-      filter: blur(18px);
-      animation: innerWarp 11s ease-in-out infinite alternate;
+        radial-gradient(ellipse at 25% 35%, rgba(221, 204, 255, 0.28), transparent 35%),
+        radial-gradient(ellipse at 75% 65%, rgba(70, 83, 190, 0.4), transparent 45%),
+        radial-gradient(ellipse at 55% 20%, rgba(180, 154, 255, 0.2), transparent 40%);
+      filter: blur(22px);
+      animation: innerWarp 22s ease-in-out infinite alternate;
     }
 
     /* Soft moving highlight */
@@ -625,12 +625,12 @@
       background:
         radial-gradient(
           ellipse at 30% 25%,
-          rgba(255, 255, 255, 0.28),
+          rgba(255, 255, 255, 0.22),
           transparent 38%
         );
-      filter: blur(20px);
-      opacity: 0.7;
-      animation: highlightWarp 9s ease-in-out infinite alternate;
+      filter: blur(24px);
+      opacity: 0.6;
+      animation: highlightWarp 18s ease-in-out infinite alternate;
     }
 
     @keyframes blobFloat {
@@ -638,13 +638,13 @@
         translate: 0 0;
       }
       25% {
-        translate: 4% -5%;
+        translate: 2% -2%;
       }
       50% {
-        translate: -4% 3%;
+        translate: -2% 2%;
       }
       75% {
-        translate: 3% -3%;
+        translate: 2% -1%;
       }
     }
 
@@ -652,70 +652,61 @@
       0% {
         border-radius: 45% 55% 60% 40% / 50% 40% 60% 50%;
         scale: 1 1;
-        rotate: -8deg;
+        rotate: -3deg;
       }
 
-      20% {
-        border-radius: 65% 35% 45% 55% / 40% 65% 35% 60%;
-        scale: 1.18 0.82;
-        rotate: 5deg;
+      25% {
+        border-radius: 52% 48% 55% 45% / 46% 54% 46% 54%;
+        scale: 1.06 0.96;
+        rotate: 2deg;
       }
 
-      40% {
-        border-radius: 35% 65% 55% 45% / 60% 35% 65% 40%;
-        scale: 0.82 1.2;
-        rotate: 14deg;
+      50% {
+        border-radius: 48% 52% 45% 55% / 54% 46% 54% 46%;
+        scale: 0.96 1.06;
+        rotate: 4deg;
       }
 
-      60% {
-        border-radius: 55% 45% 35% 65% / 35% 60% 40% 65%;
-        scale: 1.15 0.9;
-        rotate: -12deg;
-      }
-
-      80% {
-        border-radius: 40% 60% 65% 35% / 65% 40% 60% 35%;
-        scale: 0.9 1.15;
-        rotate: 7deg;
+      75% {
+        border-radius: 55% 45% 50% 50% / 48% 52% 48% 52%;
+        scale: 1.04 0.98;
+        rotate: -2deg;
       }
 
       100% {
         border-radius: 45% 55% 60% 40% / 50% 40% 60% 50%;
         scale: 1 1;
-        rotate: -8deg;
+        rotate: -3deg;
       }
     }
 
     @keyframes innerWarp {
       0% {
-        transform: translate(-8%, -5%) scale(1.1, 0.85) rotate(-12deg);
-        border-radius: 35% 65% 55% 45%;
+        transform: translate(-3%, -2%) scale(1.03, 0.97) rotate(-4deg);
       }
 
       50% {
-        transform: translate(8%, 6%) scale(0.8, 1.2) rotate(15deg);
-        border-radius: 65% 35% 40% 60%;
+        transform: translate(3%, 2%) scale(0.97, 1.04) rotate(4deg);
       }
 
       100% {
-        transform: translate(-3%, 8%) scale(1.2, 0.9) rotate(-8deg);
-        border-radius: 45% 55% 65% 35%;
+        transform: translate(-2%, 3%) scale(1.04, 0.97) rotate(-3deg);
       }
     }
 
     @keyframes highlightWarp {
       0% {
-        transform: translate(-12%, -8%) scale(0.8, 1.1);
-        opacity: 0.35;
+        transform: translate(-4%, -3%) scale(0.95, 1.03);
+        opacity: 0.4;
       }
 
       50% {
-        transform: translate(10%, 8%) scale(1.2, 0.75);
-        opacity: 0.75;
+        transform: translate(4%, 3%) scale(1.05, 0.97);
+        opacity: 0.65;
       }
 
       100% {
-        transform: translate(-3%, 12%) scale(0.9, 1.15);
+        transform: translate(-2%, 3%) scale(0.98, 1.04);
         opacity: 0.45;
       }
     }
