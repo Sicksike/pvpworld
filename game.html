@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +6,8 @@
 <title>PvPWorld | Game Selector</title>
 <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
 
-    <link rel="icon" type="image/avif"
-    href="https://user54606.na.imgto.link/public/20261111/9f4dc652ec67205b06cb67bd-pvp-world-logo.avif">
+<link rel="icon" type="image/avif"
+href="https://user54606.na.imgto.link/public/20261111/9f4dc652ec67205b06cb67bd-pvp-world-logo.avif">
 
 <style>
 :root {
@@ -458,7 +457,8 @@ h1 {
 
 .play-again-button.show {
     display: block;
-    margin-top: 22px;
+    width: fit-content;
+    margin: 22px auto 0;
 }
 
 /* LEADERBOARD SCREEN */
@@ -483,19 +483,37 @@ h1 {
     margin-bottom: 12px;
 }
 
+/* HORIZONTAL MODE PICKER */
+
 .mode-picker {
     display: flex;
+    flex-wrap: nowrap;
     gap: 18px;
+    width: 100%;
+    max-width: 100%;
     overflow-x: auto;
+    overflow-y: hidden;
     padding: 25px 10px;
     margin: 20px 0;
     scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x proximity;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    touch-action: pan-x;
+    cursor: grab;
+    scrollbar-width: thin;
+    scrollbar-color: var(--purple) #192536;
+}
+
+.mode-picker.dragging {
+    cursor: grabbing;
+    scroll-behavior: auto;
+    scroll-snap-type: none;
+    user-select: none;
 }
 
 .mode-picker::-webkit-scrollbar {
-    height: 6px;
+    height: 7px;
 }
 
 .mode-picker::-webkit-scrollbar-track {
@@ -510,6 +528,7 @@ h1 {
 
 .report-mode {
     flex: 0 0 85px;
+    min-width: 85px;
     height: 90px;
     border: 1px solid var(--border);
     background: #192536;
@@ -538,11 +557,13 @@ h1 {
     height: 48px;
     object-fit: contain;
     image-rendering: pixelated;
+    pointer-events: none;
 }
 
 .report-mode span {
     font-size: 7px;
     white-space: nowrap;
+    pointer-events: none;
 }
 
 .name-entry {
@@ -1199,8 +1220,87 @@ function showLeaderboardScreen() {
         picker.appendChild(button);
     });
 
+    picker.scrollLeft = 0;
+
     loadLeaderboard();
 }
+
+
+/* MODE PICKER MOUSE DRAG + WHEEL SCROLL */
+
+const modePicker = document.getElementById("mode-picker");
+
+let pickerIsDragging = false;
+let pickerStartX = 0;
+let pickerScrollStart = 0;
+let pickerMoved = false;
+let ignorePickerClick = false;
+
+/* Mouse wheel scrolls the picker horizontally */
+
+modePicker.addEventListener("wheel", event => {
+    if (modePicker.scrollWidth <= modePicker.clientWidth) return;
+
+    event.preventDefault();
+
+    modePicker.scrollLeft +=
+        Math.abs(event.deltaX) > Math.abs(event.deltaY)
+            ? event.deltaX
+            : event.deltaY;
+}, { passive: false });
+
+/* Click and drag with a mouse */
+
+modePicker.addEventListener("pointerdown", event => {
+    if (event.pointerType !== "mouse" || event.button !== 0) return;
+
+    pickerIsDragging = true;
+    pickerMoved = false;
+    pickerStartX = event.clientX;
+    pickerScrollStart = modePicker.scrollLeft;
+
+    modePicker.classList.add("dragging");
+    modePicker.setPointerCapture(event.pointerId);
+});
+
+modePicker.addEventListener("pointermove", event => {
+    if (!pickerIsDragging) return;
+
+    const distance = event.clientX - pickerStartX;
+
+    if (Math.abs(distance) > 5) {
+        pickerMoved = true;
+    }
+
+    if (pickerMoved) {
+        modePicker.scrollLeft = pickerScrollStart - distance;
+    }
+});
+
+function stopPickerDrag() {
+    if (!pickerIsDragging) return;
+
+    pickerIsDragging = false;
+    modePicker.classList.remove("dragging");
+
+    if (pickerMoved) {
+        ignorePickerClick = true;
+
+        setTimeout(() => {
+            ignorePickerClick = false;
+        }, 100);
+    }
+}
+
+modePicker.addEventListener("pointerup", stopPickerDrag);
+modePicker.addEventListener("pointercancel", stopPickerDrag);
+
+modePicker.addEventListener("click", event => {
+    if (ignorePickerClick) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+}, true);
 
 
 /* SUBMIT LEADERBOARD ENTRY */
