@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Server Rules | PvPWorld</title>
+  <title>Vote for PvPWorld</title>
 
   <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
 
@@ -75,7 +75,7 @@
 
     .container {
       width: 90%;
-      max-width: 900px;
+      max-width: 1100px;
       margin: 55px auto 80px;
     }
 
@@ -96,28 +96,26 @@
       font-size: 11px;
     }
 
-    /* Rules heading */
+    /* Vote cards */
 
-    .rules-heading {
-      color: #b9a4ff;
-      font-size: 17px;
-      text-align: center;
-      margin-bottom: 25px;
+    .vote-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
     }
 
-    /* Rule boxes */
-
-    .rules-list {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .rule-box {
+    .vote-card {
       background: #192536;
       border: 1px solid #35445b;
       border-radius: 15px;
-      padding: 24px;
+      padding: 25px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      min-height: 180px;
       transition:
         transform .23s ease,
         background .23s ease,
@@ -125,29 +123,38 @@
         box-shadow .23s ease;
     }
 
-    .rule-box:hover {
+    .vote-card:hover {
       transform: scale(1.025);
       background: #293a54;
       border-color: #a18bea;
       box-shadow: 0 8px 25px rgba(0, 0, 0, .25);
     }
 
-    .rule-box h3 {
+    .vote-card h3 {
       color: #c5b5ff;
-      font-size: 14px;
-      margin-bottom: 13px;
+      font-size: 13px;
+      line-height: 1.8;
     }
 
-    .rule-box h3::before {
-      content: "•";
-      color: #a18bea;
-      margin-right: 12px;
-    }
-
-    .rule-box p {
+    .vote-card p {
       color: #aab5c5;
-      font-size: 11px;
-      line-height: 1.9;
+      font-size: 10px;
+      line-height: 1.8;
+    }
+
+    .vote-button {
+      display: inline-block;
+      background: #8b72d6;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 7px;
+      font-size: 10px;
+      transition: .2s ease;
+    }
+
+    .vote-button:hover {
+      background: #a18bea;
+      transform: scale(1.05);
     }
 
     /* Footer */
@@ -163,6 +170,12 @@
 
     /* Mobile */
 
+    @media (max-width: 800px) {
+      .vote-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
     @media (max-width: 600px) {
       .header-content {
         flex-direction: column;
@@ -172,11 +185,11 @@
         margin-top: 40px;
       }
 
-      .rule-box {
-        padding: 21px;
+      .vote-grid {
+        grid-template-columns: 1fr;
       }
 
-      .rule-box:hover {
+      .vote-card:hover {
         transform: scale(1.015);
       }
     }
@@ -197,99 +210,97 @@
     </div>
   </header>
 
-  <!-- Rules -->
+  <!-- Voting -->
 
   <main class="container">
 
     <div class="page-heading">
-      <h1>⚖ Server Rules</h1>
+      <h1>Vote for PvPWorld</h1>
 
       <p>
-        Please read and follow all rules to ensure a great
-        experience for everyone.
+        Support the server by voting on these websites.
+        Every vote helps PvPWorld grow!
       </p>
     </div>
 
-    <h2 class="rules-heading">
-      🛡 Survival Server Rules
-    </h2>
+    <div class="vote-grid">
 
-    <div class="rules-list">
+      <div class="vote-card">
+        <div>
+          <h3>Minecraft Servers</h3>
+          <p>Vote for PvPWorld and support the server.</p>
+        </div>
 
-      <!-- Rule 1 -->
-
-      <div class="rule-box">
-        <h3>Spamming</h3>
-
-        <p>
-          Don't spam or you'll get MUTED
-        </p>
+        <a class="vote-button"
+           href="https://minecraftservers.org/vote/695977"
+           target="_blank" rel="noopener noreferrer">
+          Vote Now
+        </a>
       </div>
 
-      <!-- Rule 2 -->
+      <div class="vote-card">
+        <div>
+          <h3>Minecraft Server List</h3>
+          <p>Help us climb the server rankings.</p>
+        </div>
 
-      <div class="rule-box">
-        <h3>Racism & Hate Speech</h3>
-
-        <p>
-          Any racial remarks or hate speech can result in long mutes
-          and eventual bans.
-        </p>
+        <a class="vote-button"
+           href="https://minecraft-server-list.com/server/524467/vote/"
+           target="_blank" rel="noopener noreferrer">
+          Vote Now
+        </a>
       </div>
 
-      <!-- Rule 3 -->
+      <div class="vote-card">
+        <div>
+          <h3>Minecraft MP</h3>
+          <p>Give PvPWorld another vote.</p>
+        </div>
 
-      <div class="rule-box">
-        <h3>Hacking & Cheating</h3>
-
-        <p>
-          Using hacked clients, unfair advantages, or unauthorized
-          modifications is prohibited and can result in a ban. NO. EXCUSES.
-        </p>
+        <a class="vote-button"
+           href="https://minecraft-mp.com/server/366690/vote/"
+           target="_blank" rel="noopener noreferrer">
+          Vote Now
+        </a>
       </div>
 
-      <!-- Rule 4 -->
+      <div class="vote-card">
+        <div>
+          <h3>Minecraft.Buzz</h3>
+          <p>Help more players discover PvPWorld.</p>
+        </div>
 
-      <div class="rule-box">
-        <h3>Exploiting Bugs</h3>
-
-        <p>
-          Abusing server bugs or glitches for an unfair advantage
-          is not allowed. Report any bugs to staff. ie duping, etc.
-        </p>
+        <a class="vote-button"
+           href="https://minecraft.buzz/vote/pvp-world"
+           target="_blank" rel="noopener noreferrer">
+          Vote Now
+        </a>
       </div>
 
-      <!-- Rule 5 -->
+      <div class="vote-card">
+        <div>
+          <h3>MC Servers</h3>
+          <p>Support the community with a vote.</p>
+        </div>
 
-      <div class="rule-box">
-        <h3>Harassment & Threats</h3>
-
-        <p>
-          Targeted harassment, threats, or continuously making
-          another player's experience unpleasant is prohibited.
-        </p>
+        <a class="vote-button"
+           href="https://mc-servers.com/vote/7418"
+           target="_blank" rel="noopener noreferrer">
+          Vote Now
+        </a>
       </div>
 
-      <!-- Rule 6 -->
+      <div class="vote-card">
+        <div>
+          <h3>Planet Minecraft</h3>
+          <p>Help PvPWorld get noticed.</p>
+        </div>
 
-      <div class="rule-box">
-        <h3>Advertising</h3>
-
-        <p>
-          Advertising other Minecraft servers, websites, or
-          communities without staff permission is not allowed. Unless you get PERMISSION.
-        </p>
-      </div>
-
-      <!-- Rule 7 -->
-
-      <div class="rule-box">
-        <h3>Orbital Strike Cannons</h3>
-
-        <p>
-          There will be NO Orbital Strike Cannons allowed.
-          PERIOD.
-        </p>
+        <a class="vote-button"
+           href="https://www.planetminecraft.com/server/pvp-worlds-7097861/vote/"
+           target="_blank" rel="noopener noreferrer">
+          Vote Now
+        </a>
       </div>
 
     </div>
