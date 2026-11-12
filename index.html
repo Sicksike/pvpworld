@@ -43,58 +43,46 @@
     /* SERVER STATUS BAR */
 
     .status-bar {
-      background: #101722;
+      background: #111b29;
       border-bottom: 1px solid #293548;
-      padding: 10px 0;
-      text-align: center;
-      font-size: 10px;
-      color: #aab5c5;
-    }
-
-    .status-content {
-      display: inline-flex;
-      align-items: center;
+      padding: 10px 5%;
+      display: flex;
       justify-content: center;
-      gap: 9px;
+      align-items: center;
+      gap: 10px;
+      color: #aab5c5;
+      font-size: 10px;
+      text-align: center;
     }
 
     .status-dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #e6c66c;
+      background: #888;
       display: inline-block;
-      box-shadow: 0 0 8px rgba(230, 198, 108, .5);
+      flex-shrink: 0;
     }
 
     .status-dot.online {
-      background: #55df91;
-      box-shadow: 0 0 8px rgba(85, 223, 145, .6);
+      background: #55d68b;
+      box-shadow: 0 0 8px rgba(85, 214, 139, .5);
     }
 
     .status-dot.offline {
-      background: #ff7070;
-      box-shadow: 0 0 8px rgba(255, 112, 112, .5);
+      background: #e45b66;
+      box-shadow: 0 0 8px rgba(228, 91, 102, .4);
     }
 
-    .status-dot.checking {
-      background: #e6c66c;
-      box-shadow: 0 0 8px rgba(230, 198, 108, .5);
+    #server-status {
+      color: #f0f2f5;
     }
 
-    #server-status-text {
-      color: #e6c66c;
+    #player-count {
+      color: #aab5c5;
     }
 
-    #server-status-text.online {
-      color: #55df91;
-    }
-
-    #server-status-text.offline {
-      color: #ff7070;
-    }
-
-    /* NAVIGATION */
+    /* HEADER */
 
     header {
       background: #151f2d;
@@ -147,6 +135,7 @@
       line-height: 2;
       max-width: 700px;
       margin: auto;
+      width: 100%;
     }
 
     .actions {
@@ -157,48 +146,43 @@
       align-items: center;
       gap: 14px;
       margin: 30px auto 0;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       text-align: center;
     }
 
-    .hero .actions {
-      width: 100%;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-      justify-content: center !important;
-      align-content: center;
+    .hero .wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    .actions a {
+    .actions a,
+    .actions .ghost,
+    .actions .events-button,
+    .actions .trailer-button {
       display: inline-flex;
       justify-content: center;
       align-items: center;
       text-align: center;
+      flex: 0 0 auto;
       margin: 0;
-      background: #8b72d6;
+      background: #202d40;
+      color: #f0f2f5;
+      border: 1px solid #39485e;
       padding: 14px 20px;
       border-radius: 8px;
-      transition: .2s;
+      transition: background .2s ease, border-color .2s ease, transform .2s ease;
+      white-space: nowrap;
     }
 
-    .actions a:hover {
-      background: #a18bea;
+    .actions a:hover,
+    .actions .ghost:hover,
+    .actions .events-button:hover,
+    .actions .trailer-button:hover {
+      background: #8b72d6;
+      border-color: #8b72d6;
+      color: #ffffff;
       transform: translateY(-3px);
-    }
-
-    .actions .ghost {
-      background: #202d40;
-      border: 1px solid #39485e;
-    }
-
-    .actions .events-button {
-      background: #303c50;
-      border: 1px solid #52627b;
-    }
-
-    .actions .events-button:hover {
-      background: #465570;
     }
 
     /* GENERAL SECTIONS */
@@ -538,171 +522,107 @@
 
     /* SEASON 2 TRAILER */
 
-    .trailer-action {
-      margin-top: 18px;
-      margin-bottom: 24px;
+    .trailer-section {
+      padding: 65px 0;
+      text-align: center;
     }
 
-    .actions .trailer-button {
-      background: #30304d;
-      border: 1px solid #8b72d6;
-      color: #d5c9ff;
+    .trailer-section h2 {
+      font-size: 20px;
+      margin-bottom: 28px;
+      text-align: center;
+      color: #f0f2f5;
     }
 
-    .actions .trailer-button:hover {
-      background: #514477;
-      border-color: #c5b5ff;
-    }
-
-    .trailer-description {
-      color: #aab5c5;
-      line-height: 1.9;
-      margin-top: -12px;
-      margin-bottom: 22px;
-    }
-
-    .trailer-card {
-      background: #192536;
-      border: 1px solid #35445b;
-      border-radius: 16px;
-      padding: 20px;
-      transition: border-color .25s ease, transform .25s ease;
-    }
-
-    .trailer-card:hover {
-      border-color: #8b72d6;
-      transform: translateY(-3px);
-    }
-
-    .trailer-video {
-      display: block;
-      width: 100%;
-      max-height: 620px;
+    .video-container {
+      position: relative;
+      width: 90%;
+      max-width: 1000px;
+      aspect-ratio: 16 / 9;
+      margin: 0 auto;
+      overflow: hidden;
       background: #080d15;
-      border: 1px solid #39485e;
-      border-radius: 10px;
+      border: 1px solid #594b80;
+      border-radius: 14px;
+      box-shadow: 0 0 12px rgba(139, 114, 214, .12);
+      transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
     }
 
-    /* ANIMATED BLOB */
-
-    .blob {
-      position: absolute;
-      width: 40vw;
-      height: 40vw;
-      max-width: 400px;
-      max-height: 400px;
-
-      background:
-        radial-gradient(
-          circle at 35% 35%,
-          #8065d5 0%,
-          #5268b5 42%,
-          #354e7d 68%,
-          transparent 85%
-        );
-
-      opacity: 0.65;
-      filter: blur(32px);
-      border-radius: 50%;
-      top: 90vh;
-      left: 50vw;
-      transform: translate(-50%, -50%);
-      z-index: -1;
-      pointer-events: none;
-      animation: blobFlow 10s ease-in-out infinite alternate;
+    .video-container:hover {
+      transform: scale(1.015);
+      border-color: #b9a4ff;
+      box-shadow:
+        0 0 12px rgba(185, 164, 255, .35),
+        0 0 30px rgba(139, 114, 214, .2);
     }
 
-    .blob::before {
-      content: "";
+    .video-container iframe {
       position: absolute;
       inset: 0;
-      border-radius: inherit;
-
-      background:
-        radial-gradient(
-          circle at 65% 35%,
-          #b49aff 0%,
-          #8065d5 42%,
-          #40568a 72%,
-          transparent 90%
-        );
-
-      opacity: 0;
-      animation: blobColor 12s ease-in-out infinite alternate;
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
     }
 
-    .blob::after {
-      content: "";
-      position: absolute;
-      inset: 12%;
-      border-radius: inherit;
+    /* SOCIALS */
 
-      background:
-        radial-gradient(
-          circle at 35% 35%,
-          rgba(210, 190, 255, 0.65),
-          transparent 70%
-        );
-
-      filter: blur(20px);
-      opacity: 0.7;
-      animation: highlightWarp 9s ease-in-out infinite alternate;
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
     }
 
-    @keyframes blobColor {
-      from {
-        opacity: 0.15;
-      }
-
-      to {
-        opacity: 0.65;
-      }
+    .social-card {
+      background: #192536;
+      border: 1px solid #35445b;
+      border-radius: 14px;
+      padding: 28px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      text-align: center;
+      min-height: 150px;
+      transition:
+        transform .25s ease,
+        background .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
     }
 
-    @keyframes highlightWarp {
-      0% {
-        transform: translate(-8%, -5%) scale(0.9);
-      }
-
-      50% {
-        transform: translate(8%, 7%) scale(1.15);
-      }
-
-      100% {
-        transform: translate(-4%, 9%) scale(1);
-      }
+    .social-card:hover {
+      transform: translateY(-5px);
+      background: #202d40;
+      border-color: #a18bea;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, .2);
     }
 
-    @keyframes blobFlow {
-      0% {
-        border-radius: 50% 50% 50% 50%;
-        transform: translate(-50%, -50%) rotate(0deg) scale(1);
-      }
+    .social-card svg {
+      width: 38px;
+      height: 38px;
+      fill: currentColor;
+    }
 
-      20% {
-        border-radius: 70% 30% 45% 55%;
-        transform: translate(-45%, -55%) rotate(75deg) scale(1.2, 0.85);
-      }
+    .social-card h3 {
+      color: #c5b5ff;
+      font-size: 12px;
+    }
 
-      40% {
-        border-radius: 35% 65% 70% 30%;
-        transform: translate(-55%, -45%) rotate(160deg) scale(0.85, 1.2);
-      }
+    .social-card.twitch {
+      color: #a970ff;
+    }
 
-      60% {
-        border-radius: 65% 35% 30% 70%;
-        transform: translate(-48%, -52%) rotate(250deg) scale(1.25, 0.9);
-      }
+    .social-card.youtube {
+      color: #ff5555;
+    }
 
-      80% {
-        border-radius: 30% 70% 60% 40%;
-        transform: translate(-53%, -48%) rotate(310deg) scale(0.9, 1.2);
-      }
-
-      100% {
-        border-radius: 50% 50% 50% 50%;
-        transform: translate(-50%, -50%) rotate(360deg) scale(1);
-      }
+    .social-card.tiktok {
+      color: #f0f2f5;
     }
 
     /* FOOTER */
@@ -716,7 +636,182 @@
       line-height: 2;
     }
 
+    /* GLOSSY, IRIDESCENT PURPLE LIQUID BLOB */
+
+    .blob {
+      position: absolute;
+      width: 48vw;
+      height: 48vw;
+      max-width: 520px;
+      max-height: 520px;
+      top: 90vh;
+      left: 50vw;
+      border-radius: 42% 58% 57% 43% / 45% 42% 58% 55%;
+      background:
+        radial-gradient(ellipse at 31% 20%, rgba(255,255,255,.98) 0%, rgba(226,215,255,.88) 5%, transparent 20%),
+        radial-gradient(ellipse at 40% 29%, rgba(255,178,245,.95) 0%, rgba(203,135,255,.8) 12%, transparent 34%),
+        radial-gradient(ellipse at 70% 24%, rgba(126,225,255,.8) 0%, rgba(112,156,255,.45) 18%, transparent 39%),
+        radial-gradient(ellipse at 43% 43%, #d7c8ff 0%, #a98af4 25%, #7959ce 52%, transparent 74%),
+        radial-gradient(ellipse at 68% 76%, #30245f 0%, #4c378e 27%, transparent 62%),
+        radial-gradient(ellipse at 15% 68%, #343e91 0%, #51419c 28%, transparent 57%),
+        #7055bd;
+      box-shadow:
+        inset 18px 20px 35px rgba(255,255,255,.30),
+        inset -34px -42px 65px rgba(22,16,65,.72),
+        inset 8px -8px 30px rgba(114,188,255,.22),
+        0 18px 55px rgba(31,20,75,.30),
+        0 0 90px rgba(161,139,234,.22);
+      opacity: .94;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      pointer-events: none;
+      animation:
+        blobFloat 24s ease-in-out infinite,
+        blobWarp 19s ease-in-out infinite alternate;
+      will-change: transform, border-radius;
+      isolation: isolate;
+    }
+
+    /* Glossy curved highlight and shifting color reflections */
+
+    .blob::before {
+      content: "";
+      position: absolute;
+      inset: 3%;
+      border-radius: inherit;
+      background:
+        radial-gradient(ellipse at 27% 17%, rgba(255,255,255,.95) 0%, rgba(255,255,255,.55) 4%, transparent 17%),
+        radial-gradient(ellipse at 34% 24%, rgba(255,190,250,.75) 0%, transparent 28%),
+        radial-gradient(ellipse at 77% 40%, rgba(111,224,255,.52) 0%, transparent 30%),
+        radial-gradient(ellipse at 54% 78%, rgba(37,28,91,.52) 0%, transparent 43%);
+      mix-blend-mode: screen;
+      filter: blur(9px);
+      opacity: .9;
+      animation: innerWarp 17s ease-in-out infinite alternate;
+    }
+
+    /* Soft glassy sheen across the surface */
+
+    .blob::after {
+      content: "";
+      position: absolute;
+      inset: 9% 13% 12% 10%;
+      border-radius: 48% 52% 55% 45% / 40% 45% 55% 60%;
+      background:
+        linear-gradient(135deg,
+          rgba(255,255,255,.32) 0%,
+          rgba(255,255,255,.08) 18%,
+          transparent 38%,
+          rgba(192,166,255,.12) 62%,
+          rgba(22,17,65,.22) 100%);
+      box-shadow:
+        inset 5px 7px 18px rgba(255,255,255,.22),
+        inset -12px -15px 28px rgba(20,14,62,.22);
+      filter: blur(5px);
+      opacity: .85;
+      animation: highlightWarp 14s ease-in-out infinite alternate;
+    }
+
+    @keyframes blobFloat {
+      0%, 100% {
+        translate: 0 0;
+      }
+
+      25% {
+        translate: 2% -2%;
+      }
+
+      50% {
+        translate: -2% 2%;
+      }
+
+      75% {
+        translate: 2% -1%;
+      }
+    }
+
+    @keyframes blobWarp {
+      0% {
+        border-radius: 42% 58% 57% 43% / 45% 42% 58% 55%;
+        scale: 1 1;
+        rotate: -5deg;
+      }
+
+      25% {
+        border-radius: 55% 45% 48% 52% / 52% 39% 61% 48%;
+        scale: 1.05 .97;
+        rotate: 3deg;
+      }
+
+      50% {
+        border-radius: 48% 52% 60% 40% / 40% 57% 43% 60%;
+        scale: .97 1.05;
+        rotate: 6deg;
+      }
+
+      75% {
+        border-radius: 58% 42% 43% 57% / 55% 48% 52% 45%;
+        scale: 1.03 .98;
+        rotate: -3deg;
+      }
+
+      100% {
+        border-radius: 42% 58% 57% 43% / 45% 42% 58% 55%;
+        scale: 1 1;
+        rotate: -5deg;
+      }
+    }
+
+    @keyframes innerWarp {
+      0% {
+        transform: translate(-4%, -3%) scale(1.04, .96) rotate(-5deg);
+      }
+
+      50% {
+        transform: translate(4%, 3%) scale(.96, 1.05) rotate(5deg);
+      }
+
+      100% {
+        transform: translate(-2%, 4%) scale(1.05, .96) rotate(-4deg);
+      }
+    }
+
+    @keyframes highlightWarp {
+      0% {
+        transform: translate(-5%, -3%) scale(.94, 1.04) rotate(-4deg);
+        opacity: .7;
+      }
+
+      50% {
+        transform: translate(4%, 4%) scale(1.06, .96) rotate(5deg);
+        opacity: .95;
+      }
+
+      100% {
+        transform: translate(-2%, 3%) scale(.98, 1.04) rotate(-3deg);
+        opacity: .75;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .blob,
+      .blob::before,
+      .blob::after {
+        animation: none;
+      }
+
+      .video-container {
+        transition: none;
+      }
+    }
+
     /* MOBILE */
+
+    @media (max-width: 800px) {
+      .social-grid {
+        grid-template-columns: 1fr;
+      }
+    }
 
     @media (max-width: 640px) {
       nav {
@@ -730,6 +825,11 @@
 
       .hero {
         padding: 70px 0;
+      }
+
+      .hero .actions {
+        flex-wrap: wrap;
+        max-width: 100%;
       }
 
       .top-players {
@@ -777,11 +877,18 @@
         max-width: 100%;
       }
 
-      .blob {
-        width: 65vw;
-        height: 65vw;
-        opacity: 0.60;
-        filter: blur(28px);
+      .status-bar {
+        flex-wrap: wrap;
+        gap: 7px;
+      }
+
+      .trailer-section {
+        padding: 45px 0;
+      }
+
+      .video-container {
+        width: 90%;
+        border-radius: 10px;
       }
     }
   </style>
@@ -789,17 +896,15 @@
 
 <body>
 
-  <!-- SERVER STATUS -->
+  <!-- Server Status -->
 
   <div class="status-bar">
-    <div class="status-content">
-      <span id="server-status-dot" class="status-dot checking"></span>
-      <span>SERVER STATUS:</span>
-      <span id="server-status-text">CHECKING...</span>
-    </div>
+    <span class="status-dot" id="status-dot"></span>
+    <span id="server-status">Checking server status...</span>
+    <span id="player-count"></span>
   </div>
 
-  <!-- NAVIGATION -->
+  <!-- Navigation -->
 
   <header>
     <div class="wrap">
@@ -813,14 +918,16 @@
           <li><a href="#news">News</a></li>
           <li><a href="vote.html">Vote</a></li>
           <li><a href="rules.html">Rules</a></li>
+          <li><a href="game.html">Game</a></li>
           <li><a href="#events">Events</a></li>
           <li><a href="#server">Server IP</a></li>
+          <li><a href="#socials">Socials</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- HERO -->
+  <!-- Hero -->
 
   <section class="hero">
     <div class="wrap">
@@ -835,25 +942,26 @@
         the strongest, with many popular plugins such as Lifesteal.
       </p>
 
-      <div class="actions trailer-action">
-        <a href="#trailer" class="trailer-button">Season 2 Trailer</a>
-      </div>
-
       <div class="actions">
+
         <a href="https://discord.gg/eQzZXcjs6"
            target="_blank"
            rel="noopener noreferrer">
           Join Our Discord
         </a>
 
+        <a href="#trailer" class="trailer-button">Season 2 Trailer</a>
+
         <a href="#teams" class="ghost">Check out the teams</a>
 
         <a href="#events" class="events-button">Weekly Events</a>
+
+        <a href="game.html" class="ghost">All new game!</a>
       </div>
     </div>
   </section>
 
-  <!-- TOP 3 PLAYERS -->
+  <!-- Top 3 Players Overall -->
 
   <section class="block" id="top-players">
     <div class="wrap">
@@ -874,7 +982,7 @@
 
         <div class="player-card first-place">
           <img
-            src="https://user54606.na.imgto.link/public/20261111/be277e0a369bc7714295224b-avatarbody6.avif"
+            src="https://user54606.na.imgto.link/public/20261111/be277e0a369bc7714295224-avatarbody6.avif"
             alt="Sicksike Minecraft skin"
           >
 
@@ -896,7 +1004,7 @@
     </div>
   </section>
 
-  <!-- MOST KILLS -->
+  <!-- Most Kills -->
 
   <section class="block" id="kills">
     <div class="wrap">
@@ -933,27 +1041,27 @@
     </div>
   </section>
 
-  <!-- SEASON 2 TRAILER -->
+  <!-- Season 2 Trailer -->
 
-  <section class="block" id="trailer">
+  <section id="trailer" class="trailer-section">
     <div class="wrap">
 
       <h2>Season 2 Trailer</h2>
-      <p class="trailer-description">
-        Get a look at what's coming in Season 2 of PvPWorld.
-      </p>
 
-      <div class="trailer-card">
-        <video class="trailer-video" controls playsinline preload="metadata">
-          <source src="season2-trailer.mp4" type="video/mp4">
-          Your browser does not support HTML video.
-        </video>
+      <div class="video-container">
+        <iframe
+          src="https://www.youtube.com/embed/fWde4-QuQWs"
+          title="PvPWorld Season 2 Trailer"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
       </div>
 
     </div>
   </section>
 
-  <!-- TEAMS -->
+  <!-- Teams -->
 
   <section class="block" id="teams">
     <div class="wrap">
@@ -980,7 +1088,7 @@
     </div>
   </section>
 
-  <!-- NEWS -->
+  <!-- News -->
 
   <section class="block" id="news">
     <div class="wrap">
@@ -997,23 +1105,14 @@
 
         <div class="news-card">
           <h3>Tiao</h3>
-          <p>
-            Tiao has officially become the Minecraft server's biggest menace.
-            Bro has crashed the server more times than anyone can count.
-            Every time things start running smoothly, Tiao somehow finds a way
-            to bring the entire server to its knees. The server sees him join
-            and starts fighting for its life. At this point, the restart button
-            probably has PTSD. Whether it's lag, chaos, or just Tiao doing Tiao
-            things, one thing is certain: the server's uptime has a personal
-            enemy, and his name is Tiao.
-          </p>
+          <p>Tiao has officially become the Minecraft server's biggest menace. Bro has crashed the server more times than anyone can count. Every time things start running smoothly, Tiao somehow finds a way to bring the entire server to its knees. The server sees him join and starts fighting for its life. At this point, the restart button probably has PTSD. Whether it's lag, chaos, or just Tiao doing Tiao things, one thing is certain: the server's uptime has a personal enemy, and his name is Tiao.</p>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- WEEKLY EVENTS -->
+  <!-- Weekly Events -->
 
   <section class="block" id="events">
     <div class="wrap">
@@ -1052,7 +1151,7 @@
     </div>
   </section>
 
-  <!-- SERVER IP -->
+  <!-- Server IP -->
 
   <section class="block" id="server">
     <div class="wrap">
@@ -1093,14 +1192,66 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- Socials -->
+
+  <section class="block" id="socials">
+    <div class="wrap">
+
+      <h2>Follow PvPWorld</h2>
+
+      <div class="social-grid">
+
+        <!-- Twitch -->
+
+        <a href="https://www.twitch.tv/tiao9001" class="social-card twitch"
+           target="_blank" rel="noopener noreferrer"
+           aria-label="tiao9001 on Twitch">
+
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4.3 2 2 6.6v13.1h5.1V22h3.4l2.3-2.3h4.6L22 13V2H4.3zm15.4 10.2-3.4 3.4h-4.6l-2.3 2.3v-2.3H5.4V4.3h14.3v7.9zM16.3 6.6v5.7h-2.3V6.6h2.3zm-4.6 0v5.7H9.4V6.6h2.3z"/>
+          </svg>
+
+          <h3>Watch tiao9000 on Twitch</h3>
+        </a>
+
+        <!-- YouTube -->
+
+        <a href="https://www.youtube.com/channel/UCjwDhuXSfKD81iCHIG2nDXw" class="social-card youtube"
+           target="_blank" rel="noopener noreferrer"
+           aria-label="Seattle191 on YouTube">
+
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/>
+          </svg>
+
+          <h3>Watch amazing content from creator Seattle191</h3>
+        </a>
+
+        <!-- TikTok -->
+
+        <a href="#" class="social-card tiktok"
+           target="_blank" rel="noopener noreferrer"
+           aria-label="PvPWorld on TikTok">
+
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19.6 6.2a5.5 5.5 0 0 1-3.3-1.1 5.5 5.5 0 0 1-1.8-3.2V1h-4.2v14.1a3.1 3.1 0 1 1-3.1-3.1c.4 0 .8.1 1.1.2V8a7.3 7.3 0 1 0 6.2 7.2V8a9.6 9.6 0 0 0 5.6 1.8V5.7c-.2.1-.4.1-.5.1z"/>
+          </svg>
+
+          <h3>TikTok</h3>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
 
   <footer>
     © 2026 PvPWorld<br>
     Not affiliated with Mojang or Microsoft.
   </footer>
 
-  <!-- SCRIPTS -->
+  <!-- Scripts -->
 
   <script>
     // Copy IP
@@ -1123,51 +1274,49 @@
       });
     }
 
-    // PvPWorld Server Status
+    // Server Status - matches rules.html
 
     async function updateServerStatus() {
-      const dot = document.getElementById("server-status-dot");
-      const statusText = document.getElementById("server-status-text");
+      const statusText = document.getElementById("server-status");
+      const playerText = document.getElementById("player-count");
+      const statusDot = document.getElementById("status-dot");
 
       try {
-        const address = "play2.eternalzero.cloud:26419";
-
         const response = await fetch(
-          "https://api.mcsrvstat.us/3/" + encodeURIComponent(address)
+          "https://api.mcsrvstat.us/3/play2.eternalzero.cloud:26419"
         );
 
         if (!response.ok) {
-          throw new Error("Status API unavailable");
+          throw new Error("Status request failed");
         }
 
         const data = await response.json();
 
-        if (data.online === true) {
-          dot.className = "status-dot online";
-          statusText.className = "online";
-          statusText.textContent = "ONLINE";
+        if (data.online) {
+          statusText.textContent = "Server Online";
+          statusDot.className = "status-dot online";
 
-        } else if (data.online === false) {
-          dot.className = "status-dot offline";
-          statusText.className = "offline";
-          statusText.textContent = "OFFLINE";
-
+          if (data.players) {
+            playerText.textContent =
+              "• " + data.players.online + "/" + data.players.max + " Players Online";
+          } else {
+            playerText.textContent = "";
+          }
         } else {
-          throw new Error("Unknown server response");
+          statusText.textContent = "Server Offline";
+          statusDot.className = "status-dot offline";
+          playerText.textContent = "";
         }
 
       } catch (error) {
-        dot.className = "status-dot checking";
-        statusText.className = "";
-        statusText.textContent = "STATUS UNAVAILABLE";
+        statusText.textContent = "Status Unavailable";
+        statusDot.className = "status-dot";
+        playerText.textContent = "";
       }
     }
 
-    // Check immediately when the page loads
     updateServerStatus();
-
-    // Check again every 5 minutes
-    setInterval(updateServerStatus, 300000);
+    setInterval(updateServerStatus, 5 * 60 * 1000);
   </script>
 
 </body>
