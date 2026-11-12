@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Vote for PvPWorld</title>
+  <title>Rules | PvPWorld</title>
 
   <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
 
@@ -30,6 +29,48 @@
     a {
       color: inherit;
       text-decoration: none;
+    }
+
+    /* Server status */
+
+    .status-bar {
+      background: #111b29;
+      border-bottom: 1px solid #293548;
+      padding: 10px 5%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      color: #aab5c5;
+      font-size: 10px;
+      text-align: center;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #888;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .status-dot.online {
+      background: #55d68b;
+      box-shadow: 0 0 8px rgba(85, 214, 139, .5);
+    }
+
+    .status-dot.offline {
+      background: #e45b66;
+      box-shadow: 0 0 8px rgba(228, 91, 102, .4);
+    }
+
+    #server-status {
+      color: #f0f2f5;
+    }
+
+    #player-count {
+      color: #aab5c5;
     }
 
     /* Header */
@@ -75,7 +116,7 @@
 
     .container {
       width: 90%;
-      max-width: 1100px;
+      max-width: 900px;
       margin: 55px auto 80px;
     }
 
@@ -96,26 +137,40 @@
       font-size: 11px;
     }
 
-    /* Vote cards */
+    /* Category headings */
 
-    .vote-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+    .rules-heading {
+      color: #b9a4ff;
+      font-size: 17px;
+      text-align: center;
+      margin-bottom: 12px;
     }
 
-    .vote-card {
+    .category-description {
+      color: #aab5c5;
+      font-size: 10px;
+      line-height: 1.9;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .category {
+      margin-bottom: 55px;
+    }
+
+    /* Rule boxes */
+
+    .rules-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .rule-box {
       background: #192536;
       border: 1px solid #35445b;
       border-radius: 15px;
-      padding: 25px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      gap: 22px;
-      min-height: 180px;
+      padding: 24px;
       transition:
         transform .23s ease,
         background .23s ease,
@@ -123,38 +178,29 @@
         box-shadow .23s ease;
     }
 
-    .vote-card:hover {
+    .rule-box:hover {
       transform: scale(1.025);
       background: #293a54;
       border-color: #a18bea;
       box-shadow: 0 8px 25px rgba(0, 0, 0, .25);
     }
 
-    .vote-card h3 {
+    .rule-box h3 {
       color: #c5b5ff;
-      font-size: 13px;
-      line-height: 1.8;
+      font-size: 14px;
+      margin-bottom: 13px;
     }
 
-    .vote-card p {
+    .rule-box h3::before {
+      content: "•";
+      color: #a18bea;
+      margin-right: 12px;
+    }
+
+    .rule-box p {
       color: #aab5c5;
-      font-size: 10px;
-      line-height: 1.8;
-    }
-
-    .vote-button {
-      display: inline-block;
-      background: #8b72d6;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 7px;
-      font-size: 10px;
-      transition: .2s ease;
-    }
-
-    .vote-button:hover {
-      background: #a18bea;
-      transform: scale(1.05);
+      font-size: 11px;
+      line-height: 1.9;
     }
 
     /* Footer */
@@ -170,12 +216,6 @@
 
     /* Mobile */
 
-    @media (max-width: 800px) {
-      .vote-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
     @media (max-width: 600px) {
       .header-content {
         flex-direction: column;
@@ -185,18 +225,31 @@
         margin-top: 40px;
       }
 
-      .vote-grid {
-        grid-template-columns: 1fr;
+      .rule-box {
+        padding: 21px;
       }
 
-      .vote-card:hover {
+      .rule-box:hover {
         transform: scale(1.015);
+      }
+
+      .status-bar {
+        flex-wrap: wrap;
+        gap: 7px;
       }
     }
   </style>
 </head>
 
 <body>
+
+  <!-- Server Status -->
+
+  <div class="status-bar">
+    <span class="status-dot" id="status-dot"></span>
+    <span id="server-status">Checking server status...</span>
+    <span id="player-count"></span>
+  </div>
 
   <!-- Header -->
 
@@ -210,100 +263,146 @@
     </div>
   </header>
 
-  <!-- Voting -->
+  <!-- Rules -->
 
   <main class="container">
 
     <div class="page-heading">
-      <h1>Vote for PvPWorld</h1>
+      <h1>Rules</h1>
 
       <p>
-        Support the server by voting on these websites.
-        Every vote helps PvPWorld grow!
+        Please read and follow all rules to ensure a great
+        experience for everyone.
       </p>
     </div>
 
-    <div class="vote-grid">
+    <!-- Category 1: General Rules -->
 
-      <div class="vote-card">
-        <div>
-          <h3>Minecraft Servers</h3>
-          <p>Vote for PvPWorld and support the server.</p>
+    <section class="category">
+
+      <h2 class="rules-heading">
+        Rules
+      </h2>
+
+      <p class="category-description">
+        These apply to both the Minecraft and Discord Server
+      </p>
+
+      <div class="rules-list">
+
+        <!-- Rule 1 -->
+
+        <div class="rule-box">
+          <h3>Spamming</h3>
+
+          <p>
+            Don't spam or you'll get MUTED.
+          </p>
         </div>
 
-        <a class="vote-button"
-           href="https://minecraftservers.org/vote/695977"
-           target="_blank" rel="noopener noreferrer">
-          Vote Now
-        </a>
-      </div>
+        <!-- Rule 2 -->
 
-      <div class="vote-card">
-        <div>
-          <h3>Minecraft Server List</h3>
-          <p>Help us climb the server rankings.</p>
+        <div class="rule-box">
+          <h3>Racism & Hate Speech</h3>
+
+          <p>
+            Any racial remarks or hate speech can result in long mutes
+            and eventual bans.
+          </p>
         </div>
 
-        <a class="vote-button"
-           href="https://minecraft-server-list.com/server/524467/vote/"
-           target="_blank" rel="noopener noreferrer">
-          Vote Now
-        </a>
-      </div>
+        <!-- Rule 3 -->
 
-      <div class="vote-card">
-        <div>
-          <h3>Minecraft MP</h3>
-          <p>Give PvPWorld another vote.</p>
+        <div class="rule-box">
+          <h3>Harassment & Threats</h3>
+
+          <p>
+            Targeted harassment, threats, or continuously making
+            another player's experience unpleasant is prohibited.
+          </p>
         </div>
 
-        <a class="vote-button"
-           href="https://minecraft-mp.com/server/366690/vote/"
-           target="_blank" rel="noopener noreferrer">
-          Vote Now
-        </a>
-      </div>
+        <!-- Rule 4 -->
 
-      <div class="vote-card">
-        <div>
-          <h3>Minecraft.Buzz</h3>
-          <p>Help more players discover PvPWorld.</p>
+        <div class="rule-box">
+          <h3>Advertising</h3>
+
+          <p>
+            Advertising other Minecraft servers, websites, or
+            communities without staff permission is not allowed.
+            Unless you get PERMISSION.
+          </p>
         </div>
 
-        <a class="vote-button"
-           href="https://minecraft.buzz/vote/pvp-world"
-           target="_blank" rel="noopener noreferrer">
-          Vote Now
-        </a>
       </div>
 
-      <div class="vote-card">
-        <div>
-          <h3>MC Servers</h3>
-          <p>Support the community with a vote.</p>
+    </section>
+
+    <!-- Category 2: Minecraft Rules -->
+
+    <section class="category">
+
+      <h2 class="rules-heading">
+        Minecraft Rules
+      </h2>
+
+      <p class="category-description">
+        These apply to only the Minecraft server
+      </p>
+
+      <div class="rules-list">
+
+        <!-- Rule 1 -->
+
+        <div class="rule-box">
+          <h3>Hacking & Cheating</h3>
+
+          <p>
+            Using hacked clients, unfair advantages, or unauthorized
+            modifications is prohibited and can result in a ban.
+            NO. EXCUSES.
+          </p>
         </div>
 
-        <a class="vote-button"
-           href="https://mc-servers.com/vote/7418"
-           target="_blank" rel="noopener noreferrer">
-          Vote Now
-        </a>
-      </div>
+        <!-- Rule 2 -->
 
-      <div class="vote-card">
-        <div>
-          <h3>Planet Minecraft</h3>
-          <p>Help PvPWorld get noticed.</p>
+        <div class="rule-box">
+          <h3>Exploiting Bugs</h3>
+
+          <p>
+            Abusing server bugs or glitches for an unfair advantage
+            is not allowed. Report any bugs to staff. ie duping, etc.
+          </p>
         </div>
 
-        <a class="vote-button"
-           href="https://www.planetminecraft.com/server/pvp-worlds-7097861/vote/"
-           target="_blank" rel="noopener noreferrer">
-          Vote Now
-        </a>
+        <!-- Rule 3 -->
+
+        <div class="rule-box">
+          <h3>Banned Gamemodes</h3>
+
+          <p>
+            The following gamemodes are not allowed:
+            <br><br>
+            • Rocket Mace
+            <br>
+            • Crystal
+          </p>
+        </div>
+
+        <!-- Rule 4 -->
+
+        <div class="rule-box">
+          <h3>Orbital Strike Cannons</h3>
+
+          <p>
+            There will be NO Orbital Strike Cannons allowed.
+            PERIOD.
+          </p>
+        </div>
+
       </div>
 
-    </div>
+    </section>
 
   </main>
 
@@ -313,6 +412,52 @@
     © 2026 PvPWorld<br>
     Not affiliated with Mojang or Microsoft.
   </footer>
+
+  <!-- Server Status Script -->
+
+  <script>
+    async function updateServerStatus() {
+      const statusText = document.getElementById("server-status");
+      const playerText = document.getElementById("player-count");
+      const statusDot = document.getElementById("status-dot");
+
+      try {
+        const response = await fetch(
+          "https://api.mcsrvstat.us/3/play2.eternalzero.cloud:26419"
+        );
+
+        if (!response.ok) {
+          throw new Error("Status request failed");
+        }
+
+        const data = await response.json();
+
+        if (data.online) {
+          statusText.textContent = "Server Online";
+          statusDot.className = "status-dot online";
+
+          if (data.players) {
+            playerText.textContent =
+              "• " + data.players.online + "/" + data.players.max + " Players Online";
+          } else {
+            playerText.textContent = "";
+          }
+        } else {
+          statusText.textContent = "Server Offline";
+          statusDot.className = "status-dot offline";
+          playerText.textContent = "";
+        }
+
+      } catch (error) {
+        statusText.textContent = "Status Unavailable";
+        statusDot.className = "status-dot";
+        playerText.textContent = "";
+      }
+    }
+
+    updateServerStatus();
+    setInterval(updateServerStatus, 5 * 60 * 1000);
+  </script>
 
 </body>
 </html>
