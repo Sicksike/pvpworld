@@ -5,72 +5,109 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PvPWorld | Game Selector</title>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PvPWorld | Game Selector</title>
 
-<link rel="icon" href="https://user54606.na.imgto.link/public/20261111/9f4dc652ec67205b06cb67bd-pvp-world-logo.avif">
 <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
+<link rel="icon" href="https://user54606.na.imgto.link/public/20261111/9f4dc652ec67205b06cb67bd-pvp-world-logo.avif">
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+:root {
+    --background: #101722;
+    --card: #192536;
+    --border: #293548;
+    --purple: #a18bea;
+    --text: #f0f2f5;
+    --muted: #aab5c5;
 }
 
-html {
-    scroll-behavior: smooth;
+* {
+    box-sizing: border-box;
 }
 
 body {
-    background: #101722;
-    color: #f0f2f5;
-    font-family: 'Minecraftia', sans-serif;
-    font-size: 13px;
+    margin: 0;
     min-height: 100vh;
+    background: var(--background);
+    color: var(--text);
+    font-family: 'Minecraftia', sans-serif;
     overflow-x: hidden;
 }
 
-/* BACKGROUND */
+/* TOP NAVIGATION */
 
-body::before {
-    content: "";
-    position: fixed;
-    width: 650px;
-    height: 650px;
-    background: #7055bd;
-    opacity: .07;
-    filter: blur(150px);
-    border-radius: 50%;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    pointer-events: none;
-    z-index: -1;
+.navbar {
+    width: 100%;
+    min-height: 76px;
+    padding: 12px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #141e2c;
+    border-bottom: 1px solid var(--border);
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.nav-brand img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 11px;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: var(--purple);
+}
+
+.nav-links .active {
+    color: var(--purple);
 }
 
 /* SERVER STATUS */
 
 .status-bar {
-    background: #111b29;
-    border-bottom: 1px solid #293548;
-    padding: 12px 5%;
+    width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    color: #aab5c5;
-    font-size: 10px;
+    text-align: center;
+    padding: 15px 10px;
+    background: #141e2c;
+    border-bottom: 1px solid var(--border);
 }
 
-.status-left {
+.status-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 22px;
+    font-size: 10px;
+    color: var(--muted);
+}
+
+.status-item {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 9px;
 }
 
@@ -78,174 +115,84 @@ body::before {
     width: 9px;
     height: 9px;
     border-radius: 50%;
-    background: #e45b66;
-    box-shadow: 0 0 8px rgba(228, 91, 102, .5);
+    background: #e05252;
 }
 
 .status-dot.online {
-    background: #55d68b;
-    box-shadow: 0 0 8px rgba(85, 214, 139, .5);
+    background: #45d483;
+    box-shadow: 0 0 9px #45d483;
 }
 
-.status-right {
-    color: #8d9bb0;
-}
+/* PAGE */
 
-/* HEADER */
-
-header {
-    width: 90%;
-    max-width: 1100px;
-    margin: auto;
-    padding: 25px 0;
+.page {
+    width: 100%;
+    min-height: calc(100vh - 130px);
+    padding: 30px 15px 50px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    gap: 15px;
 }
 
-.logo {
-    font-size: 20px;
-    color: #a18bea;
-    text-decoration: none;
-}
-
-.back-button {
-    text-decoration: none;
-    color: #f0f2f5;
-    background: #192536;
-    border: 1px solid #35445b;
-    border-radius: 8px;
-    padding: 12px 17px;
-    font-size: 10px;
-    transition: .2s ease;
-}
-
-.back-button:hover {
-    background: #26364d;
-    border-color: #a18bea;
-    transform: translateY(-2px);
-}
-
-/* MAIN */
-
-main {
-    width: 90%;
-    max-width: 1100px;
-    margin: auto;
-    padding: 45px 0 100px;
+h1 {
+    margin: 12px 0 8px;
     text-align: center;
+    font-size: clamp(22px, 4vw, 34px);
+    letter-spacing: 2px;
 }
 
-.page-title {
-    font-size: 25px;
-    margin-bottom: 18px;
-    color: #f0f2f5;
-}
-
-.page-subtitle {
-    color: #aab5c5;
+.subtitle {
+    margin: 0;
+    color: var(--muted);
+    text-align: center;
     font-size: 11px;
-    line-height: 2;
-    margin-bottom: 18px;
 }
 
 .instruction {
-    color: #a18bea;
+    margin: 22px 0 5px;
+    color: var(--purple);
+    text-align: center;
     font-size: 10px;
-    margin-bottom: 45px;
 }
 
-/* START BUTTON */
+/* WHEEL AREA */
 
-.start-area {
+.wheel-area {
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 310px;
+    flex: 1;
+    min-height: 650px;
     position: relative;
+    margin-top: 5px;
 }
 
-.start-button {
-    width: 210px;
-    height: 210px;
-    border-radius: 50%;
-    border: 3px solid #a18bea;
-    background: radial-gradient(circle at 35% 30%, #493c78, #201a38 75%);
-    color: white;
-    font-family: 'Minecraftia', sans-serif;
-    font-size: 17px;
-    cursor: pointer;
-    box-shadow:
-        0 0 25px rgba(139, 114, 214, .25),
-        inset 0 0 25px rgba(139, 114, 214, .15);
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease,
-        opacity .3s ease;
-    z-index: 5;
-}
-
-.start-button:hover {
-    transform: scale(1.07);
-    box-shadow:
-        0 0 45px rgba(139, 114, 214, .5),
-        inset 0 0 30px rgba(139, 114, 214, .2);
-}
-
-.start-button:active {
-    transform: scale(.92);
-}
-
-.start-button.pop {
-    animation: buttonPop .45s ease forwards;
-}
-
-@keyframes buttonPop {
-    0% {
-        transform: scale(1);
-    }
-    45% {
-        transform: scale(1.18);
-    }
-    100% {
-        transform: scale(.8);
-        opacity: .15;
-    }
-}
-
-/* WHEEL */
-
-.wheel-section {
+.wheel-container {
+    width: min(96vw, 90vh, 1000px);
+    height: min(96vw, 90vh, 1000px);
+    max-width: 1000px;
+    max-height: 1000px;
+    position: relative;
     display: none;
-    justify-content: center;
     align-items: center;
-    margin: 20px auto 0;
-    animation: wheelAppear .8s ease forwards;
+    justify-content: center;
+    animation: wheelAppear 0.7s ease forwards;
 }
 
-.wheel-section.visible {
+.wheel-container.show {
     display: flex;
 }
 
 @keyframes wheelAppear {
     from {
         opacity: 0;
-        transform: scale(.65);
+        transform: scale(0.75);
     }
     to {
         opacity: 1;
         transform: scale(1);
     }
-}
-
-.wheel-stage {
-    width: min(750px, 95vw);
-    aspect-ratio: 1 / 1;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 /* OUTER RING */
@@ -254,36 +201,54 @@ main {
     position: absolute;
     width: 96%;
     height: 96%;
-    border: 2px solid rgba(161, 139, 234, .25);
+    border: 1px solid rgba(161, 139, 234, 0.15);
     border-radius: 50%;
-    box-shadow:
-        0 0 25px rgba(139, 114, 214, .08),
-        inset 0 0 25px rgba(139, 114, 214, .05);
+    pointer-events: none;
 }
 
-.wheel-ring::before {
-    content: "";
-    position: absolute;
-    inset: 12px;
-    border: 1px dashed rgba(161, 139, 234, .2);
-    border-radius: 50%;
-}
-
-/* ROTATING CONTENT */
+/* ROTATING WHEEL */
 
 .wheel-rotator {
+    width: 100%;
+    height: 100%;
     position: absolute;
-    inset: 0;
-    animation: wheelSpin 40s linear infinite;
+    border-radius: 50%;
+    animation: slowSpin 45s linear infinite;
 }
 
-@keyframes wheelSpin {
+@keyframes slowSpin {
     from {
         transform: rotate(0deg);
     }
     to {
         transform: rotate(360deg);
     }
+}
+
+/* MODE ICONS */
+
+.mode-item {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 110px;
+    height: 125px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
+.mode-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: counterSpin 45s linear infinite;
+    transition: filter 0.2s;
 }
 
 @keyframes counterSpin {
@@ -295,173 +260,151 @@ main {
     }
 }
 
-/* MODE ITEMS */
+/* No icon backgrounds, cards, or borders */
 
-.mode-item {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 100px;
-    height: 115px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transform:
-        translate(-50%, -50%)
-        translate(var(--x), var(--y));
-    cursor: pointer;
-    z-index: 2;
-}
-
-.mode-content {
-    width: 100px;
-    min-height: 105px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    animation: counterSpin 40s linear infinite;
-    transition: transform .2s ease;
-}
-
-.mode-item:hover {
-    z-index: 10;
-}
-
-.mode-item:hover .mode-content {
-    transform: scale(1.2);
-}
-
-/* FLOATING IMAGES - NO BACKGROUND */
-
-.mode-image {
-    width: 85px;
-    height: 85px;
+.mode-item img {
+    width: 90px;
+    height: 90px;
     object-fit: contain;
-    padding: 0;
     background: transparent;
     border: none;
     border-radius: 0;
     box-shadow: none;
-    transition: filter .2s ease;
+    filter: none;
+    transition: transform 0.25s ease, filter 0.25s ease;
 }
 
-.mode-item:hover .mode-image {
-    border: none;
-    box-shadow: none;
-    filter: drop-shadow(0 0 12px rgba(161, 139, 234, .65));
+.mode-item:hover {
+    z-index: 20;
 }
 
-/* MODE NAMES */
+.mode-item:hover img {
+    transform: scale(1.3);
+    filter: drop-shadow(0 0 14px rgba(161, 139, 234, 0.85));
+}
 
 .mode-name {
-    display: none;
     position: absolute;
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    width: max-content;
-    max-width: 150px;
-    text-align: center;
-    color: #d8ccff;
+    margin-top: 2px;
+    color: white;
     font-size: 9px;
-    line-height: 1.6;
-    background: transparent;
-    border: none;
-    padding: 7px 9px;
+    white-space: nowrap;
+    opacity: 0;
     pointer-events: none;
-    z-index: 20;
+    text-shadow: 0 2px 8px black;
+    transition: opacity 0.2s;
 }
 
 .mode-item:hover .mode-name {
-    display: block;
+    opacity: 1;
 }
 
-/* CENTER OF WHEEL */
+/* START BUTTON */
 
-.wheel-center {
-    position: absolute;
-    width: 125px;
-    height: 125px;
+.start-button {
+    width: 190px;
+    height: 190px;
     border-radius: 50%;
-    background: radial-gradient(circle, #30264d, #171d2a);
-    border: 2px solid #806bc0;
-    box-shadow: 0 0 30px rgba(139, 114, 214, .3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 8px;
-    z-index: 4;
+    border: 2px solid var(--purple);
+    background: #192536;
+    color: white;
+    font-family: 'Minecraftia', sans-serif;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 0 35px rgba(161, 139, 234, 0.18);
+    transition: 0.25s;
 }
 
-.wheel-center strong {
-    font-size: 12px;
-    color: #c8b8ff;
+.start-button:hover {
+    transform: scale(1.08);
+    background: #222f43;
+    box-shadow: 0 0 45px rgba(161, 139, 234, 0.4);
 }
 
-.wheel-center span {
-    font-size: 8px;
-    color: #8996aa;
+.start-button.pop {
+    animation: popOut 0.35s ease forwards;
+}
+
+@keyframes popOut {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.25);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
 }
 
 /* FOOTER */
 
-footer {
-    border-top: 1px solid #293548;
-    padding: 25px 5%;
+.footer {
+    padding: 20px;
     text-align: center;
-    color: #78869a;
+    color: #657286;
     font-size: 9px;
-    margin-top: 60px;
 }
 
-/* RESPONSIVE */
+/* MOBILE */
 
 @media (max-width: 600px) {
-    header {
-        padding: 18px 0;
+    .navbar {
+        padding: 12px 4%;
     }
 
-    .page-title {
-        font-size: 19px;
+    .nav-brand {
+        font-size: 13px;
     }
 
-    .page-subtitle {
+    .nav-brand img {
+        width: 34px;
+        height: 34px;
+    }
+
+    .nav-links {
+        gap: 12px;
+    }
+
+    .nav-links a {
         font-size: 9px;
     }
 
-    .instruction {
-        font-size: 8px;
-        margin-bottom: 25px;
+    .status-content {
+        gap: 12px;
+        font-size: 9px;
     }
 
-    .start-button {
-        width: 165px;
-        height: 165px;
-        font-size: 14px;
+    .page {
+        padding-top: 25px;
     }
 
-    .start-area {
-        min-height: 250px;
+    .wheel-area {
+        min-height: 470px;
     }
 
-    .wheel-stage {
-        width: 95vw;
+    .wheel-container {
+        width: 96vw;
+        height: 96vw;
+    }
+
+    .wheel-ring {
+        width: 97%;
+        height: 97%;
     }
 
     .mode-item {
         width: 75px;
-        height: 90px;
+        height: 95px;
     }
 
-    .mode-content {
-        width: 75px;
-        min-height: 85px;
-    }
-
-    .mode-image {
+    .mode-item img {
         width: 65px;
         height: 65px;
     }
@@ -470,762 +413,20 @@ footer {
         font-size: 7px;
     }
 
-    .wheel-center {
-        width: 95px;
-        height: 95px;
-    }
-
-    .wheel-center strong {
-        font-size: 9px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .wheel-rotator,
-    .mode-content {
-        animation-duration: 120s;
-    }
-}
-</style>
-</head>
-
-<body>
-
-<!-- SERVER STATUS -->
-
-<div class="status-bar">
-    <div class="status-left">
-        <span class="status-dot" id="status-dot"></span>
-        <span id="server-status">Checking server...</span>
-    </div>
-
-    <div class="status-right" id="player-count">
-        Players: --
-    </div>
-</div>
-
-<!-- HEADER -->
-
-<header>
-    <a href="index.html" class="logo">PvPWorld</a>
-
-    <a href="index.html" class="back-button">
-        ← Back to Home
-    </a>
-</header>
-
-<!-- MAIN CONTENT -->
-
-<main>
-
-    <h1 class="page-title">GAME SELECTOR</h1>
-
-    <p class="page-subtitle">
-        Find your next challenge.
-    </p>
-
-    <p class="instruction">
-        Select 1 mode at a time to find your favorite mode.
-    </p>
-
-    <!-- START BUTTON -->
-
-    <div class="start-area" id="start-area">
-        <button class="start-button" id="start-button" onclick="startGame()">
-            START<br>GAME
-        </button>
-    </div>
-
-    <!-- WHEEL -->
-
-    <section class="wheel-section" id="wheel-section">
-
-        <div class="wheel-stage">
-
-            <div class="wheel-ring"></div>
-
-            <div class="wheel-rotator" id="wheel-rotator">
-                <!-- Seven random modes are inserted here -->
-            </div>
-
-            <div class="wheel-center">
-                <strong>PVP WORLD</strong>
-                <span>GAME MODES</span>
-            </div>
-
-        </div>
-
-    </section>
-
-</main>
-
-<footer>
-    © 2026 PvPWorld. Not affiliated with Mojang or Microsoft.
-</footer>
-
-<script>
-
-/* GAME MODE POOL */
-
-const gameModes = [
-    {
-        name: "Spear Mace",
-        image: "https://media.forgecdn.net/avatars/thumbnails/1678/399/256/256/639066907617132686.png"
-    },
-    {
-        name: "Mace",
-        image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/6/63/Mace.png/revision/latest?cb=20260330015956"
-    },
-    {
-        name: "UHC",
-        image: "https://static.wikia.nocookie.net/pvplegacy/images/c/c9/UHCDuels.png/revision/latest/thumbnail/width/360/height/360?cb=20230408002546"
-    },
-    {
-        name: "Sword",
-        image: "https://minecraft.wiki/images/Enchanted_Diamond_Sword.gif?f741f"
-    },
-    {
-        name: "Axe",
-        image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/4/40/Diamond_Axe_JE3_BE3.png/revision/latest/scale-to-width/360?cb=20200226193844"
-    },
-    {
-        name: "Crystal",
-        image: "https://static.wikia.nocookie.net/minecraft/images/9/92/EndCrystalNew.png/revision/latest?cb=20191218004335"
-    },
-    {
-        name: "Pot",
-        image: "https://minecraft.wiki/images/Splash_Potion_of_Healing_JE2.png?d45f1"
-    },
-    {
-        name: "Nethpot",
-        image: "https://i.pinimg.com/564x/10/0d/d5/100dd5bae19708177959763d81907ab9.jpg"
-    },
-    {
-        name: "Cart",
-        image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/72/Minecart_with_TNT_%28item%29_JE1_BE1.png/revision/latest?cb=20190910054555"
-    },
-    {
-        name: "HT3 Cart",
-        image: "https://minecraft.wiki/images/Crossbow.png?0da8f"
-    },
-    {
-        name: "SMP",
-        image: "https://minecraft.wiki/images/Shield_JE2_BE1.png?4837d"
-    },
-    {
-        name: "Diamond SMP",
-        image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/a/ab/Diamond_JE3_BE3.png/revision/latest/thumbnail/width/360/height/360?cb=20230924193138"
-    },
-    {
-        name: "Explosive Diarrhea",
-        image: "https://minecraft.wiki/images/Brown_Dye_JE2_BE2.png?85e10"
-    }
-];
-
-
-/* RANDOMLY PICK SEVEN MODES */
-
-function getRandomModes() {
-    const shuffled = [...gameModes];
-
-    for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-
-    return shuffled.slice(0, 7);
-}
-
-
-/* CREATE THE WHEEL */
-
-function createWheel() {
-    const wheel = document.getElementById("wheel-rotator");
-
-    wheel.innerHTML = "";
-
-    const selectedModes = getRandomModes();
-
-    const radius = window.innerWidth <= 600 ? 43 : 45;
-
-    selectedModes.forEach((mode, index) => {
-
-        const angle = (index / 7) * Math.PI * 2 - Math.PI / 2;
-
-        const x = Math.cos(angle) * radius;
-        const y = Math.sin(angle) * radius;
-
-        const item = document.createElement("div");
-        item.className = "mode-item";
-
-        item.style.setProperty("--x", x + "%");
-        item.style.setProperty("--y", y + "%");
-
-        const content = document.createElement("div");
-        content.className = "mode-content";
-
-        const image = document.createElement("img");
-        image.className = "mode-image";
-        image.src = mode.image;
-        image.alt = mode.name;
-        image.loading = "lazy";
-
-        const name = document.createElement("span");
-        name.className = "mode-name";
-        name.textContent = mode.name;
-
-        content.appendChild(image);
-        content.appendChild(name);
-
-        item.appendChild(content);
-        wheel.appendChild(item);
-    });
-}
-
-
-/* START GAME */
-
-let gameStarted = false;
-
-function startGame() {
-    if (gameStarted) return;
-
-    gameStarted = true;
-
-    const button = document.getElementById("start-button");
-    const startArea = document.getElementById("start-area");
-    const wheelSection = document.getElementById("wheel-section");
-
-    button.classList.add("pop");
-
-    setTimeout(() => {
-        startArea.style.display = "none";
-
-        createWheel();
-
-        wheelSection.classList.add("visible");
-    }, 350);
-}
-
-
-/* SERVER STATUS */
-
-async function updateServerStatus() {
-    const status = document.getElementById("server-status");
-    const players = document.getElementById("player-count");
-    const dot = document.getElementById("status-dot");
-
-    try {
-        const response = await fetch(
-            "https://api.mcsrvstat.us/3/play2.eternalzero.cloud:26419"
-        );
-
-        const data = await response.json();
-
-        if (data.online) {
-            status.textContent = "Server Online";
-            dot.classList.add("online");
-
-            const online = data.players?.online ?? 0;
-            const max = data.players?.max ?? "?";
-
-            players.textContent = `Players: ${online}/${max}`;
-        } else {
-            status.textContent = "Server Offline";
-            players.textContent = "Players: 0";
-            dot.classList.remove("online");
-        }
-
-    } catch (error) {
-        status.textContent = "Status Unavailable";
-        players.textContent = "Players: --";
-        dot.classList.remove("online");
-    }
-}
-
-updateServerStatus();
-setInterval(updateServerStatus, 300000);
-
-
-/* KEEP WHEEL POSITIONS CORRECT AFTER RESIZING */
-
-window.addEventListener("resize", () => {
-    if (gameStarted) {
-        createWheel();
-    }
-});
-
-</script>
-
-</body>
-</html>
-
-
-<link rel="icon" href="https://user54606.na.imgto.link/public/20261111/9f4dc652ec67205b06cb67bd-pvp-world-logo.avif">
-
-<link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
-
-<style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    background: #101722;
-    color: #f0f2f5;
-    font-family: 'Minecraftia', sans-serif;
-    font-size: 13px;
-    min-height: 100vh;
-    overflow-x: hidden;
-}
-
-/* BACKGROUND */
-
-body::before {
-    content: "";
-    position: fixed;
-    width: 650px;
-    height: 650px;
-    background: #7055bd;
-    opacity: .07;
-    filter: blur(150px);
-    border-radius: 50%;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    pointer-events: none;
-    z-index: -1;
-}
-
-/* SERVER STATUS */
-
-.status-bar {
-    background: #111b29;
-    border-bottom: 1px solid #293548;
-    padding: 12px 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    color: #aab5c5;
-    font-size: 10px;
-}
-
-.status-left {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-}
-
-.status-dot {
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: #e45b66;
-    box-shadow: 0 0 8px rgba(228, 91, 102, .5);
-}
-
-.status-dot.online {
-    background: #55d68b;
-    box-shadow: 0 0 8px rgba(85, 214, 139, .5);
-}
-
-.status-right {
-    color: #8d9bb0;
-}
-
-/* HEADER */
-
-header {
-    width: 90%;
-    max-width: 1100px;
-    margin: auto;
-    padding: 25px 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 15px;
-}
-
-.logo {
-    font-size: 20px;
-    color: #a18bea;
-    text-decoration: none;
-}
-
-.back-button {
-    text-decoration: none;
-    color: #f0f2f5;
-    background: #192536;
-    border: 1px solid #35445b;
-    border-radius: 8px;
-    padding: 12px 17px;
-    font-size: 10px;
-    transition: .2s ease;
-}
-
-.back-button:hover {
-    background: #26364d;
-    border-color: #a18bea;
-    transform: translateY(-2px);
-}
-
-/* MAIN */
-
-main {
-    width: 90%;
-    max-width: 1100px;
-    margin: auto;
-    padding: 45px 0 100px;
-    text-align: center;
-}
-
-.page-title {
-    font-size: 25px;
-    margin-bottom: 18px;
-    color: #f0f2f5;
-}
-
-.page-subtitle {
-    color: #aab5c5;
-    font-size: 11px;
-    line-height: 2;
-    margin-bottom: 18px;
-}
-
-.instruction {
-    color: #a18bea;
-    font-size: 10px;
-    margin-bottom: 45px;
-}
-
-/* START BUTTON */
-
-.start-area {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 310px;
-    position: relative;
-}
-
-.start-button {
-    width: 210px;
-    height: 210px;
-    border-radius: 50%;
-    border: 3px solid #a18bea;
-    background: radial-gradient(circle at 35% 30%, #493c78, #201a38 75%);
-    color: white;
-    font-family: 'Minecraftia', sans-serif;
-    font-size: 17px;
-    cursor: pointer;
-    box-shadow:
-        0 0 25px rgba(139, 114, 214, .25),
-        inset 0 0 25px rgba(139, 114, 214, .15);
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease,
-        opacity .3s ease;
-    z-index: 5;
-}
-
-.start-button:hover {
-    transform: scale(1.07);
-    box-shadow:
-        0 0 45px rgba(139, 114, 214, .5),
-        inset 0 0 30px rgba(139, 114, 214, .2);
-}
-
-.start-button:active {
-    transform: scale(.92);
-}
-
-.start-button.pop {
-    animation: buttonPop .45s ease forwards;
-}
-
-@keyframes buttonPop {
-    0% {
-        transform: scale(1);
-    }
-    45% {
-        transform: scale(1.18);
-    }
-    100% {
-        transform: scale(.8);
-        opacity: .15;
-    }
-}
-
-/* WHEEL */
-
-.wheel-section {
-    display: none;
-    justify-content: center;
-    align-items: center;
-    margin: 20px auto 0;
-    animation: wheelAppear .8s ease forwards;
-}
-
-.wheel-section.visible {
-    display: flex;
-}
-
-@keyframes wheelAppear {
-    from {
-        opacity: 0;
-        transform: scale(.65);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-.wheel-stage {
-    width: min(650px, 90vw);
-    aspect-ratio: 1 / 1;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* OUTER RING */
-
-.wheel-ring {
-    position: absolute;
-    width: 88%;
-    height: 88%;
-    border: 2px solid rgba(161, 139, 234, .3);
-    border-radius: 50%;
-    box-shadow:
-        0 0 25px rgba(139, 114, 214, .08),
-        inset 0 0 25px rgba(139, 114, 214, .05);
-}
-
-.wheel-ring::before {
-    content: "";
-    position: absolute;
-    inset: 12px;
-    border: 1px dashed rgba(161, 139, 234, .25);
-    border-radius: 50%;
-}
-
-/* ROTATING CONTENT */
-
-.wheel-rotator {
-    position: absolute;
-    inset: 0;
-    animation: wheelSpin 40s linear infinite;
-}
-
-@keyframes wheelSpin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes counterSpin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(-360deg);
-    }
-}
-
-/* MODE ITEMS */
-
-.mode-item {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 100px;
-    height: 115px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transform:
-        translate(-50%, -50%)
-        translate(var(--x), var(--y));
-    cursor: pointer;
-    z-index: 2;
-}
-
-.mode-content {
-    width: 100px;
-    min-height: 105px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    animation: counterSpin 40s linear infinite;
-    transition: transform .2s ease;
-}
-
-.mode-item:hover {
-    z-index: 10;
-}
-
-.mode-item:hover .mode-content {
-    transform: scale(1.2);
-}
-
-.mode-image {
-    width: 76px;
-    height: 76px;
-    object-fit: contain;
-    padding: 8px;
-    background: #192536;
-    border: 1px solid #465674;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, .3);
-    transition: border-color .2s ease, box-shadow .2s ease;
-}
-
-.mode-item:hover .mode-image {
-    border-color: #a18bea;
-    box-shadow: 0 0 20px rgba(161, 139, 234, .45);
-}
-
-.mode-name {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: max-content;
-    max-width: 150px;
-    text-align: center;
-    color: #d8ccff;
-    font-size: 9px;
-    line-height: 1.6;
-    background: #192536;
-    border: 1px solid #66559b;
-    border-radius: 6px;
-    padding: 7px 9px;
-    pointer-events: none;
-    z-index: 20;
-}
-
-.mode-item:hover .mode-name {
-    display: block;
-}
-
-/* CENTER OF WHEEL */
-
-.wheel-center {
-    position: absolute;
-    width: 125px;
-    height: 125px;
-    border-radius: 50%;
-    background: radial-gradient(circle, #30264d, #171d2a);
-    border: 2px solid #806bc0;
-    box-shadow: 0 0 30px rgba(139, 114, 214, .3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 8px;
-    z-index: 4;
-}
-
-.wheel-center strong {
-    font-size: 12px;
-    color: #c8b8ff;
-}
-
-.wheel-center span {
-    font-size: 8px;
-    color: #8996aa;
-}
-
-/* FOOTER */
-
-footer {
-    border-top: 1px solid #293548;
-    padding: 25px 5%;
-    text-align: center;
-    color: #78869a;
-    font-size: 9px;
-    margin-top: 60px;
-}
-
-/* RESPONSIVE */
-
-@media (max-width: 600px) {
-    header {
-        padding: 18px 0;
-    }
-
-    .page-title {
-        font-size: 19px;
-    }
-
-    .page-subtitle {
-        font-size: 9px;
-    }
-
-    .instruction {
-        font-size: 8px;
-        margin-bottom: 25px;
-    }
-
     .start-button {
-        width: 165px;
-        height: 165px;
+        width: 145px;
+        height: 145px;
         font-size: 14px;
     }
-
-    .start-area {
-        min-height: 250px;
-    }
-
-    .mode-item {
-        width: 75px;
-        height: 90px;
-    }
-
-    .mode-content {
-        width: 75px;
-        min-height: 85px;
-    }
-
-    .mode-image {
-        width: 58px;
-        height: 58px;
-    }
-
-    .mode-name {
-        font-size: 7px;
-    }
-
-    .wheel-center {
-        width: 95px;
-        height: 95px;
-    }
-
-    .wheel-center strong {
-        font-size: 9px;
-    }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .wheel-rotator,
-    .mode-content {
-        animation-duration: 120s;
+@media (max-width: 380px) {
+    .nav-links {
+        gap: 8px;
+    }
+
+    .nav-links a {
+        font-size: 8px;
     }
 }
 </style>
@@ -1233,81 +434,105 @@ footer {
 
 <body>
 
-<!-- SERVER STATUS -->
+<!-- TOP NAVIGATION -->
+
+<nav class="navbar">
+    <a href="index.html" class="nav-brand">
+        <img src="https://user54606.na.imgto.link/public/20261111/9f4dc652ec67205b06cb67bd-pvp-world-logo.avif" alt="PvPWorld Logo">
+        <span>PvPWorld</span>
+    </a>
+
+    <div class="nav-links">
+        <a href="index.html">HOME</a>
+        <a href="game.html" class="active">GAME</a>
+        <a href="https://discord.gg/eQzZXcjs6" target="_blank" rel="noopener noreferrer">DISCORD</a>
+    </div>
+</nav>
+
+<!-- CENTERED SERVER STATUS -->
 
 <div class="status-bar">
-    <div class="status-left">
-        <span class="status-dot" id="status-dot"></span>
-        <span id="server-status">Checking server...</span>
-    </div>
+    <div class="status-content">
+        <div class="status-item">
+            <span class="status-dot" id="status-dot"></span>
+            <span id="server-status">Checking Server...</span>
+        </div>
 
-    <div class="status-right" id="player-count">
-        Players: --
+        <div class="status-item">
+            <span id="player-count">Players: --</span>
+        </div>
     </div>
 </div>
 
-<!-- HEADER -->
+<main class="page">
 
-<header>
-    <a href="index.html" class="logo">PvPWorld</a>
-
-    <a href="index.html" class="back-button">
-        ← Back to Home
-    </a>
-</header>
-
-<!-- MAIN CONTENT -->
-
-<main>
-
-    <h1 class="page-title">GAME SELECTOR</h1>
-
-    <p class="page-subtitle">
-        Find your next challenge.
-    </p>
+    <h1>GAME SELECTOR</h1>
+    <p class="subtitle">Find your next challenge.</p>
 
     <p class="instruction">
         Select 1 mode at a time to find your favorite mode.
     </p>
 
-    <!-- START BUTTON -->
+    <div class="wheel-area">
 
-    <div class="start-area" id="start-area">
         <button class="start-button" id="start-button" onclick="startGame()">
             START<br>GAME
         </button>
-    </div>
 
-    <!-- WHEEL -->
-
-    <section class="wheel-section" id="wheel-section">
-
-        <div class="wheel-stage">
-
+        <div class="wheel-container" id="wheel-container">
             <div class="wheel-ring"></div>
-
-            <div class="wheel-rotator" id="wheel-rotator">
-                <!-- The seven random modes are inserted here -->
-            </div>
-
-            <div class="wheel-center">
-                <strong>PVP WORLD</strong>
-                <span>GAME MODES</span>
-            </div>
-
+            <div class="wheel-rotator" id="wheel-rotator"></div>
         </div>
 
-    </section>
+    </div>
 
 </main>
 
-<footer>
-    © 2026 PvPWorld. Not affiliated with Mojang or Microsoft.
-</footer>
+<div class="footer">
+    PvPWorld © 2026
+</div>
 
 <script>
 
-/* GAME MODE POOL */
+/* SERVER STATUS */
+
+async function updateServerStatus() {
+    const status = document.getElementById("server-status");
+    const players = document.getElementById("player-count");
+    const dot = document.getElementById("status-dot");
+
+    try {
+        const response = await fetch(
+            "https://api.mcsrvstat.us/3/play2.eternalzero.cloud:26419"
+        );
+
+        const data = await response.json();
+
+        if (data.online) {
+            status.textContent = "Server Online";
+            dot.classList.add("online");
+
+            const online = data.players?.online ?? 0;
+            const max = data.players?.max ?? "?";
+
+            players.textContent = `Players: ${online}/${max}`;
+        } else {
+            status.textContent = "Server Offline";
+            players.textContent = "Players: 0";
+            dot.classList.remove("online");
+        }
+    } catch (error) {
+        status.textContent = "Status Unavailable";
+        players.textContent = "Players: --";
+        dot.classList.remove("online");
+    }
+}
+
+updateServerStatus();
+setInterval(updateServerStatus, 300000);
+
+
+/* GAME MODES */
 
 const gameModes = [
     {
@@ -1365,34 +590,23 @@ const gameModes = [
 ];
 
 
-/* RANDOMLY PICK SEVEN MODES */
-
-function getRandomModes() {
-    const shuffled = [...gameModes];
-
-    for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-
-    return shuffled.slice(0, 7);
-}
-
-
-/* CREATE THE WHEEL */
+/* CREATE WHEEL */
 
 function createWheel() {
     const wheel = document.getElementById("wheel-rotator");
 
     wheel.innerHTML = "";
 
-    const selectedModes = getRandomModes();
+    const shuffled = [...gameModes].sort(() => Math.random() - 0.5);
+    const selectedModes = shuffled.slice(0, 7);
 
-    const radius = window.innerWidth <= 600 ? 36 : 42;
+    const wheelSize = wheel.parentElement.getBoundingClientRect().width;
+
+    // Push icons almost all the way to the outside edge.
+    const radius = wheelSize * 0.425;
 
     selectedModes.forEach((mode, index) => {
-
-        const angle = (index / 7) * Math.PI * 2 - Math.PI / 2;
+        const angle = (index / selectedModes.length) * Math.PI * 2 - Math.PI / 2;
 
         const x = Math.cos(angle) * radius;
         const y = Math.sin(angle) * radius;
@@ -1400,25 +614,23 @@ function createWheel() {
         const item = document.createElement("div");
         item.className = "mode-item";
 
-        item.style.setProperty("--x", x + "%");
-        item.style.setProperty("--y", y + "%");
+        item.style.left = `calc(50% + ${x}px)`;
+        item.style.top = `calc(50% + ${y}px)`;
 
         const content = document.createElement("div");
         content.className = "mode-content";
 
         const image = document.createElement("img");
-        image.className = "mode-image";
         image.src = mode.image;
         image.alt = mode.name;
-        image.loading = "lazy";
+        image.draggable = false;
 
-        const name = document.createElement("span");
+        const name = document.createElement("div");
         name.className = "mode-name";
         name.textContent = mode.name;
 
         content.appendChild(image);
         content.appendChild(name);
-
         item.appendChild(content);
         wheel.appendChild(item);
     });
@@ -1427,75 +639,20 @@ function createWheel() {
 
 /* START GAME */
 
-let gameStarted = false;
-
 function startGame() {
-    if (gameStarted) return;
-
-    gameStarted = true;
-
     const button = document.getElementById("start-button");
-    const startArea = document.getElementById("start-area");
-    const wheelSection = document.getElementById("wheel-section");
+    const wheel = document.getElementById("wheel-container");
 
     button.classList.add("pop");
 
     setTimeout(() => {
-        startArea.style.display = "none";
+        button.style.display = "none";
+
+        wheel.classList.add("show");
 
         createWheel();
-
-        wheelSection.classList.add("visible");
     }, 350);
 }
-
-
-/* SERVER STATUS */
-
-async function updateServerStatus() {
-    const status = document.getElementById("server-status");
-    const players = document.getElementById("player-count");
-    const dot = document.getElementById("status-dot");
-
-    try {
-        const response = await fetch(
-            "https://api.mcsrvstat.us/3/play2.eternalzero.cloud:26419"
-        );
-
-        const data = await response.json();
-
-        if (data.online) {
-            status.textContent = "Server Online";
-            dot.classList.add("online");
-
-            const online = data.players?.online ?? 0;
-            const max = data.players?.max ?? "?";
-
-            players.textContent = `Players: ${online}/${max}`;
-        } else {
-            status.textContent = "Server Offline";
-            players.textContent = "Players: 0";
-            dot.classList.remove("online");
-        }
-
-    } catch (error) {
-        status.textContent = "Status Unavailable";
-        players.textContent = "Players: --";
-        dot.classList.remove("online");
-    }
-}
-
-updateServerStatus();
-setInterval(updateServerStatus, 300000);
-
-
-/* KEEP WHEEL POSITIONS CORRECT AFTER RESIZING */
-
-window.addEventListener("resize", () => {
-    if (gameStarted) {
-        createWheel();
-    }
-});
 
 </script>
 
