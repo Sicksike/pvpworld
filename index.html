@@ -8,6 +8,7 @@
 
   <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
 
+  <!-- Favicon -->
   <link rel="icon" type="image/avif"
     href="https://user54606.na.imgto.link/public/20261111/9f4dc652ec67205b06cb67bd-pvp-world-logo.avif">
 
@@ -124,8 +125,6 @@
       color: #b9a4ff;
     }
 
-    /* HERO */
-
     .hero {
       padding: 100px 0 90px;
       text-align: center;
@@ -145,13 +144,6 @@
       line-height: 2;
       max-width: 700px;
       margin: auto;
-      width: 100%;
-    }
-
-    .hero .wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
     }
 
     .actions {
@@ -164,6 +156,16 @@
       margin: 30px auto 0;
       flex-wrap: nowrap;
       text-align: center;
+    }
+
+    .hero .wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero p {
+      width: 100%;
     }
 
     .actions a,
@@ -194,8 +196,6 @@
       color: #ffffff;
       transform: translateY(-3px);
     }
-
-    /* GENERAL SECTIONS */
 
     .block {
       padding: 55px 0;
@@ -238,7 +238,7 @@
       line-height: 1.9;
     }
 
-    /* TOP 3 PLAYERS */
+    /* Top 3 Players */
 
     .top-players {
       display: grid;
@@ -318,7 +318,7 @@
       color: #d9a47e;
     }
 
-    /* MOST KILLS */
+    /* Most Kills */
 
     .kills-card {
       position: relative;
@@ -384,7 +384,7 @@
       transform: scale(1.12) rotate(6deg);
     }
 
-    /* NEWS */
+    /* News */
 
     .news-card {
       background: #192536;
@@ -412,7 +412,7 @@
       line-height: 1.9;
     }
 
-    /* WEEKLY EVENTS */
+    /* Weekly Events */
 
     .events-intro {
       color: #aab5c5;
@@ -483,7 +483,7 @@
       font-size: 10px;
     }
 
-    /* SERVER IP */
+    /* Server IP */
 
     .server-box {
       background: #192536;
@@ -530,7 +530,7 @@
       transform: translateY(-2px);
     }
 
-    /* SEASON 2 TRAILER */
+    /* Season 2 Trailer */
 
     .trailer-description {
       color: #aab5c5;
@@ -570,7 +570,7 @@
       line-height: 2;
     }
 
-    /* TEXTURED, RIPPLING 3D BLOB */
+    /* LARGE, SLOW-MOVING LIQUID RIPPLES */
 
     .blob {
       position: absolute;
@@ -582,89 +582,96 @@
       left: 50vw;
       border-radius: 45% 55% 60% 40%;
       background:
-        radial-gradient(ellipse at 32% 24%, rgba(221, 204, 255, 0.9), transparent 15%),
-        radial-gradient(ellipse at 38% 32%, #b49aff, #8059e8 28%, transparent 62%),
-        radial-gradient(ellipse at 72% 72%, #3946a8, #29245e 55%, transparent 78%),
-        radial-gradient(circle at 50% 50%, #7650d5, #302052 75%);
+        radial-gradient(ellipse at 32% 24%, rgba(221, 204, 255, 0.95), transparent 18%),
+        radial-gradient(ellipse at 38% 32%, #b49aff 0%, #8059e8 30%, transparent 66%),
+        radial-gradient(ellipse at 72% 72%, #3946a8 0%, #29245e 56%, transparent 80%),
+        radial-gradient(circle at 50% 50%, #7650d5 0%, #302052 76%);
       box-shadow:
-        inset -35px -35px 70px rgba(8, 10, 35, 0.7),
-        inset 20px 20px 55px rgba(196, 181, 253, 0.3),
-        0 0 100px rgba(124, 58, 237, 0.3);
-      opacity: 0.7;
-      filter: blur(8px);
+        inset -38px -38px 75px rgba(8, 10, 35, 0.72),
+        inset 24px 22px 60px rgba(196, 181, 253, 0.3),
+        0 0 110px rgba(124, 58, 237, 0.32);
+      opacity: 0.74;
+      filter: blur(5px);
       transform: translate(-50%, -50%);
       z-index: -1;
       pointer-events: none;
-      animation: blobFloat 18s ease-in-out infinite, blobMorph 24s ease-in-out infinite alternate;
+      animation: blobFloat 19s ease-in-out infinite, blobMorph 26s ease-in-out infinite alternate;
     }
+
+    /* Big, clearly visible ripple bands */
 
     .blob::before {
       content: "";
       position: absolute;
-      inset: 0;
+      inset: -8%;
       border-radius: inherit;
       background: repeating-radial-gradient(
-        ellipse at 40% 38%,
-        transparent 0 12px,
-        rgba(221, 204, 255, 0.2) 14px,
-        rgba(124, 88, 220, 0.25) 17px,
-        transparent 21px 32px
+        ellipse at 42% 42%,
+        transparent 0 28px,
+        rgba(224, 211, 255, 0.30) 31px 35px,
+        rgba(139, 112, 214, 0.24) 38px 44px,
+        transparent 49px 72px
       );
       mix-blend-mode: screen;
-      opacity: 0.8;
-      filter: blur(1.5px);
-      -webkit-mask-image: radial-gradient(ellipse at center, black 15%, transparent 72%);
-      mask-image: radial-gradient(ellipse at center, black 15%, transparent 72%);
-      animation: rippleMove 13s ease-in-out infinite alternate;
+      opacity: 0.95;
+      filter: blur(2px);
+      -webkit-mask-image: radial-gradient(ellipse at center, #000 22%, transparent 76%);
+      mask-image: radial-gradient(ellipse at center, #000 22%, transparent 76%);
+      animation: bigRipple 16s ease-in-out infinite alternate;
     }
+
+    /* Secondary broad rings and moving highlights */
 
     .blob::after {
       content: "";
       position: absolute;
-      inset: 0;
+      inset: -5%;
       border-radius: inherit;
       background:
-        radial-gradient(ellipse at 28% 25%, rgba(255,255,255,0.5), transparent 13%),
-        radial-gradient(ellipse at 65% 35%, rgba(196,181,253,0.25), transparent 25%),
-        radial-gradient(ellipse at 75% 80%, rgba(10,15,55,0.8), transparent 55%),
-        repeating-radial-gradient(ellipse at 65% 60%, transparent 0 20px, rgba(49,46,129,0.16) 22px, transparent 27px 40px);
+        radial-gradient(ellipse at 28% 25%, rgba(255,255,255,0.62), transparent 16%),
+        radial-gradient(ellipse at 65% 35%, rgba(196,181,253,0.32), transparent 28%),
+        radial-gradient(ellipse at 75% 80%, rgba(10,15,55,0.82), transparent 56%),
+        repeating-radial-gradient(
+          ellipse at 68% 58%,
+          transparent 0 42px,
+          rgba(185, 163, 255, 0.20) 46px 51px,
+          transparent 57px 96px
+        );
       mix-blend-mode: screen;
-      opacity: 0.8;
+      opacity: 0.88;
       filter: blur(3px);
-      animation: surfaceShift 17s ease-in-out infinite alternate;
+      -webkit-mask-image: radial-gradient(ellipse at center, #000 18%, transparent 78%);
+      mask-image: radial-gradient(ellipse at center, #000 18%, transparent 78%);
+      animation: wideWave 21s ease-in-out infinite alternate;
     }
 
     @keyframes blobFloat {
       0%, 100% { transform: translate(-50%, -50%) translate3d(0, 0, 0); }
-      25% { transform: translate(-46%, -53%) translate3d(0, -35px, 0); }
+      25% { transform: translate(-46%, -53%) translate3d(0, -32px, 0); }
       50% { transform: translate(-53%, -47%) translate3d(0, 20px, 0); }
-      75% { transform: translate(-48%, -51%) translate3d(0, -20px, 0); }
+      75% { transform: translate(-48%, -51%) translate3d(0, -18px, 0); }
     }
 
     @keyframes blobMorph {
       0% { border-radius: 45% 55% 60% 40%; scale: 1; }
-      50% { border-radius: 60% 40% 45% 55%; scale: 1.12; }
-      100% { border-radius: 40% 60% 55% 45%; scale: 0.95; }
+      50% { border-radius: 60% 40% 45% 55%; scale: 1.10; }
+      100% { border-radius: 40% 60% 55% 45%; scale: 0.96; }
     }
 
-    @keyframes rippleMove {
-      0% { transform: translate(-5%, -4%) scale(0.95) rotate(-8deg); }
-      50% { transform: translate(4%, 3%) scale(1.08) rotate(5deg); }
-      100% { transform: translate(-2%, 6%) scale(1.15) rotate(12deg); }
+    @keyframes bigRipple {
+      0% { transform: translate(-7%, -5%) scale(0.78) rotate(-12deg); }
+      50% { transform: translate(4%, 3%) scale(1.10) rotate(4deg); }
+      100% { transform: translate(-3%, 7%) scale(1.28) rotate(14deg); }
     }
 
-    @keyframes surfaceShift {
-      0% { transform: translate(3%, 2%) scale(1); }
-      100% { transform: translate(-7%, -5%) scale(1.12); }
+    @keyframes wideWave {
+      0% { transform: translate(5%, 3%) scale(0.88) rotate(8deg); }
+      100% { transform: translate(-8%, -6%) scale(1.18) rotate(-10deg); }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .blob, .blob::before, .blob::after {
-        animation: none;
-      }
+      .blob, .blob::before, .blob::after { animation: none; }
     }
-
-    /* MOBILE */
 
     @media (max-width: 640px) {
       nav {
@@ -735,7 +742,7 @@
 
 <body>
 
-  <!-- SERVER STATUS -->
+  <!-- Small Server Status Indicator -->
 
   <div class="status-bar">
     <div class="status-content">
@@ -745,7 +752,7 @@
     </div>
   </div>
 
-  <!-- NAVIGATION -->
+  <!-- Navigation -->
 
   <header>
     <div class="wrap">
@@ -766,13 +773,15 @@
     </div>
   </header>
 
-  <!-- HERO -->
+  <!-- Hero -->
 
   <section class="hero">
     <div class="wrap">
       <h1>PVP. Survival. <span>Teams.</span></h1>
 
-      <p>The perfect combo.</p>
+      <p>
+        The perfect combo.
+      </p>
 
       <p>
         A Minecraft server to play with your friends and become
@@ -780,16 +789,16 @@
       </p>
 
       <div class="actions">
-        <a href="#trailer" class="trailer-button">Season 2 Trailer</a>
 
         <a href="https://discord.gg/eQzZXcjs6"
            target="_blank"
            rel="noopener noreferrer">
           Join Our Discord
         </a>
-
+        
         <a href="#trailer" class="trailer-button">Season 2 Trailer</a>
 
+        
         <a href="#teams" class="ghost">Check out the teams</a>
 
         <a href="#events" class="events-button">Weekly Events</a>
@@ -797,48 +806,62 @@
     </div>
   </section>
 
-  <!-- TOP 3 PLAYERS -->
+  <!-- Top 3 Players Overall -->
 
   <section class="block" id="top-players">
     <div class="wrap">
+
       <h2>Top 3 Players Overall</h2>
 
       <div class="top-players">
+
+        <!-- 2nd Place -->
+
         <div class="player-card second-place">
           <img
             src="https://user54606.na.imgto.link/public/20261111/b9b0830cb3ce416fe083727e-avatarbody4.avif"
             alt="tiao9000Twitch Minecraft skin"
           >
+
           <div class="player-place">2ND PLACE</div>
           <h3>tiao9000Twitch</h3>
         </div>
+
+        <!-- 1st Place -->
 
         <div class="player-card first-place">
           <img
             src="https://user54606.na.imgto.link/public/20261111/be277e0a369bc7714295224b-avatarbody6.avif"
             alt="Sicksike Minecraft skin"
           >
+
           <div class="player-place">1ST PLACE</div>
           <h3>Sicksike</h3>
         </div>
+
+        <!-- 3rd Place -->
 
         <div class="player-card third-place">
           <img
             src="https://user54606.na.imgto.link/public/20261111/5efb4898ef49635f5b33eedb-avatarbody5-1.avif"
             alt="Coni_loves_chili Minecraft skin"
           >
+
           <div class="player-place">3RD PLACE</div>
           <h3>Coni_loves_chili</h3>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- MOST KILLS -->
+  <!-- Most Kills -->
 
   <section class="block" id="kills">
     <div class="wrap">
+
       <div class="kills-card">
+
         <h2>Most Kills</h2>
         <p class="sub">The top players on PvPWorld.</p>
 
@@ -853,24 +876,29 @@
             <span>1. Sicksike</span>
             <span class="kill-count">0 kills</span>
           </li>
+
           <li>
             <span>2. tiao9000Twitch</span>
             <span class="kill-count">0 kills</span>
           </li>
+
           <li>
             <span>3. Coni</span>
             <span class="kill-count">0 kills</span>
           </li>
         </ol>
+
       </div>
     </div>
   </section>
 
-  <!-- SEASON 2 TRAILER -->
+  <!-- Season 2 Trailer -->
 
   <section class="block" id="trailer">
     <div class="wrap">
+
       <h2>Season 2 Trailer</h2>
+
       <p class="trailer-description">
         Get a look at what's coming in Season 2 of PvPWorld.
       </p>
@@ -881,16 +909,18 @@
           Your browser does not support HTML video.
         </video>
       </div>
+
     </div>
   </section>
 
-  <!-- TEAMS -->
+  <!-- Teams -->
 
   <section class="block" id="teams">
     <div class="wrap">
       <h2>Teams</h2>
 
       <div class="grid">
+
         <div class="card">
           <h3>bottles</h3>
           <p>Tiao, Shadox, Coder</p>
@@ -905,18 +935,21 @@
           <h3>nan</h3>
           <p>nan</p>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- NEWS -->
+  <!-- News -->
 
   <section class="block" id="news">
     <div class="wrap">
       <h2>News</h2>
+
       <div class="blob"></div>
 
       <div class="grid">
+
         <div class="news-card">
           <h3>Lifesteal</h3>
           <p>We have added the Lifesteal plugin now!!</p>
@@ -924,31 +957,26 @@
 
         <div class="news-card">
           <h3>Tiao</h3>
-          <p>
-            Tiao has officially become the Minecraft server's biggest menace.
-            Bro has crashed the server more times than anyone can count.
-            Every time things start running smoothly, Tiao somehow finds a
-            way to bring the entire server to its knees. The server sees him
-            join and starts fighting for its life. At this point, the restart
-            button probably has PTSD. Whether it's lag, chaos, or just Tiao
-            doing Tiao things, one thing is certain: the server's uptime has
-            a personal enemy, and his name is Tiao.
-          </p>
+          <p>Tiao has officially become the Minecraft server's biggest menace. Bro has crashed the server more times than anyone can count. Every time things start running smoothly, Tiao somehow finds a way to bring the entire server to its knees. The server sees him join and starts fighting for its life. At this point, the restart button probably has PTSD. Whether it's lag, chaos, or just Tiao doing Tiao things, one thing is certain: the server's uptime has a personal enemy, and his name is Tiao.</p>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- WEEKLY EVENTS -->
+  <!-- Weekly Events -->
 
   <section class="block" id="events">
     <div class="wrap">
+
       <h2>Weekly Events</h2>
+
       <p class="events-intro">
         Check out the upcoming events on PvPWorld.
       </p>
 
       <div class="event-card">
+
         <img
           class="event-image"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPN_MVh-N4E-kaAtZB_njvXRbsDMmibAK02uTU24G2m9zNQMntShT-m4yW&s=10"
@@ -956,6 +984,7 @@
         >
 
         <div class="event-info">
+
           <h3>SERVER OPENING</h3>
 
           <div class="event-details">
@@ -963,24 +992,31 @@
             <span>🕒 4:00 PM PST</span>
           </div>
 
-          <p>Season two begins.</p>
+          <p>
+            Season two begins.
+          </p>
 
           <span class="event-label">UPCOMING EVENT</span>
+
         </div>
       </div>
+
     </div>
   </section>
 
-  <!-- SERVER IP -->
+  <!-- Server IP -->
 
   <section class="block" id="server">
     <div class="wrap">
+
       <h2>Join PvPWorld</h2>
 
       <div class="grid">
+
         <div class="server-box">
           <h3>Java Edition</h3>
           <p>play2.eternalzero.cloud:26419</p>
+
           <button onclick="copyAddress('play2.eternalzero.cloud:26419', this)">
             Copy IP
           </button>
@@ -990,6 +1026,7 @@
           <h3>Bedrock Edition</h3>
           <p>play2.eternalzero.cloud</p>
           <p>Port: 55831</p>
+
           <button onclick="copyAddress('play2.eternalzero.cloud', this)">
             Copy IP
           </button>
@@ -998,24 +1035,28 @@
         <div class="server-box">
           <h3>Eaglercraft</h3>
           <p>wss://pvp.tiao9002.workers.dev</p>
+
           <button onclick="copyAddress('wss://pvp.tiao9002.workers.dev', this)">
             Copy IP
           </button>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- Footer -->
 
   <footer>
     © 2026 PvPWorld<br>
     Not affiliated with Mojang or Microsoft.
   </footer>
 
-  <!-- SCRIPTS -->
+  <!-- Scripts -->
 
   <script>
+    // Copy IP
+
     function copyAddress(address, button) {
       const originalText = button.textContent;
 
@@ -1033,6 +1074,8 @@
         }, 1800);
       });
     }
+
+    // PvPWorld Server Status
 
     async function updateServerStatus() {
       const dot = document.getElementById("server-status-dot");
@@ -1070,7 +1113,10 @@
       }
     }
 
+    // Check immediately when the page loads
     updateServerStatus();
+
+    // Check again every 5 minutes
     setInterval(updateServerStatus, 300000);
   </script>
 
