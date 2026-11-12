@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -147,6 +146,13 @@ h1 {
     font-size: 10px;
 }
 
+.round-label {
+    margin-top: 15px;
+    color: var(--purple);
+    font-size: 11px;
+    text-align: center;
+}
+
 /* WHEEL */
 
 .wheel-area {
@@ -158,6 +164,7 @@ h1 {
     min-height: 650px;
     position: relative;
     margin-top: 5px;
+    padding-bottom: 75px;
 }
 
 .wheel-container {
@@ -373,31 +380,6 @@ h1 {
     color: var(--muted);
 }
 
-/* ORIGINAL SELECTED MODE */
-
-.result-mode.original-selected {
-    flex: 1.25;
-    border: 2px solid var(--purple);
-    box-shadow: 0 0 35px rgba(161,139,234,.22);
-    transform: scale(1.08);
-}
-
-.result-mode.original-selected img {
-    width: 150px;
-    height: 150px;
-}
-
-.result-mode.original-selected h2 {
-    color: var(--purple);
-    font-size: 14px;
-}
-
-.selected-label {
-    color: var(--purple);
-    font-size: 9px;
-    margin-bottom: 12px;
-}
-
 /* FINAL CHOICE HIGHLIGHT */
 
 .result-mode.chosen {
@@ -414,11 +396,22 @@ h1 {
 
 .result-mode.chosen h2 { color: var(--purple); }
 
-/* CONTINUE BUTTON */
+/* BUTTONS */
+
+.wheel-actions {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    z-index: 30;
+}
 
 .continue-button {
     display: none;
-    margin: 30px auto 0;
     padding: 15px 35px;
     background: #192536;
     color: white;
@@ -447,14 +440,8 @@ h1 {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* RESET BUTTON */
-
 .reset-button {
     display: none;
-    position: absolute;
-    bottom: 5px;
-    left: 50%;
-    transform: translateX(-50%);
     padding: 13px 22px;
     background: #192536;
     color: var(--purple);
@@ -464,7 +451,6 @@ h1 {
     font-size: 10px;
     cursor: pointer;
     transition: .2s;
-    z-index: 30;
 }
 
 .reset-button:hover {
@@ -500,16 +486,15 @@ h1 {
     .mode-item img { width: 65px; height: 65px; }
     .mode-name { font-size: 7px; }
     .start-button { width: 145px; height: 145px; font-size: 14px; }
-    .reset-button { bottom: -8px; font-size: 9px; }
 
     .results-container { gap: 8px; }
     .result-mode { padding: 15px 5px; }
     .result-mode img { width: 65px; height: 65px; }
     .result-mode h2 { font-size: 8px; }
     .result-mode p { font-size: 6px; }
-    .result-mode.original-selected img { width: 85px; height: 85px; }
-    .result-mode.original-selected h2 { font-size: 9px; }
-    .selected-label { font-size: 7px; }
+    .wheel-actions { bottom: 0; }
+    .continue-button { font-size: 9px; }
+    .reset-button { font-size: 9px; }
 }
 
 @media (max-width:450px) {
@@ -564,6 +549,8 @@ h1 {
         Select 1 mode at a time to find your favorite mode.
     </p>
 
+    <p class="round-label" id="round-label">ROUND 1</p>
+
     <div class="wheel-area">
 
         <button class="start-button" id="start-button" onclick="startGame()">
@@ -577,36 +564,37 @@ h1 {
 
         <div class="results-container" id="results-container">
 
-            <div class="result-mode original-selected" id="result-selected" data-position="selected">
-                <span class="selected-label">YOUR SELECTION</span>
+            <div class="result-mode" id="result-selected" data-position="selected">
                 <img id="selected-image" src="" alt="">
                 <h2 id="selected-name"></h2>
-                <p>Selected mode</p>
+                <p>Available mode</p>
             </div>
 
             <div class="result-mode" id="result-middle" data-position="middle">
                 <img id="middle-image" src="" alt="">
                 <h2 id="middle-name"></h2>
-                <p>Random mode</p>
+                <p>Available mode</p>
             </div>
 
             <div class="result-mode" id="result-right" data-position="right">
                 <img id="right-image" src="" alt="">
                 <h2 id="right-name"></h2>
-                <p>Random mode</p>
+                <p>Available mode</p>
             </div>
 
         </div>
 
-        <button class="reset-button" id="reset-button" onclick="resetGame()">
-            RESET MODES
-        </button>
+        <div class="wheel-actions">
+            <button class="continue-button" id="continue-button" onclick="continueGame()">
+                CONTINUE
+            </button>
+
+            <button class="reset-button" id="reset-button" onclick="resetGame()">
+                RESET MODES
+            </button>
+        </div>
 
     </div>
-
-    <button class="continue-button" id="continue-button" onclick="continueGame()">
-        CONTINUE
-    </button>
 
 </main>
 
@@ -751,20 +739,26 @@ function shuffleArray(array) {
 }
 
 
-/* PREVIOUS SELECTION */
+/* GAME STATE */
 
 let previousSelection = [];
 let selectionInProgress = false;
 let finalChoice = null;
+let roundOneWinner = null;
+let currentRound = 1;
 
 
-/* GET SEVEN RANDOM MODES */
+/* GET RANDOM MODES */
 
-function getRandomModes() {
+function getRandomModes(count, excludedNames = []) {
+    const availableModes = gameModes.filter(
+        mode => !excludedNames.includes(mode.name)
+    );
+
     let selectedModes = [];
 
     for (let attempt = 0; attempt < 20; attempt++) {
-        selectedModes = shuffleArray(gameModes).slice(0, 7);
+        selectedModes = shuffleArray(availableModes).slice(0, count);
 
         const currentNames = selectedModes
             .map(mode => mode.name)
@@ -790,7 +784,13 @@ function createWheel() {
     const wheel = document.getElementById("wheel-rotator");
     wheel.innerHTML = "";
 
-    const selectedModes = getRandomModes();
+    const excludedNames = currentRound === 2 && roundOneWinner
+        ? [roundOneWinner.name]
+        : [];
+
+    const numberOfModes = currentRound === 1 ? 5 : 4;
+    const selectedModes = getRandomModes(numberOfModes, excludedNames);
+
     const wheelSize = wheel.parentElement.getBoundingClientRect().width;
     const radius = wheelSize * 0.425;
 
@@ -834,6 +834,19 @@ function createWheel() {
 }
 
 
+/* CLEAR RESULT SELECTIONS */
+
+function clearResultSelections() {
+    finalChoice = null;
+
+    document.querySelectorAll(".result-mode").forEach(card => {
+        card.classList.remove("chosen");
+    });
+
+    document.getElementById("continue-button").classList.remove("show");
+}
+
+
 /* SELECT A GAMEMODE FROM THE WHEEL */
 
 function selectMode(selectedMode) {
@@ -851,26 +864,21 @@ function selectMode(selectedMode) {
         item.classList.add("popping");
     });
 
+    const excludedNames = [selectedMode.name];
+
+    if (roundOneWinner) {
+        excludedNames.push(roundOneWinner.name);
+    }
+
     const remainingModes = shuffleArray(
-        gameModes.filter(mode => mode.name !== selectedMode.name)
+        gameModes.filter(mode => !excludedNames.includes(mode.name))
     );
 
-    const middleMode = remainingModes[0];
-    const rightMode = remainingModes[1];
-
     showResult("selected", selectedMode);
-    showResult("middle", middleMode);
-    showResult("right", rightMode);
+    showResult("middle", remainingModes[0]);
+    showResult("right", remainingModes[1]);
 
-    // Hide the Continue button until one of the three is clicked.
-    document.getElementById("continue-button").classList.remove("show");
-
-    // Clear any previous choice.
-    finalChoice = null;
-
-    document.querySelectorAll(".result-mode").forEach(card => {
-        card.classList.remove("chosen");
-    });
+    clearResultSelections();
 
     setTimeout(() => {
         wheel.classList.remove("show");
@@ -901,32 +909,70 @@ function showResult(position, mode) {
 
 document.querySelectorAll(".result-mode").forEach(card => {
     card.addEventListener("click", () => {
+        if (!selectionInProgress) return;
 
-        // Remove the highlight from the previous choice.
         document.querySelectorAll(".result-mode").forEach(item => {
             item.classList.remove("chosen");
         });
 
-        // Highlight the newly selected mode.
         card.classList.add("chosen");
 
-        // Remember which mode was selected.
         const position = card.dataset.position;
         finalChoice = document.getElementById(position + "-name").textContent;
 
-        // Reveal Continue.
         document.getElementById("continue-button").classList.add("show");
     });
 });
 
 
-/* CONTINUE */
+/* CONTINUE TO NEXT ROUND */
 
 function continueGame() {
     if (!finalChoice) return;
 
-    // The next stage will be added here.
-    console.log("Final gamemode selected:", finalChoice);
+    if (currentRound === 1) {
+        roundOneWinner = gameModes.find(
+            mode => mode.name === finalChoice
+        );
+
+        currentRound = 2;
+        selectionInProgress = false;
+
+        document.getElementById("round-label").textContent = "ROUND 2";
+
+        clearResultSelections();
+
+        document.getElementById("results-container").classList.remove("show");
+
+        const rotator = document.getElementById("wheel-rotator");
+        rotator.style.animation = "none";
+        rotator.offsetHeight;
+        rotator.style.animation = "";
+
+        document.getElementById("wheel-container").classList.add("show");
+
+        createWheel();
+
+    } else {
+        document.getElementById("round-label").textContent =
+            "YOUR FINAL MODE: " + finalChoice.toUpperCase();
+
+        document.getElementById("continue-button").classList.remove("show");
+
+        document.querySelectorAll(".result-mode").forEach(card => {
+            card.classList.remove("chosen");
+        });
+
+        document.querySelectorAll(".result-mode").forEach(card => {
+            const name = card.querySelector("h2").textContent;
+
+            if (name === finalChoice) {
+                card.classList.add("chosen");
+            }
+        });
+
+        selectionInProgress = false;
+    }
 }
 
 
@@ -960,16 +1006,17 @@ function resetGame() {
 
     selectionInProgress = false;
     finalChoice = null;
+    roundOneWinner = null;
+    currentRound = 1;
+    previousSelection = [];
 
     results.classList.remove("show");
+    clearResultSelections();
 
-    document.getElementById("continue-button").classList.remove("show");
-
-    document.querySelectorAll(".result-mode").forEach(card => {
-        card.classList.remove("chosen");
-    });
+    document.getElementById("round-label").textContent = "ROUND 1";
 
     wheel.classList.remove("show");
+    rotator.innerHTML = "";
 
     rotator.style.animation = "none";
     rotator.offsetHeight;
