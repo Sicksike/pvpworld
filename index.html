@@ -570,7 +570,7 @@
       line-height: 2;
     }
 
-    /* LARGE, SLOW-MOVING LIQUID RIPPLES */
+    /* QUIET BLOB WITH AN OCCASIONAL 3D WATER RIPPLE */
 
     .blob {
       position: absolute;
@@ -598,51 +598,47 @@
       animation: blobFloat 19s ease-in-out infinite, blobMorph 26s ease-in-out infinite alternate;
     }
 
-    /* Big, clearly visible ripple bands */
+    /* No constant rings: one large ripple appears briefly, then disappears */
 
     .blob::before {
       content: "";
       position: absolute;
-      inset: -8%;
-      border-radius: inherit;
+      inset: -12%;
+      border-radius: 50%;
       background: repeating-radial-gradient(
-        ellipse at 42% 42%,
-        transparent 0 28px,
-        rgba(224, 211, 255, 0.30) 31px 35px,
-        rgba(139, 112, 214, 0.24) 38px 44px,
-        transparent 49px 72px
+        ellipse at center,
+        transparent 0 42px,
+        rgba(235, 225, 255, 0.0) 43px 49px,
+        rgba(235, 225, 255, 0.72) 51px 57px,
+        rgba(139, 112, 214, 0.38) 60px 66px,
+        transparent 70px 105px
       );
-      mix-blend-mode: screen;
-      opacity: 0.95;
+      opacity: 0;
       filter: blur(2px);
-      -webkit-mask-image: radial-gradient(ellipse at center, #000 22%, transparent 76%);
-      mask-image: radial-gradient(ellipse at center, #000 22%, transparent 76%);
-      animation: bigRipple 16s ease-in-out infinite alternate;
+      mix-blend-mode: screen;
+      transform: perspective(700px) rotateX(58deg) scale(0.18);
+      transform-origin: center;
+      -webkit-mask-image: radial-gradient(ellipse at center, #000 12%, transparent 76%);
+      mask-image: radial-gradient(ellipse at center, #000 12%, transparent 76%);
+      animation: occasional3DRipple 22s ease-out infinite;
     }
 
-    /* Secondary broad rings and moving highlights */
+    /* A brief raised highlight gives the ripple a 3D surface effect */
 
     .blob::after {
       content: "";
       position: absolute;
-      inset: -5%;
+      inset: 4%;
       border-radius: inherit;
       background:
-        radial-gradient(ellipse at 28% 25%, rgba(255,255,255,0.62), transparent 16%),
-        radial-gradient(ellipse at 65% 35%, rgba(196,181,253,0.32), transparent 28%),
-        radial-gradient(ellipse at 75% 80%, rgba(10,15,55,0.82), transparent 56%),
-        repeating-radial-gradient(
-          ellipse at 68% 58%,
-          transparent 0 42px,
-          rgba(185, 163, 255, 0.20) 46px 51px,
-          transparent 57px 96px
-        );
+        radial-gradient(ellipse at 50% 50%, transparent 28%, rgba(221, 204, 255, 0.0) 38%, rgba(221, 204, 255, 0.5) 44%, transparent 52%),
+        radial-gradient(ellipse at 35% 30%, rgba(255, 255, 255, 0.0), transparent 55%);
+      opacity: 0;
+      filter: blur(5px);
       mix-blend-mode: screen;
-      opacity: 0.88;
-      filter: blur(3px);
-      -webkit-mask-image: radial-gradient(ellipse at center, #000 18%, transparent 78%);
-      mask-image: radial-gradient(ellipse at center, #000 18%, transparent 78%);
-      animation: wideWave 21s ease-in-out infinite alternate;
+      transform: perspective(700px) rotateX(58deg) scale(0.22) translateY(12%);
+      transform-origin: center;
+      animation: rippleHighlight 22s ease-out infinite;
     }
 
     @keyframes blobFloat {
@@ -658,19 +654,47 @@
       100% { border-radius: 40% 60% 55% 45%; scale: 0.96; }
     }
 
-    @keyframes bigRipple {
-      0% { transform: translate(-7%, -5%) scale(0.78) rotate(-12deg); }
-      50% { transform: translate(4%, 3%) scale(1.10) rotate(4deg); }
-      100% { transform: translate(-3%, 7%) scale(1.28) rotate(14deg); }
+    @keyframes occasional3DRipple {
+      0%, 70% {
+        opacity: 0;
+        transform: perspective(700px) rotateX(58deg) scale(0.18) rotateZ(-8deg);
+      }
+      73% {
+        opacity: 0.9;
+        transform: perspective(700px) rotateX(58deg) scale(0.28) rotateZ(-5deg);
+      }
+      88% {
+        opacity: 0.72;
+        transform: perspective(700px) rotateX(58deg) scale(1.35) rotateZ(5deg);
+      }
+      100% {
+        opacity: 0;
+        transform: perspective(700px) rotateX(58deg) scale(1.85) rotateZ(10deg);
+      }
     }
 
-    @keyframes wideWave {
-      0% { transform: translate(5%, 3%) scale(0.88) rotate(8deg); }
-      100% { transform: translate(-8%, -6%) scale(1.18) rotate(-10deg); }
+    @keyframes rippleHighlight {
+      0%, 70% {
+        opacity: 0;
+        transform: perspective(700px) rotateX(58deg) scale(0.22) translateY(12%);
+      }
+      74% {
+        opacity: 0.75;
+        transform: perspective(700px) rotateX(58deg) scale(0.35) translateY(8%);
+      }
+      88% {
+        opacity: 0.4;
+        transform: perspective(700px) rotateX(58deg) scale(1.25) translateY(-3%);
+      }
+      100% {
+        opacity: 0;
+        transform: perspective(700px) rotateX(58deg) scale(1.8) translateY(-8%);
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
       .blob, .blob::before, .blob::after { animation: none; }
+      .blob::before, .blob::after { opacity: 0; }
     }
 
     @media (max-width: 640px) {
@@ -736,6 +760,7 @@
       .kills-list {
         max-width: 100%;
       }
+
     }
   </style>
 </head>
@@ -795,7 +820,7 @@
            rel="noopener noreferrer">
           Join Our Discord
         </a>
-        
+
         <a href="#trailer" class="trailer-button">Season 2 Trailer</a>
 
         
@@ -898,7 +923,6 @@
     <div class="wrap">
 
       <h2>Season 2 Trailer</h2>
-
       <p class="trailer-description">
         Get a look at what's coming in Season 2 of PvPWorld.
       </p>
@@ -945,7 +969,6 @@
   <section class="block" id="news">
     <div class="wrap">
       <h2>News</h2>
-
       <div class="blob"></div>
 
       <div class="grid">
@@ -970,7 +993,6 @@
     <div class="wrap">
 
       <h2>Weekly Events</h2>
-
       <p class="events-intro">
         Check out the upcoming events on PvPWorld.
       </p>
