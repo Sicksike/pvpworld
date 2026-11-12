@@ -179,6 +179,24 @@
       background: #465570;
     }
 
+    /* SEASON 2 TRAILER BUTTON */
+
+    .trailer-action {
+      margin-top: 18px;
+      margin-bottom: 24px;
+    }
+
+    .actions .trailer-button {
+      background: #30304d;
+      border: 1px solid #8b72d6;
+      color: #d5c9ff;
+    }
+
+    .actions .trailer-button:hover {
+      background: #514477;
+      border-color: #c5b5ff;
+    }
+
     .block {
       padding: 55px 0;
     }
@@ -357,6 +375,37 @@
       transform: scale(1.12) rotate(6deg);
     }
 
+    /* SEASON 2 TRAILER */
+
+    .trailer-description {
+      color: #aab5c5;
+      line-height: 1.9;
+      margin-top: -12px;
+      margin-bottom: 22px;
+    }
+
+    .trailer-card {
+      background: #192536;
+      border: 1px solid #35445b;
+      border-radius: 16px;
+      padding: 20px;
+      transition: border-color .25s ease, transform .25s ease;
+    }
+
+    .trailer-card:hover {
+      border-color: #8b72d6;
+      transform: translateY(-3px);
+    }
+
+    .trailer-video {
+      display: block;
+      width: 100%;
+      max-height: 620px;
+      background: #080d15;
+      border: 1px solid #39485e;
+      border-radius: 10px;
+    }
+
     /* News */
 
     .news-card {
@@ -493,65 +542,66 @@
       font-size: 10px;
       line-height: 2;
     }
+
     .blob {
-    position: absolute;
-    width: 40vw;
-    height: 40vw;
-    max-width: 400px;
-    max-height: 400px;
-    background: radial-gradient(circle, #8b5cf6, #3b82f6 55%, transparent 75%);
-    opacity: 0.5;
-    filter: blur(40px);
-    border-radius: 50%;
-    top: 90vh;
-    left: 50vw;
-    transform: translate(-50%, -50%);
-    z-index: -1;
-    pointer-events: none;
-    animation: blobFlow 10s ease-in-out infinite alternate;
-}
+      position: absolute;
+      width: 40vw;
+      height: 40vw;
+      max-width: 400px;
+      max-height: 400px;
+      background: radial-gradient(circle, #8b5cf6, #3b82f6 55%, transparent 75%);
+      opacity: 0.5;
+      filter: blur(40px);
+      border-radius: 50%;
+      top: 90vh;
+      left: 50vw;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      pointer-events: none;
+      animation: blobFlow 10s ease-in-out infinite alternate;
+    }
 
-.blob::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: radial-gradient(circle, #ffd0b5 0%, #ffad91 50%, #e85d5d 75%, transparent 85%);
-    opacity: 0;
-    animation: blobColor 12s ease-in-out infinite alternate;
-}
+    .blob::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle, #ffd0b5 0%, #ffad91 50%, #e85d5d 75%, transparent 85%);
+      opacity: 0;
+      animation: blobColor 12s ease-in-out infinite alternate;
+    }
 
-@keyframes blobColor {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
+    @keyframes blobColor {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
-@keyframes blobFlow {
-    0% {
+    @keyframes blobFlow {
+      0% {
         border-radius: 50% 50% 50% 50%;
         transform: translate(-50%, -50%) rotate(0deg) scale(1);
-    }
-    20% {
+      }
+      20% {
         border-radius: 70% 30% 45% 55%;
         transform: translate(-45%, -55%) rotate(75deg) scale(1.2, 0.85);
-    }
-    40% {
+      }
+      40% {
         border-radius: 35% 65% 70% 30%;
         transform: translate(-55%, -45%) rotate(160deg) scale(0.85, 1.2);
-    }
-    60% {
+      }
+      60% {
         border-radius: 65% 35% 30% 70%;
         transform: translate(-48%, -52%) rotate(250deg) scale(1.25, 0.9);
-    }
-    80% {
+      }
+      80% {
         border-radius: 30% 70% 60% 40%;
         transform: translate(-53%, -48%) rotate(310deg) scale(0.9, 1.2);
-    }
-    100% {
+      }
+      100% {
         border-radius: 50% 50% 50% 50%;
         transform: translate(-50%, -50%) rotate(360deg) scale(1);
+      }
     }
-}
 
     @media (max-width: 640px) {
       nav {
@@ -611,65 +661,10 @@
       .kills-list {
         max-width: 100%;
       }
-      .blob {
-    position: absolute;
-    width: 40vw;
-    height: 40vw;
-    max-width: 400px;
-    max-height: 400px;
-    background: radial-gradient(circle, #8b5cf6, #3b82f6 55%, transparent 75%);
-    opacity: 0.5;
-    filter: blur(40px);
-    border-radius: 50%;
-    top: 90vh;
-    left: 50vw;
-    transform: translate(-50%, -50%);
-    z-index: -1;
-    pointer-events: none;
-    animation: blobFlow 10s ease-in-out infinite alternate;
-}
 
-.blob::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: radial-gradient(circle, #ffd0b5 0%, #ffad91 50%, #e85d5d 75%, transparent 85%);
-    opacity: 0;
-    animation: blobColor 12s ease-in-out infinite alternate;
-}
-
-@keyframes blobColor {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes blobFlow {
-    0% {
-        border-radius: 50% 50% 50% 50%;
-        transform: translate(-50%, -50%) rotate(0deg) scale(1);
-    }
-    20% {
-        border-radius: 70% 30% 45% 55%;
-        transform: translate(-45%, -55%) rotate(75deg) scale(1.2, 0.85);
-    }
-    40% {
-        border-radius: 35% 65% 70% 30%;
-        transform: translate(-55%, -45%) rotate(160deg) scale(0.85, 1.2);
-    }
-    60% {
-        border-radius: 65% 35% 30% 70%;
-        transform: translate(-48%, -52%) rotate(250deg) scale(1.25, 0.9);
-    }
-    80% {
-        border-radius: 30% 70% 60% 40%;
-        transform: translate(-53%, -48%) rotate(310deg) scale(0.9, 1.2);
-    }
-    100% {
-        border-radius: 50% 50% 50% 50%;
-        transform: translate(-50%, -50%) rotate(360deg) scale(1);
-    }
-}
+      .trailer-card {
+        padding: 13px;
+      }
     }
   </style>
 </head>
@@ -708,9 +703,16 @@
   </header>
 
   <!-- Hero -->
+
   <section class="hero">
     <div class="wrap">
       <h1>PVP. Survival. <span>Teams.</span></h1>
+
+      <div class="actions trailer-action">
+        <a href="#trailer" class="trailer-button">
+          Season 2 Trailer
+        </a>
+      </div>
 
       <p>
         The perfect combo.
@@ -820,6 +822,33 @@
     </div>
   </section>
 
+  <!-- Season 2 Trailer -->
+
+  <section class="block" id="trailer">
+    <div class="wrap">
+
+      <h2>Season 2 Trailer</h2>
+
+      <p class="trailer-description">
+        Get a look at what's coming in Season 2 of PvPWorld.
+      </p>
+
+      <div class="trailer-card">
+
+        <video
+          class="trailer-video"
+          controls
+          playsinline
+          preload="metadata"
+        >
+          <source src="season2-trailer.mp4" type="video/mp4">
+          Your browser does not support HTML video.
+        </video>
+
+      </div>
+    </div>
+  </section>
+
   <!-- Teams -->
 
   <section class="block" id="teams">
@@ -852,7 +881,8 @@
   <section class="block" id="news">
     <div class="wrap">
       <h2>News</h2>
-    <div class="blob"></div>
+      <div class="blob"></div>
+
       <div class="grid">
 
         <div class="news-card">
