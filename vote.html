@@ -110,6 +110,24 @@ header {
     margin: auto;
 }
 
+.back-button {
+    display: inline-block;
+    background: #202d40;
+    border: 1px solid #39485e;
+    padding: 11px 17px;
+    border-radius: 7px;
+    font-size: 10px;
+    transition: .2s ease;
+    color: var(--text, #f0f2f5);
+    margin-bottom: 15px;
+}
+
+.back-button:hover {
+    background: #35445d;
+    border-color: #a18bea;
+    transform: scale(1.04);
+}
+
 nav {
     display: flex;
     justify-content: space-between;
@@ -298,6 +316,9 @@ footer {
 
 <header>
     <div class="wrap">
+
+        <a href="index.html" class="back-button">Back to Home</a>
+
         <nav>
 
             <div class="logo">PvPWorld</div>
