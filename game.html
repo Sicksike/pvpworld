@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -147,13 +148,13 @@ h1 {
 }
 
 .round-label {
-    margin-top: 15px;
+    margin-top: 18px;
     color: var(--purple);
     font-size: 11px;
     text-align: center;
 }
 
-/* WHEEL */
+/* WHEEL AREA */
 
 .wheel-area {
     width: 100%;
@@ -276,6 +277,22 @@ h1 {
 
 .mode-item:hover .mode-name { opacity: 1; }
 
+/* SELECTED MODE */
+
+.mode-item.chosen img {
+    filter: drop-shadow(0 0 18px rgba(161,139,234,1));
+    transform: scale(1.25);
+}
+
+.mode-item.chosen .mode-name {
+    opacity: 1;
+    color: var(--purple);
+}
+
+.mode-item.chosen {
+    z-index: 25;
+}
+
 /* POP ANIMATION */
 
 .mode-item.popping {
@@ -319,83 +336,6 @@ h1 {
     100% { transform: scale(0); opacity: 0; }
 }
 
-/* THREE RESULTS */
-
-.results-container {
-    display: none;
-    width: 100%;
-    max-width: 950px;
-    align-items: center;
-    justify-content: center;
-    gap: 35px;
-    margin: auto;
-}
-
-.results-container.show {
-    display: flex;
-    animation: resultsAppear .65s ease forwards;
-}
-
-@keyframes resultsAppear {
-    from { opacity: 0; transform: translateY(25px) scale(.9); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-.result-mode {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 25px 10px;
-    border: 1px solid rgba(161,139,234,.2);
-    border-radius: 12px;
-    background: rgba(25,37,54,.75);
-    transition: .25s ease;
-    cursor: pointer;
-}
-
-.result-mode img {
-    width: 110px;
-    height: 110px;
-    object-fit: contain;
-    image-rendering: pixelated;
-    transition: transform .25s ease;
-}
-
-.result-mode:hover img { transform: scale(1.12); }
-
-.result-mode h2 {
-    margin-top: 18px;
-    font-size: 12px;
-    color: white;
-    font-weight: normal;
-}
-
-.result-mode p {
-    margin-top: 8px;
-    font-size: 8px;
-    color: var(--muted);
-}
-
-/* FINAL CHOICE HIGHLIGHT */
-
-.result-mode.chosen {
-    border: 2px solid var(--purple);
-    background: rgba(161,139,234,.13);
-    box-shadow: 0 0 30px rgba(161,139,234,.3);
-    transform: translateY(-8px);
-}
-
-.result-mode.chosen img {
-    filter: drop-shadow(0 0 12px rgba(161,139,234,.75));
-    transform: scale(1.12);
-}
-
-.result-mode.chosen h2 { color: var(--purple); }
-
 /* BUTTONS */
 
 .wheel-actions {
@@ -410,7 +350,9 @@ h1 {
     z-index: 30;
 }
 
-.continue-button {
+.continue-button,
+.reset-button,
+.play-again-button {
     display: none;
     padding: 15px 35px;
     background: #192536;
@@ -424,15 +366,25 @@ h1 {
     transition: .2s ease;
 }
 
-.continue-button.show {
+.continue-button.show,
+.reset-button.show,
+.play-again-button.show {
     display: block;
     animation: continueAppear .35s ease forwards;
 }
 
-.continue-button:hover {
+.continue-button:hover,
+.reset-button:hover,
+.play-again-button:hover {
     background: #26344a;
     box-shadow: 0 0 25px rgba(161,139,234,.4);
     transform: scale(1.05);
+}
+
+.reset-button {
+    color: var(--purple);
+    padding: 13px 22px;
+    font-size: 10px;
 }
 
 @keyframes continueAppear {
@@ -440,25 +392,71 @@ h1 {
     to { opacity: 1; transform: translateY(0); }
 }
 
-.reset-button {
+/* FINAL SCREEN */
+
+.final-screen {
     display: none;
-    padding: 13px 22px;
-    background: #192536;
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    padding: 35px 20px;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: resultsAppear .7s ease forwards;
+}
+
+.final-screen.show {
+    display: flex;
+}
+
+@keyframes resultsAppear {
+    from { opacity: 0; transform: translateY(25px) scale(.9); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.final-heading {
     color: var(--purple);
-    border: 1px solid var(--purple);
-    border-radius: 6px;
-    font-family: 'Minecraftia',sans-serif;
-    font-size: 10px;
-    cursor: pointer;
-    transition: .2s;
+    font-size: clamp(18px,4vw,26px);
+    margin-bottom: 30px;
 }
 
-.reset-button:hover {
-    background: #26344a;
-    box-shadow: 0 0 18px rgba(161,139,234,.2);
+.final-card {
+    width: 100%;
+    max-width: 380px;
+    padding: 35px 20px;
+    border: 2px solid var(--purple);
+    border-radius: 14px;
+    background: rgba(25,37,54,.85);
+    box-shadow: 0 0 40px rgba(161,139,234,.2);
 }
 
-.reset-button.show { display: block; }
+.final-card img {
+    width: 190px;
+    height: 190px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    filter: drop-shadow(0 0 15px rgba(161,139,234,.35));
+}
+
+.final-card h2 {
+    margin-top: 22px;
+    font-size: 17px;
+    font-weight: normal;
+    color: white;
+}
+
+.final-question {
+    margin-top: 35px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.play-again-button.show {
+    display: block;
+    margin-top: 22px;
+}
 
 /* FOOTER */
 
@@ -486,15 +484,11 @@ h1 {
     .mode-item img { width: 65px; height: 65px; }
     .mode-name { font-size: 7px; }
     .start-button { width: 145px; height: 145px; font-size: 14px; }
-
-    .results-container { gap: 8px; }
-    .result-mode { padding: 15px 5px; }
-    .result-mode img { width: 65px; height: 65px; }
-    .result-mode h2 { font-size: 8px; }
-    .result-mode p { font-size: 6px; }
     .wheel-actions { bottom: 0; }
     .continue-button { font-size: 9px; }
     .reset-button { font-size: 9px; }
+    .final-card img { width: 145px; height: 145px; }
+    .final-card h2 { font-size: 13px; }
 }
 
 @media (max-width:450px) {
@@ -545,13 +539,13 @@ h1 {
     <h1>GAME SELECTOR</h1>
     <p class="subtitle">Find your next challenge.</p>
 
-    <p class="instruction">
-        Select 1 mode at a time to find your favorite mode.
+    <p class="instruction" id="instruction">
+        Select a mode to advance to the next round.
     </p>
 
     <p class="round-label" id="round-label">ROUND 1</p>
 
-    <div class="wheel-area">
+    <div class="wheel-area" id="wheel-area">
 
         <button class="start-button" id="start-button" onclick="startGame()">
             START<br>GAME
@@ -562,29 +556,7 @@ h1 {
             <div class="wheel-rotator" id="wheel-rotator"></div>
         </div>
 
-        <div class="results-container" id="results-container">
-
-            <div class="result-mode" id="result-selected" data-position="selected">
-                <img id="selected-image" src="" alt="">
-                <h2 id="selected-name"></h2>
-                <p>Available mode</p>
-            </div>
-
-            <div class="result-mode" id="result-middle" data-position="middle">
-                <img id="middle-image" src="" alt="">
-                <h2 id="middle-name"></h2>
-                <p>Available mode</p>
-            </div>
-
-            <div class="result-mode" id="result-right" data-position="right">
-                <img id="right-image" src="" alt="">
-                <h2 id="right-name"></h2>
-                <p>Available mode</p>
-            </div>
-
-        </div>
-
-        <div class="wheel-actions">
+        <div class="wheel-actions" id="wheel-actions">
             <button class="continue-button" id="continue-button" onclick="continueGame()">
                 CONTINUE
             </button>
@@ -593,6 +565,25 @@ h1 {
                 RESET MODES
             </button>
         </div>
+
+    </div>
+
+    <!-- FINAL RESULT -->
+
+    <div class="final-screen" id="final-screen">
+
+        <h2 class="final-heading">YOUR GAMEMODE IS:</h2>
+
+        <div class="final-card">
+            <img id="final-image" src="" alt="">
+            <h2 id="final-name"></h2>
+        </div>
+
+        <p class="final-question">PLAY AGAIN?</p>
+
+        <button class="play-again-button show" onclick="resetGame()">
+            PLAY AGAIN
+        </button>
 
     </div>
 
@@ -741,40 +732,43 @@ function shuffleArray(array) {
 
 /* GAME STATE */
 
-let previousSelection = [];
-let selectionInProgress = false;
-let finalChoice = null;
-let roundOneWinner = null;
 let currentRound = 1;
+let currentModes = [];
+let previousWinner = null;
+let selectedMode = null;
+let selectionLocked = false;
 
 
-/* GET RANDOM MODES */
+/* ROUND SETTINGS */
 
-function getRandomModes(count, excludedNames = []) {
-    const availableModes = gameModes.filter(
-        mode => !excludedNames.includes(mode.name)
-    );
+function getRoundSize() {
+    if (currentRound === 1) return 5;
+    if (currentRound === 2) return 4;
+    if (currentRound === 3) return 3;
+    return 2;
+}
 
-    let selectedModes = [];
 
-    for (let attempt = 0; attempt < 20; attempt++) {
-        selectedModes = shuffleArray(availableModes).slice(0, count);
+/* BUILD ROUND MODES */
 
-        const currentNames = selectedModes
-            .map(mode => mode.name)
-            .sort()
-            .join("|");
+function getRoundModes() {
+    const randomCount = currentRound === 1
+        ? 5
+        : getRoundSize() - 1;
 
-        const previousNames = [...previousSelection]
-            .sort()
-            .join("|");
+    const excludedNames = previousWinner
+        ? [previousWinner.name]
+        : [];
 
-        if (currentNames !== previousNames) break;
+    const randomModes = shuffleArray(
+        gameModes.filter(mode => !excludedNames.includes(mode.name))
+    ).slice(0, randomCount);
+
+    if (previousWinner) {
+        return [previousWinner, ...randomModes];
     }
 
-    previousSelection = selectedModes.map(mode => mode.name);
-
-    return selectedModes;
+    return randomModes;
 }
 
 
@@ -784,19 +778,16 @@ function createWheel() {
     const wheel = document.getElementById("wheel-rotator");
     wheel.innerHTML = "";
 
-    const excludedNames = currentRound === 2 && roundOneWinner
-        ? [roundOneWinner.name]
-        : [];
-
-    const numberOfModes = currentRound === 1 ? 5 : 4;
-    const selectedModes = getRandomModes(numberOfModes, excludedNames);
+    currentModes = getRoundModes();
+    selectedMode = null;
+    selectionLocked = false;
 
     const wheelSize = wheel.parentElement.getBoundingClientRect().width;
     const radius = wheelSize * 0.425;
 
-    selectedModes.forEach((mode, index) => {
+    currentModes.forEach((mode, index) => {
         const angle =
-            (index / selectedModes.length) * Math.PI * 2 - Math.PI / 2;
+            (index / currentModes.length) * Math.PI * 2 - Math.PI / 2;
 
         const x = Math.cos(angle) * radius;
         const y = Math.sin(angle) * radius;
@@ -829,150 +820,8 @@ function createWheel() {
         item.appendChild(content);
         wheel.appendChild(item);
 
-        item.addEventListener("click", () => selectMode(mode));
+        item.addEventListener("click", () => chooseMode(mode, item));
     });
-}
-
-
-/* CLEAR RESULT SELECTIONS */
-
-function clearResultSelections() {
-    finalChoice = null;
-
-    document.querySelectorAll(".result-mode").forEach(card => {
-        card.classList.remove("chosen");
-    });
-
-    document.getElementById("continue-button").classList.remove("show");
-}
-
-
-/* SELECT A GAMEMODE FROM THE WHEEL */
-
-function selectMode(selectedMode) {
-    if (selectionInProgress) return;
-
-    selectionInProgress = true;
-
-    const wheel = document.getElementById("wheel-container");
-    const rotator = document.getElementById("wheel-rotator");
-    const results = document.getElementById("results-container");
-
-    rotator.style.animationPlayState = "paused";
-
-    document.querySelectorAll(".mode-item").forEach(item => {
-        item.classList.add("popping");
-    });
-
-    const excludedNames = [selectedMode.name];
-
-    if (roundOneWinner) {
-        excludedNames.push(roundOneWinner.name);
-    }
-
-    const remainingModes = shuffleArray(
-        gameModes.filter(mode => !excludedNames.includes(mode.name))
-    );
-
-    showResult("selected", selectedMode);
-    showResult("middle", remainingModes[0]);
-    showResult("right", remainingModes[1]);
-
-    clearResultSelections();
-
-    setTimeout(() => {
-        wheel.classList.remove("show");
-        results.classList.add("show");
-    }, 450);
-}
-
-
-/* DISPLAY A RESULT */
-
-function showResult(position, mode) {
-    const image = document.getElementById(position + "-image");
-    const name = document.getElementById(position + "-name");
-
-    image.src = mode.image;
-    image.alt = mode.name;
-
-    image.onerror = function() {
-        this.onerror = null;
-        this.src = textureBase + "diamond.png";
-    };
-
-    name.textContent = mode.name;
-}
-
-
-/* CHOOSE ONE OF THE THREE RESULTS */
-
-document.querySelectorAll(".result-mode").forEach(card => {
-    card.addEventListener("click", () => {
-        if (!selectionInProgress) return;
-
-        document.querySelectorAll(".result-mode").forEach(item => {
-            item.classList.remove("chosen");
-        });
-
-        card.classList.add("chosen");
-
-        const position = card.dataset.position;
-        finalChoice = document.getElementById(position + "-name").textContent;
-
-        document.getElementById("continue-button").classList.add("show");
-    });
-});
-
-
-/* CONTINUE TO NEXT ROUND */
-
-function continueGame() {
-    if (!finalChoice) return;
-
-    if (currentRound === 1) {
-        roundOneWinner = gameModes.find(
-            mode => mode.name === finalChoice
-        );
-
-        currentRound = 2;
-        selectionInProgress = false;
-
-        document.getElementById("round-label").textContent = "ROUND 2";
-
-        clearResultSelections();
-
-        document.getElementById("results-container").classList.remove("show");
-
-        const rotator = document.getElementById("wheel-rotator");
-        rotator.style.animation = "none";
-        rotator.offsetHeight;
-        rotator.style.animation = "";
-
-        document.getElementById("wheel-container").classList.add("show");
-
-        createWheel();
-
-    } else {
-        document.getElementById("round-label").textContent =
-            "YOUR FINAL MODE: " + finalChoice.toUpperCase();
-
-        document.getElementById("continue-button").classList.remove("show");
-
-        document.querySelectorAll(".result-mode").forEach(card => {
-            card.classList.remove("chosen");
-        });
-
-        document.querySelectorAll(".result-mode").forEach(card => {
-            const name = card.querySelector("h2").textContent;
-
-            if (name === finalChoice) {
-                card.classList.add("chosen");
-            }
-        });
-
-        selectionInProgress = false;
-    }
 }
 
 
@@ -981,7 +830,6 @@ function continueGame() {
 function startGame() {
     const button = document.getElementById("start-button");
     const wheel = document.getElementById("wheel-container");
-    const resetButton = document.getElementById("reset-button");
 
     if (wheel.classList.contains("show")) return;
 
@@ -990,42 +838,133 @@ function startGame() {
     setTimeout(() => {
         button.style.display = "none";
         wheel.classList.add("show");
-        resetButton.classList.add("show");
+
+        document.getElementById("reset-button").classList.add("show");
+
         createWheel();
     }, 350);
 }
 
 
-/* RESET */
+/* CHOOSE MODE */
 
-function resetGame() {
-    const button = document.getElementById("start-button");
+function chooseMode(mode, item) {
+    if (selectionLocked) return;
+
+    selectionLocked = true;
+    selectedMode = mode;
+
+    const rotator = document.getElementById("wheel-rotator");
+
+    rotator.style.animationPlayState = "paused";
+
+    item.classList.add("chosen");
+
+    document.querySelectorAll(".mode-item").forEach(otherItem => {
+        if (otherItem !== item) {
+            otherItem.classList.add("popping");
+        }
+    });
+
+    document.getElementById("continue-button").classList.add("show");
+}
+
+
+/* CONTINUE TO NEXT ROUND */
+
+function continueGame() {
+    if (!selectedMode || !selectionLocked) return;
+
+    previousWinner = selectedMode;
+
+    document.getElementById("continue-button").classList.remove("show");
+
+    if (currentRound === 4) {
+        showFinalScreen();
+        return;
+    }
+
+    currentRound++;
+
+    document.getElementById("round-label").textContent =
+        "ROUND " + currentRound;
+
     const wheel = document.getElementById("wheel-container");
     const rotator = document.getElementById("wheel-rotator");
-    const results = document.getElementById("results-container");
-
-    selectionInProgress = false;
-    finalChoice = null;
-    roundOneWinner = null;
-    currentRound = 1;
-    previousSelection = [];
-
-    results.classList.remove("show");
-    clearResultSelections();
-
-    document.getElementById("round-label").textContent = "ROUND 1";
 
     wheel.classList.remove("show");
-    rotator.innerHTML = "";
 
     rotator.style.animation = "none";
     rotator.offsetHeight;
     rotator.style.animation = "";
+    rotator.style.animationPlayState = "running";
+
+    setTimeout(() => {
+        wheel.classList.add("show");
+        createWheel();
+    }, 350);
+}
+
+
+/* FINAL SCREEN */
+
+function showFinalScreen() {
+    const wheelArea = document.getElementById("wheel-area");
+    const finalScreen = document.getElementById("final-screen");
+
+    document.getElementById("final-image").src = previousWinner.image;
+    document.getElementById("final-image").alt = previousWinner.name;
+
+    document.getElementById("final-image").onerror = function() {
+        this.onerror = null;
+        this.src = textureBase + "diamond.png";
+    };
+
+    document.getElementById("final-name").textContent = previousWinner.name;
+
+    wheelArea.style.display = "none";
+    document.getElementById("round-label").style.display = "none";
+    document.getElementById("instruction").style.display = "none";
+
+    finalScreen.classList.add("show");
+}
+
+
+/* RESET / PLAY AGAIN */
+
+function resetGame() {
+    currentRound = 1;
+    currentModes = [];
+    previousWinner = null;
+    selectedMode = null;
+    selectionLocked = false;
+
+    const wheelArea = document.getElementById("wheel-area");
+    const wheel = document.getElementById("wheel-container");
+    const rotator = document.getElementById("wheel-rotator");
+    const button = document.getElementById("start-button");
+
+    wheelArea.style.display = "flex";
+    wheel.classList.remove("show");
+
+    rotator.innerHTML = "";
+    rotator.style.animation = "none";
+    rotator.offsetHeight;
+    rotator.style.animation = "";
+    rotator.style.animationPlayState = "running";
 
     button.classList.remove("pop");
     button.style.display = "block";
 
+    document.getElementById("round-label").textContent = "ROUND 1";
+    document.getElementById("round-label").style.display = "block";
+
+    document.getElementById("instruction").style.display = "block";
+
+    document.getElementById("continue-button").classList.remove("show");
     document.getElementById("reset-button").classList.remove("show");
+
+    document.getElementById("final-screen").classList.remove("show");
 }
 
 </script>
