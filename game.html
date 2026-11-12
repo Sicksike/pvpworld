@@ -4,9 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>PvPWorld | Game Selector</title>
-
 <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
 
 <style>
@@ -19,15 +17,9 @@
     --muted: #aab5c5;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-html {
-    scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
     min-height: 100vh;
@@ -37,12 +29,9 @@ body {
     overflow-x: hidden;
 }
 
-a {
-    color: inherit;
-    text-decoration: none;
-}
+a { color: inherit; text-decoration: none; }
 
-/* SERVER STATUS BAR */
+/* SERVER STATUS */
 
 .status-bar {
     background: #101722;
@@ -67,35 +56,24 @@ a {
     border-radius: 50%;
     background: #e6c66c;
     display: inline-block;
-    box-shadow: 0 0 8px rgba(230, 198, 108, .5);
+    box-shadow: 0 0 8px rgba(230,198,108,.5);
     flex-shrink: 0;
 }
 
 .status-dot.online {
     background: #55df91;
-    box-shadow: 0 0 8px rgba(85, 223, 145, .6);
+    box-shadow: 0 0 8px rgba(85,223,145,.6);
 }
 
 .status-dot.offline {
     background: #ff7070;
-    box-shadow: 0 0 8px rgba(255, 112, 112, .5);
+    box-shadow: 0 0 8px rgba(255,112,112,.5);
 }
 
-#server-status {
-    color: #e6c66c;
-}
-
-#server-status.online {
-    color: #55df91;
-}
-
-#server-status.offline {
-    color: #ff7070;
-}
-
-#player-count {
-    color: #aab5c5;
-}
+#server-status { color: #e6c66c; }
+#server-status.online { color: #55df91; }
+#server-status.offline { color: #ff7070; }
+#player-count { color: #aab5c5; }
 
 /* NAVIGATION */
 
@@ -136,10 +114,7 @@ nav a {
     transition: color .2s ease;
 }
 
-nav a:hover,
-nav a.active {
-    color: #b9a4ff;
-}
+nav a:hover, nav a.active { color: #b9a4ff; }
 
 /* PAGE */
 
@@ -155,12 +130,11 @@ nav a.active {
 h1 {
     margin: 12px 0 8px;
     text-align: center;
-    font-size: clamp(22px, 4vw, 34px);
+    font-size: clamp(22px,4vw,34px);
     letter-spacing: 2px;
 }
 
 .subtitle {
-    margin: 0;
     color: var(--muted);
     text-align: center;
     font-size: 11px;
@@ -173,7 +147,7 @@ h1 {
     font-size: 10px;
 }
 
-/* WHEEL AREA */
+/* WHEEL */
 
 .wheel-area {
     width: 100%;
@@ -187,45 +161,32 @@ h1 {
 }
 
 .wheel-container {
-    width: min(96vw, 90vh, 1000px);
-    height: min(96vw, 90vh, 1000px);
+    width: min(96vw,90vh,1000px);
+    height: min(96vw,90vh,1000px);
     max-width: 1000px;
     max-height: 1000px;
     position: relative;
     display: none;
     align-items: center;
     justify-content: center;
-    animation: wheelAppear 0.7s ease forwards;
+    animation: wheelAppear .7s ease forwards;
 }
 
-.wheel-container.show {
-    display: flex;
-}
+.wheel-container.show { display: flex; }
 
 @keyframes wheelAppear {
-    from {
-        opacity: 0;
-        transform: scale(0.75);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+    from { opacity: 0; transform: scale(.75); }
+    to { opacity: 1; transform: scale(1); }
 }
-
-/* OUTER RING */
 
 .wheel-ring {
     position: absolute;
     width: 96%;
     height: 96%;
-    border: 1px solid rgba(161, 139, 234, 0.15);
+    border: 1px solid rgba(161,139,234,.15);
     border-radius: 50%;
     pointer-events: none;
 }
-
-/* ROTATING WHEEL */
 
 .wheel-rotator {
     width: 100%;
@@ -236,13 +197,8 @@ h1 {
 }
 
 @keyframes slowSpin {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 /* MODE ICONS */
@@ -256,9 +212,8 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%,-50%);
     cursor: pointer;
-    transition: opacity .35s ease;
 }
 
 .mode-content {
@@ -269,20 +224,13 @@ h1 {
     justify-content: center;
     align-items: center;
     animation: counterSpin 45s linear infinite;
-    transition: filter 0.2s;
+    transition: filter .2s;
 }
 
 @keyframes counterSpin {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(-360deg);
-    }
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
 }
-
-/* TEXTURES */
 
 .mode-item img {
     width: 90px;
@@ -294,16 +242,14 @@ h1 {
     box-shadow: none !important;
     image-rendering: pixelated;
     filter: none;
-    transition: transform 0.25s ease, filter 0.25s ease;
+    transition: transform .25s ease, filter .25s ease;
 }
 
-.mode-item:hover {
-    z-index: 20;
-}
+.mode-item:hover { z-index: 20; }
 
 .mode-item:hover img {
     transform: scale(1.3);
-    filter: drop-shadow(0 0 14px rgba(161, 139, 234, 0.85));
+    filter: drop-shadow(0 0 14px rgba(161,139,234,.85));
 }
 
 .mode-name {
@@ -318,12 +264,10 @@ h1 {
     opacity: 0;
     pointer-events: none;
     text-shadow: 0 2px 8px black;
-    transition: opacity 0.2s;
+    transition: opacity .2s;
 }
 
-.mode-item:hover .mode-name {
-    opacity: 1;
-}
+.mode-item:hover .mode-name { opacity: 1; }
 
 /* POP ANIMATION */
 
@@ -333,20 +277,9 @@ h1 {
 }
 
 @keyframes modePop {
-    0% {
-        opacity: 1;
-        scale: 1;
-    }
-
-    50% {
-        opacity: .7;
-        scale: 1.3;
-    }
-
-    100% {
-        opacity: 0;
-        scale: 0;
-    }
+    0% { opacity: 1; scale: 1; }
+    50% { opacity: .7; scale: 1.3; }
+    100% { opacity: 0; scale: 0; }
 }
 
 /* START BUTTON */
@@ -358,41 +291,28 @@ h1 {
     border: 2px solid var(--purple);
     background: #192536;
     color: white;
-    font-family: 'Minecraftia', sans-serif;
+    font-family: 'Minecraftia',sans-serif;
     font-size: 18px;
     cursor: pointer;
-    box-shadow: 0 0 35px rgba(161, 139, 234, 0.18);
-    transition: 0.25s;
+    box-shadow: 0 0 35px rgba(161,139,234,.18);
+    transition: .25s;
 }
 
 .start-button:hover {
     transform: scale(1.08);
     background: #222f43;
-    box-shadow: 0 0 45px rgba(161, 139, 234, 0.4);
+    box-shadow: 0 0 45px rgba(161,139,234,.4);
 }
 
-.start-button.pop {
-    animation: popOut 0.35s ease forwards;
-}
+.start-button.pop { animation: popOut .35s ease forwards; }
 
 @keyframes popOut {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-
-    50% {
-        transform: scale(1.25);
-        opacity: 0.7;
-    }
-
-    100% {
-        transform: scale(0);
-        opacity: 0;
-    }
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.25); opacity: .7; }
+    100% { transform: scale(0); opacity: 0; }
 }
 
-/* SELECTED GAME MODES */
+/* THREE RESULTS */
 
 .results-container {
     display: none;
@@ -410,15 +330,8 @@ h1 {
 }
 
 @keyframes resultsAppear {
-    from {
-        opacity: 0;
-        transform: translateY(25px) scale(.9);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
+    from { opacity: 0; transform: translateY(25px) scale(.9); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .result-mode {
@@ -430,10 +343,11 @@ h1 {
     justify-content: center;
     text-align: center;
     padding: 25px 10px;
-    border: 1px solid rgba(161, 139, 234, .2);
+    border: 1px solid rgba(161,139,234,.2);
     border-radius: 12px;
-    background: rgba(25, 37, 54, .75);
+    background: rgba(25,37,54,.75);
     transition: .25s ease;
+    cursor: pointer;
 }
 
 .result-mode img {
@@ -444,9 +358,7 @@ h1 {
     transition: transform .25s ease;
 }
 
-.result-mode:hover img {
-    transform: scale(1.12);
-}
+.result-mode:hover img { transform: scale(1.12); }
 
 .result-mode h2 {
     margin-top: 18px;
@@ -461,21 +373,21 @@ h1 {
     color: var(--muted);
 }
 
-/* SELECTED MODE */
+/* ORIGINAL SELECTED MODE */
 
-.result-mode.selected {
+.result-mode.original-selected {
     flex: 1.25;
     border: 2px solid var(--purple);
-    box-shadow: 0 0 35px rgba(161, 139, 234, .22);
+    box-shadow: 0 0 35px rgba(161,139,234,.22);
     transform: scale(1.08);
 }
 
-.result-mode.selected img {
+.result-mode.original-selected img {
     width: 150px;
     height: 150px;
 }
 
-.result-mode.selected h2 {
+.result-mode.original-selected h2 {
     color: var(--purple);
     font-size: 14px;
 }
@@ -484,6 +396,55 @@ h1 {
     color: var(--purple);
     font-size: 9px;
     margin-bottom: 12px;
+}
+
+/* FINAL CHOICE HIGHLIGHT */
+
+.result-mode.chosen {
+    border: 2px solid var(--purple);
+    background: rgba(161,139,234,.13);
+    box-shadow: 0 0 30px rgba(161,139,234,.3);
+    transform: translateY(-8px);
+}
+
+.result-mode.chosen img {
+    filter: drop-shadow(0 0 12px rgba(161,139,234,.75));
+    transform: scale(1.12);
+}
+
+.result-mode.chosen h2 { color: var(--purple); }
+
+/* CONTINUE BUTTON */
+
+.continue-button {
+    display: none;
+    margin: 30px auto 0;
+    padding: 15px 35px;
+    background: #192536;
+    color: white;
+    border: 1px solid var(--purple);
+    border-radius: 6px;
+    font-family: 'Minecraftia',sans-serif;
+    font-size: 11px;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(161,139,234,.15);
+    transition: .2s ease;
+}
+
+.continue-button.show {
+    display: block;
+    animation: continueAppear .35s ease forwards;
+}
+
+.continue-button:hover {
+    background: #26344a;
+    box-shadow: 0 0 25px rgba(161,139,234,.4);
+    transform: scale(1.05);
+}
+
+@keyframes continueAppear {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* RESET BUTTON */
@@ -499,21 +460,19 @@ h1 {
     color: var(--purple);
     border: 1px solid var(--purple);
     border-radius: 6px;
-    font-family: 'Minecraftia', sans-serif;
+    font-family: 'Minecraftia',sans-serif;
     font-size: 10px;
     cursor: pointer;
-    transition: 0.2s;
+    transition: .2s;
     z-index: 30;
 }
 
 .reset-button:hover {
     background: #26344a;
-    box-shadow: 0 0 18px rgba(161, 139, 234, 0.2);
+    box-shadow: 0 0 18px rgba(161,139,234,.2);
 }
 
-.reset-button.show {
-    display: block;
-}
+.reset-button.show { display: block; }
 
 /* FOOTER */
 
@@ -526,130 +485,49 @@ h1 {
 
 /* MOBILE */
 
-@media (max-width: 700px) {
-    nav {
-        flex-direction: column;
-    }
-
-    nav ul {
-        justify-content: center;
-        gap: 14px;
-    }
+@media (max-width:700px) {
+    nav { flex-direction: column; }
+    nav ul { justify-content: center; gap: 14px; }
 }
 
-@media (max-width: 600px) {
-    .status-content {
-        gap: 9px;
-        font-size: 9px;
-    }
+@media (max-width:600px) {
+    .status-content { gap: 9px; font-size: 9px; }
+    .page { padding-top: 25px; }
+    .wheel-area { min-height: 470px; }
+    .wheel-container { width: 96vw; height: 96vw; }
+    .wheel-ring { width: 97%; height: 97%; }
+    .mode-item { width: 75px; height: 95px; }
+    .mode-item img { width: 65px; height: 65px; }
+    .mode-name { font-size: 7px; }
+    .start-button { width: 145px; height: 145px; font-size: 14px; }
+    .reset-button { bottom: -8px; font-size: 9px; }
 
-    .page {
-        padding-top: 25px;
-    }
-
-    .wheel-area {
-        min-height: 470px;
-    }
-
-    .wheel-container {
-        width: 96vw;
-        height: 96vw;
-    }
-
-    .wheel-ring {
-        width: 97%;
-        height: 97%;
-    }
-
-    .mode-item {
-        width: 75px;
-        height: 95px;
-    }
-
-    .mode-item img {
-        width: 65px;
-        height: 65px;
-    }
-
-    .mode-name {
-        font-size: 7px;
-    }
-
-    .start-button {
-        width: 145px;
-        height: 145px;
-        font-size: 14px;
-    }
-
-    .reset-button {
-        bottom: -8px;
-        font-size: 9px;
-    }
-
-    .results-container {
-        gap: 8px;
-    }
-
-    .result-mode {
-        padding: 15px 5px;
-    }
-
-    .result-mode img {
-        width: 65px;
-        height: 65px;
-    }
-
-    .result-mode h2 {
-        font-size: 8px;
-    }
-
-    .result-mode p {
-        font-size: 6px;
-    }
-
-    .result-mode.selected img {
-        width: 85px;
-        height: 85px;
-    }
-
-    .result-mode.selected h2 {
-        font-size: 9px;
-    }
-
-    .selected-label {
-        font-size: 7px;
-    }
+    .results-container { gap: 8px; }
+    .result-mode { padding: 15px 5px; }
+    .result-mode img { width: 65px; height: 65px; }
+    .result-mode h2 { font-size: 8px; }
+    .result-mode p { font-size: 6px; }
+    .result-mode.original-selected img { width: 85px; height: 85px; }
+    .result-mode.original-selected h2 { font-size: 9px; }
+    .selected-label { font-size: 7px; }
 }
 
-@media (max-width: 450px) {
-    h1 {
-        font-size: 21px;
-    }
-
-    nav ul {
-        gap: 12px;
-    }
-
-    nav a {
-        font-size: 9px;
-    }
+@media (max-width:450px) {
+    h1 { font-size: 21px; }
+    nav ul { gap: 12px; }
+    nav a { font-size: 9px; }
 }
 
-@media (max-width: 380px) {
-    nav ul {
-        gap: 9px;
-    }
-
-    nav a {
-        font-size: 8px;
-    }
+@media (max-width:380px) {
+    nav ul { gap: 9px; }
+    nav a { font-size: 8px; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- SERVER STATUS BAR -->
+<!-- SERVER STATUS -->
 
 <div class="status-bar">
     <div class="status-content">
@@ -666,7 +544,6 @@ h1 {
     <div class="wrap">
         <nav>
             <div class="logo">PvPWorld</div>
-
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="game.html" class="active">Game</a></li>
@@ -699,24 +576,26 @@ h1 {
         </div>
 
         <div class="results-container" id="results-container">
-            <div class="result-mode selected" id="result-selected">
+
+            <div class="result-mode original-selected" id="result-selected" data-position="selected">
                 <span class="selected-label">YOUR SELECTION</span>
                 <img id="selected-image" src="" alt="">
                 <h2 id="selected-name"></h2>
                 <p>Selected mode</p>
             </div>
 
-            <div class="result-mode" id="result-middle">
+            <div class="result-mode" id="result-middle" data-position="middle">
                 <img id="middle-image" src="" alt="">
                 <h2 id="middle-name"></h2>
                 <p>Random mode</p>
             </div>
 
-            <div class="result-mode" id="result-right">
+            <div class="result-mode" id="result-right" data-position="right">
                 <img id="right-image" src="" alt="">
                 <h2 id="right-name"></h2>
                 <p>Random mode</p>
             </div>
+
         </div>
 
         <button class="reset-button" id="reset-button" onclick="resetGame()">
@@ -724,6 +603,10 @@ h1 {
         </button>
 
     </div>
+
+    <button class="continue-button" id="continue-button" onclick="continueGame()">
+        CONTINUE
+    </button>
 
 </main>
 
@@ -745,9 +628,7 @@ async function updateServerStatus() {
             "https://api.mcsrvstat.us/3/play2.eternalzero.cloud:26419"
         );
 
-        if (!response.ok) {
-            throw new Error("Status API unavailable");
-        }
+        if (!response.ok) throw new Error("Status API unavailable");
 
         const data = await response.json();
 
@@ -760,7 +641,6 @@ async function updateServerStatus() {
             const max = data.players?.max ?? "?";
 
             players.textContent = "• " + online + "/" + max + " PLAYERS ONLINE";
-
         } else {
             status.textContent = "OFFLINE";
             status.className = "offline";
@@ -780,7 +660,7 @@ updateServerStatus();
 setInterval(updateServerStatus, 300000);
 
 
-/* MINECRAFT TEXTURE BASE URL */
+/* TEXTURE BASE URL */
 
 const textureBase =
     "https://mcasset.cloud/1.21.11/assets/minecraft/textures/item/";
@@ -857,14 +737,13 @@ function randomIndex(max) {
 }
 
 
-/* FISHER-YATES SHUFFLE */
+/* SHUFFLE */
 
 function shuffleArray(array) {
     const shuffled = [...array];
 
     for (let i = shuffled.length - 1; i > 0; i--) {
         const j = randomIndex(i + 1);
-
         [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
 
@@ -872,12 +751,14 @@ function shuffleArray(array) {
 }
 
 
-/* REMEMBER PREVIOUS SELECTION */
+/* PREVIOUS SELECTION */
 
 let previousSelection = [];
+let selectionInProgress = false;
+let finalChoice = null;
 
 
-/* GET A NEW SET OF SEVEN */
+/* GET SEVEN RANDOM MODES */
 
 function getRandomModes() {
     let selectedModes = [];
@@ -894,9 +775,7 @@ function getRandomModes() {
             .sort()
             .join("|");
 
-        if (currentNames !== previousNames) {
-            break;
-        }
+        if (currentNames !== previousNames) break;
     }
 
     previousSelection = selectedModes.map(mode => mode.name);
@@ -909,11 +788,9 @@ function getRandomModes() {
 
 function createWheel() {
     const wheel = document.getElementById("wheel-rotator");
-
     wheel.innerHTML = "";
 
     const selectedModes = getRandomModes();
-
     const wheelSize = wheel.parentElement.getBoundingClientRect().width;
     const radius = wheelSize * 0.425;
 
@@ -938,7 +815,7 @@ function createWheel() {
         image.alt = mode.name;
         image.draggable = false;
 
-        image.onerror = function () {
+        image.onerror = function() {
             this.onerror = null;
             this.src = textureBase + "diamond.png";
         };
@@ -952,17 +829,14 @@ function createWheel() {
         item.appendChild(content);
         wheel.appendChild(item);
 
-        // Clicking a gamemode selects it.
-        item.addEventListener("click", () => selectMode(mode, item));
+        item.addEventListener("click", () => selectMode(mode));
     });
 }
 
 
-/* SELECT A GAMEMODE */
+/* SELECT A GAMEMODE FROM THE WHEEL */
 
-let selectionInProgress = false;
-
-function selectMode(selectedMode, clickedItem) {
+function selectMode(selectedMode) {
     if (selectionInProgress) return;
 
     selectionInProgress = true;
@@ -971,17 +845,12 @@ function selectMode(selectedMode, clickedItem) {
     const rotator = document.getElementById("wheel-rotator");
     const results = document.getElementById("results-container");
 
-    // Stop the wheel from spinning.
     rotator.style.animationPlayState = "paused";
 
-    // Make all seven icons pop away.
-    const allItems = document.querySelectorAll(".mode-item");
-
-    allItems.forEach(item => {
+    document.querySelectorAll(".mode-item").forEach(item => {
         item.classList.add("popping");
     });
 
-    // Pick two different random modes from the remaining pool.
     const remainingModes = shuffleArray(
         gameModes.filter(mode => mode.name !== selectedMode.name)
     );
@@ -989,12 +858,20 @@ function selectMode(selectedMode, clickedItem) {
     const middleMode = remainingModes[0];
     const rightMode = remainingModes[1];
 
-    // Set up the three results.
     showResult("selected", selectedMode);
     showResult("middle", middleMode);
     showResult("right", rightMode);
 
-    // Show the results after the pop animation.
+    // Hide the Continue button until one of the three is clicked.
+    document.getElementById("continue-button").classList.remove("show");
+
+    // Clear any previous choice.
+    finalChoice = null;
+
+    document.querySelectorAll(".result-mode").forEach(card => {
+        card.classList.remove("chosen");
+    });
+
     setTimeout(() => {
         wheel.classList.remove("show");
         results.classList.add("show");
@@ -1002,7 +879,7 @@ function selectMode(selectedMode, clickedItem) {
 }
 
 
-/* DISPLAY RESULT */
+/* DISPLAY A RESULT */
 
 function showResult(position, mode) {
     const image = document.getElementById(position + "-image");
@@ -1011,12 +888,45 @@ function showResult(position, mode) {
     image.src = mode.image;
     image.alt = mode.name;
 
-    image.onerror = function () {
+    image.onerror = function() {
         this.onerror = null;
         this.src = textureBase + "diamond.png";
     };
 
     name.textContent = mode.name;
+}
+
+
+/* CHOOSE ONE OF THE THREE RESULTS */
+
+document.querySelectorAll(".result-mode").forEach(card => {
+    card.addEventListener("click", () => {
+
+        // Remove the highlight from the previous choice.
+        document.querySelectorAll(".result-mode").forEach(item => {
+            item.classList.remove("chosen");
+        });
+
+        // Highlight the newly selected mode.
+        card.classList.add("chosen");
+
+        // Remember which mode was selected.
+        const position = card.dataset.position;
+        finalChoice = document.getElementById(position + "-name").textContent;
+
+        // Reveal Continue.
+        document.getElementById("continue-button").classList.add("show");
+    });
+});
+
+
+/* CONTINUE */
+
+function continueGame() {
+    if (!finalChoice) return;
+
+    // The next stage will be added here.
+    console.log("Final gamemode selected:", finalChoice);
 }
 
 
@@ -1033,16 +943,14 @@ function startGame() {
 
     setTimeout(() => {
         button.style.display = "none";
-
         wheel.classList.add("show");
         resetButton.classList.add("show");
-
         createWheel();
     }, 350);
 }
 
 
-/* RESET MODES */
+/* RESET */
 
 function resetGame() {
     const button = document.getElementById("start-button");
@@ -1051,8 +959,15 @@ function resetGame() {
     const results = document.getElementById("results-container");
 
     selectionInProgress = false;
+    finalChoice = null;
 
     results.classList.remove("show");
+
+    document.getElementById("continue-button").classList.remove("show");
+
+    document.querySelectorAll(".result-mode").forEach(card => {
+        card.classList.remove("chosen");
+    });
 
     wheel.classList.remove("show");
 
