@@ -8,7 +8,6 @@
 
   <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
 
-  <!-- Favicon -->
   <link rel="icon" type="image/avif"
     href="https://user54606.na.imgto.link/public/20261111/9f4dc652ec67205b06cb67bd-pvp-world-logo.avif">
 
@@ -41,7 +40,7 @@
       margin: auto;
     }
 
-    /* SERVER STATUS BAR */
+    /* SERVER STATUS */
 
     .status-bar {
       background: #101722;
@@ -80,7 +79,6 @@
 
     .status-dot.checking {
       background: #e6c66c;
-      box-shadow: 0 0 8px rgba(230, 198, 108, .5);
     }
 
     #server-status-text {
@@ -95,6 +93,8 @@
       color: #ff7070;
     }
 
+    /* NAVIGATION */
+
     header {
       background: #151f2d;
       border-bottom: 1px solid #293548;
@@ -103,9 +103,10 @@
 
     nav {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
-      gap: 20px;
+      flex-wrap: wrap;
+      gap: 25px;
     }
 
     .logo {
@@ -119,11 +120,19 @@
       list-style: none;
       gap: 24px;
       flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    nav a {
+      transition: color .2s ease;
     }
 
     nav a:hover {
       color: #b9a4ff;
     }
+
+    /* HERO */
 
     .hero {
       padding: 100px 0 90px;
@@ -149,6 +158,7 @@
     .actions {
       display: flex;
       justify-content: center;
+      align-items: center;
       gap: 14px;
       margin-top: 30px;
       flex-wrap: wrap;
@@ -158,7 +168,7 @@
       background: #8b72d6;
       padding: 14px 20px;
       border-radius: 8px;
-      transition: .2s;
+      transition: background .2s ease, transform .2s ease, border-color .2s ease;
     }
 
     .actions a:hover {
@@ -171,6 +181,11 @@
       border: 1px solid #39485e;
     }
 
+    .actions .ghost:hover {
+      background: #303f56;
+      border-color: #8b72d6;
+    }
+
     .actions .events-button {
       background: #303c50;
       border: 1px solid #52627b;
@@ -178,13 +193,14 @@
 
     .actions .events-button:hover {
       background: #465570;
+      border-color: #8b72d6;
     }
 
     /* SEASON 2 TRAILER BUTTON */
 
     .trailer-action {
-      margin-top: 18px;
-      margin-bottom: 24px;
+      margin-top: 22px;
+      margin-bottom: 0;
     }
 
     .actions .trailer-button {
@@ -213,11 +229,29 @@
       gap: 20px;
     }
 
-    .card {
+    /* GENERAL CARD HOVER */
+
+    .card,
+    .news-card,
+    .server-box {
       background: #192536;
       border: 1px solid #2d3b50;
       border-radius: 12px;
       padding: 24px;
+      transition:
+        transform .25s ease,
+        background .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
+    }
+
+    .card:hover,
+    .news-card:hover,
+    .server-box:hover {
+      transform: translateY(-4px);
+      background: #202f43;
+      border-color: #8b72d6;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, .2);
     }
 
     .card h3 {
@@ -230,7 +264,7 @@
       line-height: 1.9;
     }
 
-    /* Top 3 Players */
+    /* TOP 3 PLAYERS */
 
     .top-players {
       display: grid;
@@ -310,7 +344,7 @@
       color: #d9a47e;
     }
 
-    /* Most Kills */
+    /* MOST KILLS */
 
     .kills-card {
       position: relative;
@@ -376,7 +410,7 @@
       transform: scale(1.12) rotate(6deg);
     }
 
-    /* SEASON 2 TRAILER */
+    /* TRAILER */
 
     .trailer-description {
       color: #aab5c5;
@@ -407,14 +441,7 @@
       border-radius: 10px;
     }
 
-    /* News */
-
-    .news-card {
-      background: #192536;
-      border: 1px solid #2d3b50;
-      border-radius: 12px;
-      padding: 24px;
-    }
+    /* NEWS */
 
     .news-card h3 {
       color: #c5b5ff;
@@ -426,7 +453,7 @@
       line-height: 1.9;
     }
 
-    /* Weekly Events */
+    /* EVENTS */
 
     .events-intro {
       color: #aab5c5;
@@ -497,16 +524,7 @@
       font-size: 10px;
     }
 
-    /* Server IP */
-
-    .server-box {
-      background: #192536;
-      border: 1px solid #2d3b50;
-      border-radius: 12px;
-      padding: 25px;
-      margin-bottom: 15px;
-      min-width: 0;
-    }
+    /* SERVER IP */
 
     .server-box h3 {
       color: #c5b5ff;
@@ -528,7 +546,7 @@
       font-family: inherit;
       font-size: 10px;
       cursor: pointer;
-      transition: .2s;
+      transition: background .2s ease, transform .2s ease;
     }
 
     button:hover {
@@ -544,6 +562,8 @@
       font-size: 10px;
       line-height: 2;
     }
+
+    /* BACKGROUND ANIMATION */
 
     .blob {
       position: absolute;
@@ -580,30 +600,32 @@
 
     @keyframes blobFlow {
       0% {
-        border-radius: 50% 50% 50% 50%;
+        border-radius: 50%;
         transform: translate(-50%, -50%) rotate(0deg) scale(1);
       }
       20% {
         border-radius: 70% 30% 45% 55%;
-        transform: translate(-45%, -55%) rotate(75deg) scale(1.2, 0.85);
+        transform: translate(-45%, -55%) rotate(75deg) scale(1.2, .85);
       }
       40% {
         border-radius: 35% 65% 70% 30%;
-        transform: translate(-55%, -45%) rotate(160deg) scale(0.85, 1.2);
+        transform: translate(-55%, -45%) rotate(160deg) scale(.85, 1.2);
       }
       60% {
         border-radius: 65% 35% 30% 70%;
-        transform: translate(-48%, -52%) rotate(250deg) scale(1.25, 0.9);
+        transform: translate(-48%, -52%) rotate(250deg) scale(1.25, .9);
       }
       80% {
         border-radius: 30% 70% 60% 40%;
-        transform: translate(-53%, -48%) rotate(310deg) scale(0.9, 1.2);
+        transform: translate(-53%, -48%) rotate(310deg) scale(.9, 1.2);
       }
       100% {
-        border-radius: 50% 50% 50% 50%;
+        border-radius: 50%;
         transform: translate(-50%, -50%) rotate(360deg) scale(1);
       }
     }
+
+    /* MOBILE */
 
     @media (max-width: 640px) {
       nav {
@@ -673,7 +695,7 @@
 
 <body>
 
-  <!-- Small Server Status Indicator -->
+  <!-- SERVER STATUS -->
 
   <div class="status-bar">
     <div class="status-content">
@@ -683,7 +705,7 @@
     </div>
   </div>
 
-  <!-- Navigation -->
+  <!-- NAVIGATION -->
 
   <header>
     <div class="wrap">
@@ -704,11 +726,21 @@
     </div>
   </header>
 
-  <!-- Hero -->
+  <!-- HERO -->
 
   <section class="hero">
     <div class="wrap">
+
       <h1>PVP. Survival. <span>Teams.</span></h1>
+
+      <p>The perfect combo.</p>
+
+      <p>
+        A Minecraft server to play with your friends and become
+        the strongest, with many popular plugins such as Lifesteal.
+      </p>
+
+      <!-- Trailer button now below intro text -->
 
       <div class="actions trailer-action">
         <a href="#trailer" class="trailer-button">
@@ -716,14 +748,7 @@
         </a>
       </div>
 
-      <p>
-        The perfect combo.
-      </p>
-
-      <p>
-        A Minecraft server to play with your friends and become
-        the strongest, with many popular plugins such as Lifesteal.
-      </p>
+      <!-- Main buttons -->
 
       <div class="actions">
         <a href="https://discord.gg/eQzZXcjs6"
@@ -736,10 +761,11 @@
 
         <a href="#events" class="events-button">Weekly Events</a>
       </div>
+
     </div>
   </section>
 
-  <!-- Top 3 Players Overall -->
+  <!-- TOP 3 PLAYERS -->
 
   <section class="block" id="top-players">
     <div class="wrap">
@@ -747,8 +773,6 @@
       <h2>Top 3 Players Overall</h2>
 
       <div class="top-players">
-
-        <!-- 2nd Place -->
 
         <div class="player-card second-place">
           <img
@@ -760,8 +784,6 @@
           <h3>tiao9000Twitch</h3>
         </div>
 
-        <!-- 1st Place -->
-
         <div class="player-card first-place">
           <img
             src="https://user54606.na.imgto.link/public/20261111/be277e0a369bc7714295224b-avatarbody6.avif"
@@ -771,8 +793,6 @@
           <div class="player-place">1ST PLACE</div>
           <h3>Sicksike</h3>
         </div>
-
-        <!-- 3rd Place -->
 
         <div class="player-card third-place">
           <img
@@ -788,7 +808,7 @@
     </div>
   </section>
 
-  <!-- Most Kills -->
+  <!-- MOST KILLS -->
 
   <section class="block" id="kills">
     <div class="wrap">
@@ -825,7 +845,7 @@
     </div>
   </section>
 
-  <!-- Season 2 Trailer -->
+  <!-- SEASON 2 TRAILER -->
 
   <section class="block" id="trailer">
     <div class="wrap">
@@ -852,7 +872,7 @@
     </div>
   </section>
 
-  <!-- Teams -->
+  <!-- TEAMS -->
 
   <section class="block" id="teams">
     <div class="wrap">
@@ -879,7 +899,7 @@
     </div>
   </section>
 
-  <!-- News -->
+  <!-- NEWS -->
 
   <section class="block" id="news">
     <div class="wrap">
@@ -902,7 +922,7 @@
     </div>
   </section>
 
-  <!-- Weekly Events -->
+  <!-- WEEKLY EVENTS -->
 
   <section class="block" id="events">
     <div class="wrap">
@@ -942,7 +962,7 @@
     </div>
   </section>
 
-  <!-- Server IP -->
+  <!-- SERVER IP -->
 
   <section class="block" id="server">
     <div class="wrap">
@@ -950,8 +970,6 @@
       <h2>Join PvPWorld</h2>
 
       <div class="grid">
-
-        <!-- Java Edition -->
 
         <div class="server-box">
           <h3>Java Edition</h3>
@@ -962,8 +980,6 @@
           </button>
         </div>
 
-        <!-- Bedrock Edition -->
-
         <div class="server-box">
           <h3>Bedrock Edition</h3>
           <p>play2.eternalzero.cloud</p>
@@ -973,8 +989,6 @@
             Copy IP
           </button>
         </div>
-
-        <!-- Eaglercraft -->
 
         <div class="server-box">
           <h3>Eaglercraft</h3>
@@ -989,18 +1003,16 @@
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- FOOTER -->
 
   <footer>
     © 2026 PvPWorld<br>
     Not affiliated with Mojang or Microsoft.
   </footer>
 
-  <!-- Scripts -->
+  <!-- SCRIPTS -->
 
   <script>
-    // Copy IP
-
     function copyAddress(address, button) {
       const originalText = button.textContent;
 
@@ -1018,8 +1030,6 @@
         }, 1800);
       });
     }
-
-    // PvPWorld Server Status
 
     async function updateServerStatus() {
       const dot = document.getElementById("server-status-dot");
@@ -1057,10 +1067,7 @@
       }
     }
 
-    // Check immediately when the page loads
     updateServerStatus();
-
-    // Check again every 5 minutes
     setInterval(updateServerStatus, 300000);
   </script>
 
