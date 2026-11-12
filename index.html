@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,7 @@
 
   <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
 
+  <!-- Favicon -->
   <link rel="icon" type="image/avif"
     href="https://user54606.na.imgto.link/public/20261111/9f4dc652ec67205b06cb67bd-pvp-world-logo.avif">
 
@@ -39,7 +41,7 @@
       margin: auto;
     }
 
-    /* SERVER STATUS */
+    /* SERVER STATUS BAR */
 
     .status-bar {
       background: #101722;
@@ -93,8 +95,6 @@
       color: #ff7070;
     }
 
-    /* NAVIGATION */
-
     header {
       background: #151f2d;
       border-bottom: 1px solid #293548;
@@ -125,8 +125,6 @@
       color: #b9a4ff;
     }
 
-    /* HERO */
-
     .hero {
       padding: 100px 0 90px;
       text-align: center;
@@ -148,7 +146,7 @@
       margin: auto;
     }
 
-    /* HERO BUTTONS - CENTERED */
+    /* HERO BUTTONS */
 
     .actions {
       width: 100%;
@@ -158,67 +156,48 @@
       align-items: center;
       gap: 14px;
       margin: 30px auto 0;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       text-align: center;
     }
 
-    .hero .actions {
-      width: 100%;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-      justify-content: center !important;
-      align-content: center;
+    .hero .wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    .actions a {
+    .hero p {
+      width: 100%;
+    }
+
+    .actions a,
+    .actions .ghost,
+    .actions .events-button,
+    .actions .trailer-button {
       display: inline-flex;
       justify-content: center;
       align-items: center;
       text-align: center;
+      flex: 0 0 auto;
       margin: 0;
-      background: #8b72d6;
+      background: #202d40;
+      color: #f0f2f5;
+      border: 1px solid #39485e;
       padding: 14px 20px;
       border-radius: 8px;
-      transition: .2s;
+      transition: background .2s ease, border-color .2s ease, transform .2s ease;
+      white-space: nowrap;
     }
 
-    .actions a:hover {
-      background: #a18bea;
+    .actions a:hover,
+    .actions .ghost:hover,
+    .actions .events-button:hover,
+    .actions .trailer-button:hover {
+      background: #8b72d6;
+      border-color: #8b72d6;
+      color: #ffffff;
       transform: translateY(-3px);
     }
-
-    .actions .ghost {
-      background: #202d40;
-      border: 1px solid #39485e;
-    }
-
-    .actions .events-button {
-      background: #303c50;
-      border: 1px solid #52627b;
-    }
-
-    .actions .events-button:hover {
-      background: #465570;
-    }
-
-    .trailer-action {
-      margin-top: 18px;
-      margin-bottom: 24px;
-    }
-
-    .actions .trailer-button {
-      background: #30304d;
-      border: 1px solid #8b72d6;
-      color: #d5c9ff;
-    }
-
-    .actions .trailer-button:hover {
-      background: #514477;
-      border-color: #c5b5ff;
-    }
-
-    /* GENERAL SECTIONS */
 
     .block {
       padding: 55px 0;
@@ -234,8 +213,6 @@
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 20px;
     }
-
-    /* TEAM CARDS */
 
     .card {
       background: #192536;
@@ -508,7 +485,7 @@
       font-size: 10px;
     }
 
-    /* SERVER IP BOXES */
+    /* SERVER IP */
 
     .server-box {
       background: #192536;
@@ -555,7 +532,7 @@
       transform: translateY(-2px);
     }
 
-    /* TRAILER */
+    /* SEASON 2 TRAILER */
 
     .trailer-description {
       color: #aab5c5;
@@ -586,8 +563,6 @@
       border-radius: 10px;
     }
 
-    /* FOOTER */
-
     footer {
       text-align: center;
       padding: 30px 15px;
@@ -597,24 +572,32 @@
       line-height: 2;
     }
 
-    /* BACKGROUND BLOB */
+    /* 3D FLUID BACKGROUND BLOB */
 
     .blob {
       position: absolute;
-      width: 40vw;
-      height: 40vw;
-      max-width: 400px;
-      max-height: 400px;
-      background: radial-gradient(circle, #8b5cf6, #3b82f6 55%, transparent 75%);
-      opacity: 0.5;
-      filter: blur(40px);
-      border-radius: 50%;
+      width: 48vw;
+      height: 48vw;
+      max-width: 520px;
+      max-height: 520px;
       top: 90vh;
       left: 50vw;
+      border-radius: 45% 55% 60% 40%;
+      background:
+        radial-gradient(ellipse at 32% 25%, rgba(205, 185, 255, 0.95) 0%, transparent 18%),
+        radial-gradient(ellipse at 35% 30%, #a78bfa 0%, #7654d8 25%, transparent 60%),
+        radial-gradient(ellipse at 70% 75%, #2563eb 0%, #312e81 45%, transparent 75%),
+        radial-gradient(circle at 50% 50%, #7551d8 0%, #31245f 65%, #17152f 100%);
+      box-shadow:
+        inset -35px -35px 70px rgba(8, 10, 35, 0.65),
+        inset 20px 20px 55px rgba(196, 181, 253, 0.25),
+        0 0 100px rgba(124, 58, 237, 0.25);
+      opacity: 0.65;
+      filter: blur(16px);
       transform: translate(-50%, -50%);
       z-index: -1;
       pointer-events: none;
-      animation: blobFlow 10s ease-in-out infinite alternate;
+      animation: blobFloat 18s ease-in-out infinite, blobMorph 24s ease-in-out infinite alternate;
     }
 
     .blob::before {
@@ -622,40 +605,84 @@
       position: absolute;
       inset: 0;
       border-radius: inherit;
-      background: radial-gradient(circle, #ffd0b5 0%, #ffad91 50%, #e85d5d 75%, transparent 85%);
-      opacity: 0;
-      animation: blobColor 12s ease-in-out infinite alternate;
+      background: radial-gradient(ellipse at 30% 25%, rgba(255, 255, 255, 0.55), rgba(196, 181, 253, 0.18) 15%, transparent 40%);
+      mix-blend-mode: screen;
+      animation: blobLight 12s ease-in-out infinite alternate;
     }
 
-    @keyframes blobColor {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    .blob::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(ellipse at 75% 80%, rgba(15, 23, 70, 0.8), transparent 55%);
+      animation: blobShadow 16s ease-in-out infinite alternate;
     }
 
-    @keyframes blobFlow {
+    @keyframes blobFloat {
+      0%, 100% {
+        transform: translate(-50%, -50%) translate3d(0, 0, 0);
+      }
+
+      25% {
+        transform: translate(-46%, -53%) translate3d(0, -35px, 0);
+      }
+
+      50% {
+        transform: translate(-53%, -47%) translate3d(0, 20px, 0);
+      }
+
+      75% {
+        transform: translate(-48%, -51%) translate3d(0, -20px, 0);
+      }
+    }
+
+    @keyframes blobMorph {
       0% {
-        border-radius: 50%;
-        transform: translate(-50%, -50%) rotate(0deg) scale(1);
+        border-radius: 45% 55% 60% 40%;
+        scale: 1;
       }
-      20% {
-        border-radius: 70% 30% 45% 55%;
-        transform: translate(-45%, -55%) rotate(75deg) scale(1.2, 0.85);
+
+      50% {
+        border-radius: 60% 40% 45% 55%;
+        scale: 1.12;
       }
-      40% {
-        border-radius: 35% 65% 70% 30%;
-        transform: translate(-55%, -45%) rotate(160deg) scale(0.85, 1.2);
-      }
-      60% {
-        border-radius: 65% 35% 30% 70%;
-        transform: translate(-48%, -52%) rotate(250deg) scale(1.25, 0.9);
-      }
-      80% {
-        border-radius: 30% 70% 60% 40%;
-        transform: translate(-53%, -48%) rotate(310deg) scale(0.9, 1.2);
-      }
+
       100% {
-        border-radius: 50%;
-        transform: translate(-50%, -50%) rotate(360deg) scale(1);
+        border-radius: 40% 60% 55% 45%;
+        scale: 0.95;
+      }
+    }
+
+    @keyframes blobLight {
+      0% {
+        transform: translate(-8%, -5%) scale(0.9);
+        opacity: 0.45;
+      }
+
+      100% {
+        transform: translate(12%, 10%) scale(1.15);
+        opacity: 0.9;
+      }
+    }
+
+    @keyframes blobShadow {
+      0% {
+        transform: translate(3%, 2%) scale(1);
+        opacity: 0.7;
+      }
+
+      100% {
+        transform: translate(-8%, -6%) scale(1.15);
+        opacity: 0.95;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .blob,
+      .blob::before,
+      .blob::after {
+        animation: none;
       }
     }
 
@@ -673,6 +700,11 @@
 
       .hero {
         padding: 70px 0;
+      }
+
+      .hero .actions {
+        flex-wrap: wrap;
+        max-width: 100%;
       }
 
       .top-players {
@@ -725,7 +757,7 @@
 
 <body>
 
-  <!-- SERVER STATUS -->
+  <!-- SMALL SERVER STATUS INDICATOR -->
 
   <div class="status-bar">
     <div class="status-content">
@@ -771,11 +803,9 @@
         the strongest, with many popular plugins such as Lifesteal.
       </p>
 
-      <div class="actions trailer-action">
-        <a href="#trailer" class="trailer-button">Season 2 Trailer</a>
-      </div>
-
       <div class="actions">
+        <a href="#trailer" class="trailer-button">Season 2 Trailer</a>
+
         <a href="https://discord.gg/eQzZXcjs6"
            target="_blank"
            rel="noopener noreferrer">
@@ -789,7 +819,7 @@
     </div>
   </section>
 
-  <!-- TOP 3 PLAYERS -->
+  <!-- TOP 3 PLAYERS OVERALL -->
 
   <section class="block" id="top-players">
     <div class="wrap">
@@ -797,6 +827,8 @@
       <h2>Top 3 Players Overall</h2>
 
       <div class="top-players">
+
+        <!-- 2ND PLACE -->
 
         <div class="player-card second-place">
           <img
@@ -808,6 +840,8 @@
           <h3>tiao9000Twitch</h3>
         </div>
 
+        <!-- 1ST PLACE -->
+
         <div class="player-card first-place">
           <img
             src="https://user54606.na.imgto.link/public/20261111/be277e0a369bc7714295224b-avatarbody6.avif"
@@ -817,6 +851,8 @@
           <div class="player-place">1ST PLACE</div>
           <h3>Sicksike</h3>
         </div>
+
+        <!-- 3RD PLACE -->
 
         <div class="player-card third-place">
           <img
@@ -1090,7 +1126,10 @@
       }
     }
 
+    // Check immediately when the page loads
     updateServerStatus();
+
+    // Check again every 5 minutes
     setInterval(updateServerStatus, 300000);
   </script>
 
