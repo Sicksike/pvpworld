@@ -42,7 +42,7 @@ a {
     text-decoration: none;
 }
 
-/* SERVER STATUS BAR - MATCHES VOTE.HTML */
+/* SERVER STATUS BAR */
 
 .status-bar {
     background: #101722;
@@ -97,7 +97,7 @@ a {
     color: #aab5c5;
 }
 
-/* NAVIGATION - MATCHES VOTE.HTML */
+/* NAVIGATION */
 
 header {
     background: #151f2d;
@@ -258,6 +258,7 @@ h1 {
     justify-content: center;
     transform: translate(-50%, -50%);
     cursor: pointer;
+    transition: opacity .35s ease;
 }
 
 .mode-content {
@@ -281,7 +282,7 @@ h1 {
     }
 }
 
-/* TRANSPARENT MINECRAFT TEXTURES */
+/* TEXTURES */
 
 .mode-item img {
     width: 90px;
@@ -322,6 +323,30 @@ h1 {
 
 .mode-item:hover .mode-name {
     opacity: 1;
+}
+
+/* POP ANIMATION */
+
+.mode-item.popping {
+    animation: modePop .4s ease forwards;
+    pointer-events: none;
+}
+
+@keyframes modePop {
+    0% {
+        opacity: 1;
+        scale: 1;
+    }
+
+    50% {
+        opacity: .7;
+        scale: 1.3;
+    }
+
+    100% {
+        opacity: 0;
+        scale: 0;
+    }
 }
 
 /* START BUTTON */
@@ -365,6 +390,100 @@ h1 {
         transform: scale(0);
         opacity: 0;
     }
+}
+
+/* SELECTED GAME MODES */
+
+.results-container {
+    display: none;
+    width: 100%;
+    max-width: 950px;
+    align-items: center;
+    justify-content: center;
+    gap: 35px;
+    margin: auto;
+}
+
+.results-container.show {
+    display: flex;
+    animation: resultsAppear .65s ease forwards;
+}
+
+@keyframes resultsAppear {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.result-mode {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 25px 10px;
+    border: 1px solid rgba(161, 139, 234, .2);
+    border-radius: 12px;
+    background: rgba(25, 37, 54, .75);
+    transition: .25s ease;
+}
+
+.result-mode img {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    transition: transform .25s ease;
+}
+
+.result-mode:hover img {
+    transform: scale(1.12);
+}
+
+.result-mode h2 {
+    margin-top: 18px;
+    font-size: 12px;
+    color: white;
+    font-weight: normal;
+}
+
+.result-mode p {
+    margin-top: 8px;
+    font-size: 8px;
+    color: var(--muted);
+}
+
+/* SELECTED MODE */
+
+.result-mode.selected {
+    flex: 1.25;
+    border: 2px solid var(--purple);
+    box-shadow: 0 0 35px rgba(161, 139, 234, .22);
+    transform: scale(1.08);
+}
+
+.result-mode.selected img {
+    width: 150px;
+    height: 150px;
+}
+
+.result-mode.selected h2 {
+    color: var(--purple);
+    font-size: 14px;
+}
+
+.selected-label {
+    color: var(--purple);
+    font-size: 9px;
+    margin-bottom: 12px;
 }
 
 /* RESET BUTTON */
@@ -466,6 +585,40 @@ h1 {
         bottom: -8px;
         font-size: 9px;
     }
+
+    .results-container {
+        gap: 8px;
+    }
+
+    .result-mode {
+        padding: 15px 5px;
+    }
+
+    .result-mode img {
+        width: 65px;
+        height: 65px;
+    }
+
+    .result-mode h2 {
+        font-size: 8px;
+    }
+
+    .result-mode p {
+        font-size: 6px;
+    }
+
+    .result-mode.selected img {
+        width: 85px;
+        height: 85px;
+    }
+
+    .result-mode.selected h2 {
+        font-size: 9px;
+    }
+
+    .selected-label {
+        font-size: 7px;
+    }
 }
 
 @media (max-width: 450px) {
@@ -512,7 +665,6 @@ h1 {
 <header>
     <div class="wrap">
         <nav>
-
             <div class="logo">PvPWorld</div>
 
             <ul>
@@ -520,7 +672,6 @@ h1 {
                 <li><a href="game.html" class="active">Game</a></li>
                 <li><a href="https://discord.gg/eQzZXcjs6" target="_blank" rel="noopener noreferrer">Discord</a></li>
             </ul>
-
         </nav>
     </div>
 </header>
@@ -545,6 +696,27 @@ h1 {
         <div class="wheel-container" id="wheel-container">
             <div class="wheel-ring"></div>
             <div class="wheel-rotator" id="wheel-rotator"></div>
+        </div>
+
+        <div class="results-container" id="results-container">
+            <div class="result-mode selected" id="result-selected">
+                <span class="selected-label">YOUR SELECTION</span>
+                <img id="selected-image" src="" alt="">
+                <h2 id="selected-name"></h2>
+                <p>Selected mode</p>
+            </div>
+
+            <div class="result-mode" id="result-middle">
+                <img id="middle-image" src="" alt="">
+                <h2 id="middle-name"></h2>
+                <p>Random mode</p>
+            </div>
+
+            <div class="result-mode" id="result-right">
+                <img id="right-image" src="" alt="">
+                <h2 id="right-name"></h2>
+                <p>Random mode</p>
+            </div>
         </div>
 
         <button class="reset-button" id="reset-button" onclick="resetGame()">
@@ -743,8 +915,6 @@ function createWheel() {
     const selectedModes = getRandomModes();
 
     const wheelSize = wheel.parentElement.getBoundingClientRect().width;
-
-    // Place icons close to the outer edge.
     const radius = wheelSize * 0.425;
 
     selectedModes.forEach((mode, index) => {
@@ -781,7 +951,72 @@ function createWheel() {
         content.appendChild(name);
         item.appendChild(content);
         wheel.appendChild(item);
+
+        // Clicking a gamemode selects it.
+        item.addEventListener("click", () => selectMode(mode, item));
     });
+}
+
+
+/* SELECT A GAMEMODE */
+
+let selectionInProgress = false;
+
+function selectMode(selectedMode, clickedItem) {
+    if (selectionInProgress) return;
+
+    selectionInProgress = true;
+
+    const wheel = document.getElementById("wheel-container");
+    const rotator = document.getElementById("wheel-rotator");
+    const results = document.getElementById("results-container");
+
+    // Stop the wheel from spinning.
+    rotator.style.animationPlayState = "paused";
+
+    // Make all seven icons pop away.
+    const allItems = document.querySelectorAll(".mode-item");
+
+    allItems.forEach(item => {
+        item.classList.add("popping");
+    });
+
+    // Pick two different random modes from the remaining pool.
+    const remainingModes = shuffleArray(
+        gameModes.filter(mode => mode.name !== selectedMode.name)
+    );
+
+    const middleMode = remainingModes[0];
+    const rightMode = remainingModes[1];
+
+    // Set up the three results.
+    showResult("selected", selectedMode);
+    showResult("middle", middleMode);
+    showResult("right", rightMode);
+
+    // Show the results after the pop animation.
+    setTimeout(() => {
+        wheel.classList.remove("show");
+        results.classList.add("show");
+    }, 450);
+}
+
+
+/* DISPLAY RESULT */
+
+function showResult(position, mode) {
+    const image = document.getElementById(position + "-image");
+    const name = document.getElementById(position + "-name");
+
+    image.src = mode.image;
+    image.alt = mode.name;
+
+    image.onerror = function () {
+        this.onerror = null;
+        this.src = textureBase + "diamond.png";
+    };
+
+    name.textContent = mode.name;
 }
 
 
@@ -791,6 +1026,8 @@ function startGame() {
     const button = document.getElementById("start-button");
     const wheel = document.getElementById("wheel-container");
     const resetButton = document.getElementById("reset-button");
+
+    if (wheel.classList.contains("show")) return;
 
     button.classList.add("pop");
 
@@ -808,13 +1045,25 @@ function startGame() {
 /* RESET MODES */
 
 function resetGame() {
+    const button = document.getElementById("start-button");
+    const wheel = document.getElementById("wheel-container");
     const rotator = document.getElementById("wheel-rotator");
+    const results = document.getElementById("results-container");
+
+    selectionInProgress = false;
+
+    results.classList.remove("show");
+
+    wheel.classList.remove("show");
 
     rotator.style.animation = "none";
     rotator.offsetHeight;
     rotator.style.animation = "";
 
-    createWheel();
+    button.classList.remove("pop");
+    button.style.display = "block";
+
+    document.getElementById("reset-button").classList.remove("show");
 }
 
 </script>
