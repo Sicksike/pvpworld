@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,13 +83,32 @@ a { color: inherit; text-decoration: none; }
 header {
     background: #151f2d;
     border-bottom: 1px solid #293548;
-    padding: 20px 0;
+    padding: 18px 0 20px;
 }
 
 .wrap {
     width: 90%;
     max-width: 1100px;
     margin: auto;
+}
+
+/* BACK TO HOME */
+
+.back-button {
+    display: inline-block;
+    background: #202d40;
+    border: 1px solid #39485e;
+    padding: 11px 17px;
+    border-radius: 7px;
+    font-size: 10px;
+    transition: .2s ease;
+    margin-bottom: 17px;
+}
+
+.back-button:hover {
+    background: #35445d;
+    border-color: #a18bea;
+    transform: scale(1.04);
 }
 
 nav {
@@ -716,6 +736,11 @@ h1 {
 
 <header>
     <div class="wrap">
+
+        <a href="index.html" class="back-button">
+            Back to Home
+        </a>
+
         <nav>
             <div class="logo">PvPWorld</div>
             <ul>
@@ -1236,7 +1261,7 @@ let pickerScrollStart = 0;
 let pickerMoved = false;
 let ignorePickerClick = false;
 
-/* Mouse wheel scrolls the picker horizontally */
+/* Mouse wheel scrolls the picker horizontally - 3x speed */
 
 modePicker.addEventListener("wheel", event => {
     if (modePicker.scrollWidth <= modePicker.clientWidth) return;
@@ -1244,9 +1269,9 @@ modePicker.addEventListener("wheel", event => {
     event.preventDefault();
 
     modePicker.scrollLeft +=
-        Math.abs(event.deltaX) > Math.abs(event.deltaY)
+        (Math.abs(event.deltaX) > Math.abs(event.deltaY)
             ? event.deltaX
-            : event.deltaY;
+            : event.deltaY) * 3;
 }, { passive: false });
 
 /* Click and drag with a mouse */
