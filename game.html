@@ -78,7 +78,7 @@ a { color: inherit; text-decoration: none; }
 #server-status.offline { color: #ff7070; }
 #player-count { color: #aab5c5; }
 
-/* NAVIGATION */
+/* HEADER */
 
 header {
     background: #151f2d;
@@ -102,7 +102,7 @@ header {
     border-radius: 7px;
     font-size: 10px;
     transition: .2s ease;
-    margin-bottom: 17px;
+    margin-bottom: 0;
 }
 
 .back-button:hover {
@@ -110,33 +110,6 @@ header {
     border-color: #a18bea;
     transform: scale(1.04);
 }
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-}
-
-.logo {
-    font-size: 22px;
-    font-weight: bold;
-    color: #b9a4ff;
-}
-
-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 24px;
-    flex-wrap: wrap;
-}
-
-nav a {
-    color: var(--muted);
-    transition: color .2s ease;
-}
-
-nav a:hover, nav a.active { color: #b9a4ff; }
 
 /* PAGE */
 
@@ -682,11 +655,6 @@ h1 {
 
 /* MOBILE */
 
-@media (max-width:700px) {
-    nav { flex-direction: column; }
-    nav ul { justify-content: center; gap: 14px; }
-}
-
 @media (max-width:600px) {
     .status-content { gap: 9px; font-size: 9px; }
     .page { padding-top: 25px; }
@@ -712,13 +680,6 @@ h1 {
 
 @media (max-width:450px) {
     h1 { font-size: 21px; }
-    nav ul { gap: 12px; }
-    nav a { font-size: 9px; }
-}
-
-@media (max-width:380px) {
-    nav ul { gap: 9px; }
-    nav a { font-size: 8px; }
 }
 </style>
 </head>
@@ -736,19 +697,9 @@ h1 {
 
 <header>
     <div class="wrap">
-
         <a href="index.html" class="back-button">
             Back to Home
         </a>
-
-        <nav>
-            <div class="logo">PvPWorld</div>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="game.html" class="active">Game</a></li>
-                <li><a href="https://discord.gg/eQzZXcjs6" target="_blank" rel="noopener noreferrer">Discord</a></li>
-            </ul>
-        </nav>
     </div>
 </header>
 
