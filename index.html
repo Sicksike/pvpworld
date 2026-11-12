@@ -497,9 +497,9 @@
     position: absolute;
     width: 40vw;
     height: 40vw;
-    max-width: 600px;
-    max-height: 600px;
-    background: radial-gradient(circle, #8b5cf6, #3b82f6, transparent 70%);
+    max-width: 400px;
+    max-height: 400px;
+    background: radial-gradient(circle, #8b5cf6, #3b82f6 55%, transparent 75%);
     opacity: 0.5;
     filter: blur(40px);
     border-radius: 50%;
@@ -508,6 +508,49 @@
     transform: translate(-50%, -50%);
     z-index: -1;
     pointer-events: none;
+    animation: blobFlow 10s ease-in-out infinite alternate;
+}
+
+.blob::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle, #ffd0b5 0%, #ffad91 50%, #e85d5d 75%, transparent 85%);
+    opacity: 0;
+    animation: blobColor 12s ease-in-out infinite alternate;
+}
+
+@keyframes blobColor {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes blobFlow {
+    0% {
+        border-radius: 50% 50% 50% 50%;
+        transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    }
+    20% {
+        border-radius: 70% 30% 45% 55%;
+        transform: translate(-45%, -55%) rotate(75deg) scale(1.2, 0.85);
+    }
+    40% {
+        border-radius: 35% 65% 70% 30%;
+        transform: translate(-55%, -45%) rotate(160deg) scale(0.85, 1.2);
+    }
+    60% {
+        border-radius: 65% 35% 30% 70%;
+        transform: translate(-48%, -52%) rotate(250deg) scale(1.25, 0.9);
+    }
+    80% {
+        border-radius: 30% 70% 60% 40%;
+        transform: translate(-53%, -48%) rotate(310deg) scale(0.9, 1.2);
+    }
+    100% {
+        border-radius: 50% 50% 50% 50%;
+        transform: translate(-50%, -50%) rotate(360deg) scale(1);
+    }
 }
 
     @media (max-width: 640px) {
@@ -572,9 +615,9 @@
     position: absolute;
     width: 40vw;
     height: 40vw;
-    max-width: 600px;
-    max-height: 600px;
-    background: radial-gradient(circle, #8b5cf6, #3b82f6, transparent 70%);
+    max-width: 400px;
+    max-height: 400px;
+    background: radial-gradient(circle, #8b5cf6, #3b82f6 55%, transparent 75%);
     opacity: 0.5;
     filter: blur(40px);
     border-radius: 50%;
@@ -583,6 +626,49 @@
     transform: translate(-50%, -50%);
     z-index: -1;
     pointer-events: none;
+    animation: blobFlow 10s ease-in-out infinite alternate;
+}
+
+.blob::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle, #ffd0b5 0%, #ffad91 50%, #e85d5d 75%, transparent 85%);
+    opacity: 0;
+    animation: blobColor 12s ease-in-out infinite alternate;
+}
+
+@keyframes blobColor {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes blobFlow {
+    0% {
+        border-radius: 50% 50% 50% 50%;
+        transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    }
+    20% {
+        border-radius: 70% 30% 45% 55%;
+        transform: translate(-45%, -55%) rotate(75deg) scale(1.2, 0.85);
+    }
+    40% {
+        border-radius: 35% 65% 70% 30%;
+        transform: translate(-55%, -45%) rotate(160deg) scale(0.85, 1.2);
+    }
+    60% {
+        border-radius: 65% 35% 30% 70%;
+        transform: translate(-48%, -52%) rotate(250deg) scale(1.25, 0.9);
+    }
+    80% {
+        border-radius: 30% 70% 60% 40%;
+        transform: translate(-53%, -48%) rotate(310deg) scale(0.9, 1.2);
+    }
+    100% {
+        border-radius: 50% 50% 50% 50%;
+        transform: translate(-50%, -50%) rotate(360deg) scale(1);
+    }
 }
     }
   </style>
