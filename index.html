@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -504,6 +505,7 @@
       border-radius: 12px;
       padding: 25px;
       margin-bottom: 15px;
+      min-width: 0;
     }
 
     .server-box h3 {
@@ -717,6 +719,7 @@
       <p>
         The perfect combo.
       </p>
+
       <p>
         A Minecraft server to play with your friends and become
         the strongest, with many popular plugins such as Lifesteal.
@@ -835,16 +838,15 @@
 
       <div class="trailer-card">
 
-
-       <video
-         class="trailer-video"
-         controls
-         playsinline
-         preload="metadata"
-       >
-         <source src="https://cdn.rapidfile.cc/DCADzY56OA/season2-trailer.mp4" type="video/mp4">
-         Your browser does not support HTML video.
-       </video>
+        <video
+          class="trailer-video"
+          controls
+          playsinline
+          preload="metadata"
+        >
+          <source src="https://cdn.rapidfile.cc/DCADzY56OA/season2-trailer.mp4" type="video/mp4">
+          Your browser does not support HTML video.
+        </video>
 
       </div>
     </div>
@@ -906,6 +908,7 @@
     <div class="wrap">
 
       <h2>Weekly Events</h2>
+
       <p class="events-intro">
         Check out the upcoming events on PvPWorld.
       </p>
@@ -948,6 +951,8 @@
 
       <div class="grid">
 
+        <!-- Java Edition -->
+
         <div class="server-box">
           <h3>Java Edition</h3>
           <p>play2.eternalzero.cloud:26419</p>
@@ -957,12 +962,25 @@
           </button>
         </div>
 
+        <!-- Bedrock Edition -->
+
         <div class="server-box">
           <h3>Bedrock Edition</h3>
           <p>play2.eternalzero.cloud</p>
           <p>Port: 55831</p>
 
           <button onclick="copyAddress('play2.eternalzero.cloud', this)">
+            Copy IP
+          </button>
+        </div>
+
+        <!-- Eaglercraft -->
+
+        <div class="server-box">
+          <h3>Eaglercraft</h3>
+          <p>wss://pvp.tiao9002.workers.dev</p>
+
+          <button onclick="copyAddress('wss://pvp.tiao9002.workers.dev', this)">
             Copy IP
           </button>
         </div>
