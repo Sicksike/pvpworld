@@ -52,6 +52,7 @@ a {
     align-items: center;
     justify-content: center;
     gap: 9px;
+    flex-wrap: wrap;
 }
 
 .status-dot {
@@ -61,6 +62,7 @@ a {
     background: #e6c66c;
     display: inline-block;
     box-shadow: 0 0 8px rgba(230, 198, 108, .5);
+    flex-shrink: 0;
 }
 
 .status-dot.online {
@@ -88,6 +90,10 @@ a {
 
 #server-status-text.offline {
     color: #ff7070;
+}
+
+#server-player-count {
+    color: #aab5c5;
 }
 
 /* NAVIGATION */
@@ -284,6 +290,7 @@ footer {
         <span id="server-status-dot" class="status-dot checking"></span>
         <span>SERVER STATUS:</span>
         <span id="server-status-text">CHECKING...</span>
+        <span id="server-player-count"></span>
     </div>
 </div>
 
@@ -415,6 +422,7 @@ async function updateServerStatus() {
 
     const dot = document.getElementById("server-status-dot");
     const statusText = document.getElementById("server-status-text");
+    const playerCount = document.getElementById("server-player-count");
 
     try {
 
@@ -436,11 +444,24 @@ async function updateServerStatus() {
             statusText.className = "online";
             statusText.textContent = "ONLINE";
 
+            if (
+                data.players &&
+                typeof data.players.online === "number" &&
+                typeof data.players.max === "number"
+            ) {
+                playerCount.textContent =
+                    "• " + data.players.online + "/" +
+                    data.players.max + " PLAYERS ONLINE";
+            } else {
+                playerCount.textContent = "";
+            }
+
         } else if (data.online === false) {
 
             dot.className = "status-dot offline";
             statusText.className = "offline";
             statusText.textContent = "OFFLINE";
+            playerCount.textContent = "";
 
         } else {
 
@@ -453,6 +474,7 @@ async function updateServerStatus() {
         dot.className = "status-dot checking";
         statusText.className = "";
         statusText.textContent = "STATUS UNAVAILABLE";
+        playerCount.textContent = "";
 
     }
 }
