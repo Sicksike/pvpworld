@@ -73,10 +73,7 @@ body {
     transition: color 0.2s;
 }
 
-.nav-links a:hover {
-    color: var(--purple);
-}
-
+.nav-links a:hover,
 .nav-links .active {
     color: var(--purple);
 }
@@ -260,16 +257,20 @@ h1 {
     }
 }
 
-/* No icon backgrounds, cards, or borders */
+/* TRANSPARENT MINECRAFT TEXTURES */
 
 .mode-item img {
     width: 90px;
     height: 90px;
     object-fit: contain;
-    background: transparent;
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
+
+    /* No backgrounds, borders, or image shadows */
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+
+    image-rendering: pixelated;
     filter: none;
     transition: transform 0.25s ease, filter 0.25s ease;
 }
@@ -341,6 +342,35 @@ h1 {
         transform: scale(0);
         opacity: 0;
     }
+}
+
+/* RESET BUTTON */
+
+.reset-button {
+    display: none;
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 13px 22px;
+    background: #192536;
+    color: var(--purple);
+    border: 1px solid var(--purple);
+    border-radius: 6px;
+    font-family: 'Minecraftia', sans-serif;
+    font-size: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+    z-index: 30;
+}
+
+.reset-button:hover {
+    background: #26344a;
+    box-shadow: 0 0 18px rgba(161, 139, 234, 0.2);
+}
+
+.reset-button.show {
+    display: block;
 }
 
 /* FOOTER */
@@ -418,6 +448,11 @@ h1 {
         height: 145px;
         font-size: 14px;
     }
+
+    .reset-button {
+        bottom: -8px;
+        font-size: 9px;
+    }
 }
 
 @media (max-width: 380px) {
@@ -438,7 +473,10 @@ h1 {
 
 <nav class="navbar">
     <a href="index.html" class="nav-brand">
-        <img src="https://user54606.na.imgto.link/public/20261111/9f4dc652ec67205b06cb67bd-pvp-world-logo.avif" alt="PvPWorld Logo">
+        <img
+            src="https://user54606.na.imgto.link/public/20261111/9f4dc652ec67205b06cb67bd-pvp-world-logo.avif"
+            alt="PvPWorld Logo"
+        >
         <span>PvPWorld</span>
     </a>
 
@@ -483,6 +521,10 @@ h1 {
             <div class="wheel-ring"></div>
             <div class="wheel-rotator" id="wheel-rotator"></div>
         </div>
+
+        <button class="reset-button" id="reset-button" onclick="resetGame()">
+            RESET MODES
+        </button>
 
     </div>
 
@@ -532,62 +574,130 @@ updateServerStatus();
 setInterval(updateServerStatus, 300000);
 
 
+/* MINECRAFT TEXTURE BASE URL */
+
+const textureBase =
+    "https://mcasset.cloud/1.21.11/assets/minecraft/textures/item/";
+
+
 /* GAME MODES */
 
 const gameModes = [
     {
         name: "Spear Mace",
-        image: "https://media.forgecdn.net/avatars/thumbnails/1678/399/256/256/639066907617132686.png"
+        image: textureBase + "diamond_spear.png"
     },
     {
         name: "Mace",
-        image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/6/63/Mace.png/revision/latest?cb=20260330015956"
+        image: textureBase + "mace.png"
     },
     {
         name: "UHC",
-        image: "https://static.wikia.nocookie.net/pvplegacy/images/c/c9/UHCDuels.png/revision/latest/thumbnail/width/360/height/360?cb=20230408002546"
+        image: textureBase + "golden_apple.png"
     },
     {
         name: "Sword",
-        image: "https://minecraft.wiki/images/Enchanted_Diamond_Sword.gif?f741f"
+        image: textureBase + "diamond_sword.png"
     },
     {
         name: "Axe",
-        image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/4/40/Diamond_Axe_JE3_BE3.png/revision/latest/scale-to-width/360?cb=20200226193844"
+        image: textureBase + "diamond_axe.png"
     },
     {
         name: "Crystal",
-        image: "https://static.wikia.nocookie.net/minecraft/images/9/92/EndCrystalNew.png/revision/latest?cb=20191218004335"
+        image: textureBase + "end_crystal.png"
     },
     {
         name: "Pot",
-        image: "https://minecraft.wiki/images/Splash_Potion_of_Healing_JE2.png?d45f1"
+        image: textureBase + "splash_potion.png"
     },
     {
         name: "Nethpot",
-        image: "https://i.pinimg.com/564x/10/0d/d5/100dd5bae19708177959763d81907ab9.jpg"
+        image: textureBase + "lingering_potion.png"
     },
     {
         name: "Cart",
-        image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/72/Minecart_with_TNT_%28item%29_JE1_BE1.png/revision/latest?cb=20190910054555"
+        image: textureBase + "minecart.png"
     },
     {
         name: "HT3 Cart",
-        image: "https://minecraft.wiki/images/Crossbow.png?0da8f"
+        image: textureBase + "crossbow_standby.png"
     },
     {
         name: "SMP",
-        image: "https://minecraft.wiki/images/Shield_JE2_BE1.png?4837d"
+        image: textureBase + "shield.png"
     },
     {
         name: "Diamond SMP",
-        image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/a/ab/Diamond_JE3_BE3.png/revision/latest/thumbnail/width/360/height/360?cb=20230924193138"
+        image: textureBase + "diamond.png"
     },
     {
         name: "Explosive Diarrhea",
-        image: "https://minecraft.wiki/images/Brown_Dye_JE2_BE2.png?85e10"
+        image: textureBase + "brown_dye.png"
     }
 ];
+
+
+/* RANDOM NUMBER GENERATOR */
+
+function randomIndex(max) {
+    if (window.crypto && window.crypto.getRandomValues) {
+        const randomValues = new Uint32Array(1);
+        window.crypto.getRandomValues(randomValues);
+        return randomValues[0] % max;
+    }
+
+    return Math.floor(Math.random() * max);
+}
+
+
+/* PROPER FISHER-YATES SHUFFLE */
+
+function shuffleArray(array) {
+    const shuffled = [...array];
+
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = randomIndex(i + 1);
+
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+
+    return shuffled;
+}
+
+
+/* REMEMBER PREVIOUS SELECTION */
+
+let previousSelection = [];
+
+
+/* GET A NEW SET OF SEVEN */
+
+function getRandomModes() {
+    let selectedModes = [];
+
+    // Try to avoid getting the exact same seven modes after a reset.
+    for (let attempt = 0; attempt < 20; attempt++) {
+        selectedModes = shuffleArray(gameModes).slice(0, 7);
+
+        const currentNames = selectedModes
+            .map(mode => mode.name)
+            .sort()
+            .join("|");
+
+        const previousNames = [...previousSelection]
+            .sort()
+            .join("|");
+
+        if (currentNames !== previousNames) {
+            break;
+        }
+    }
+
+    previousSelection = selectedModes.map(mode => mode.name);
+
+    return selectedModes;
+}
 
 
 /* CREATE WHEEL */
@@ -597,16 +707,16 @@ function createWheel() {
 
     wheel.innerHTML = "";
 
-    const shuffled = [...gameModes].sort(() => Math.random() - 0.5);
-    const selectedModes = shuffled.slice(0, 7);
+    const selectedModes = getRandomModes();
 
     const wheelSize = wheel.parentElement.getBoundingClientRect().width;
 
-    // Push icons almost all the way to the outside edge.
+    // Keep the icons close to the outside edge.
     const radius = wheelSize * 0.425;
 
     selectedModes.forEach((mode, index) => {
-        const angle = (index / selectedModes.length) * Math.PI * 2 - Math.PI / 2;
+        const angle =
+            (index / selectedModes.length) * Math.PI * 2 - Math.PI / 2;
 
         const x = Math.cos(angle) * radius;
         const y = Math.sin(angle) * radius;
@@ -625,6 +735,12 @@ function createWheel() {
         image.alt = mode.name;
         image.draggable = false;
 
+        // Fallback if an image ever fails to load.
+        image.onerror = function () {
+            this.onerror = null;
+            this.src = textureBase + "diamond.png";
+        };
+
         const name = document.createElement("div");
         name.className = "mode-name";
         name.textContent = mode.name;
@@ -642,6 +758,7 @@ function createWheel() {
 function startGame() {
     const button = document.getElementById("start-button");
     const wheel = document.getElementById("wheel-container");
+    const resetButton = document.getElementById("reset-button");
 
     button.classList.add("pop");
 
@@ -649,9 +766,25 @@ function startGame() {
         button.style.display = "none";
 
         wheel.classList.add("show");
+        resetButton.classList.add("show");
 
         createWheel();
     }, 350);
+}
+
+
+/* RESET MODES */
+
+function resetGame() {
+    const wheel = document.getElementById("wheel-container");
+    const rotator = document.getElementById("wheel-rotator");
+
+    // Restart the wheel animation.
+    rotator.style.animation = "none";
+    rotator.offsetHeight;
+    rotator.style.animation = "";
+
+    createWheel();
 }
 
 </script>
