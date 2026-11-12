@@ -8,7 +8,6 @@
 
   <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
 
-  <!-- Favicon -->
   <link rel="icon" type="image/avif"
     href="https://user54606.na.imgto.link/public/20261111/9f4dc652ec67205b06cb67bd-pvp-world-logo.avif">
 
@@ -570,7 +569,7 @@
       line-height: 2;
     }
 
-    /* QUIET BLOB WITH AN OCCASIONAL 3D WATER RIPPLE */
+    /* WARPING AND STRETCHING BLOB */
 
     .blob {
       position: absolute;
@@ -595,106 +594,138 @@
       transform: translate(-50%, -50%);
       z-index: -1;
       pointer-events: none;
-      animation: blobFloat 19s ease-in-out infinite, blobMorph 26s ease-in-out infinite alternate;
+      animation:
+        blobFloat 19s ease-in-out infinite,
+        blobWarp 13s ease-in-out infinite alternate;
+      will-change: transform, border-radius;
     }
 
-    /* No constant rings: one large ripple appears briefly, then disappears */
+    /* Extra inner color movement makes the blob look fluid */
 
     .blob::before {
       content: "";
       position: absolute;
-      inset: -12%;
-      border-radius: 50%;
-      background: repeating-radial-gradient(
-        ellipse at center,
-        transparent 0 42px,
-        rgba(235, 225, 255, 0.0) 43px 49px,
-        rgba(235, 225, 255, 0.72) 51px 57px,
-        rgba(139, 112, 214, 0.38) 60px 66px,
-        transparent 70px 105px
-      );
-      opacity: 0;
-      filter: blur(2px);
-      mix-blend-mode: screen;
-      transform: perspective(700px) rotateX(58deg) scale(0.18);
-      transform-origin: center;
-      -webkit-mask-image: radial-gradient(ellipse at center, #000 12%, transparent 76%);
-      mask-image: radial-gradient(ellipse at center, #000 12%, transparent 76%);
-      animation: occasional3DRipple 22s ease-out infinite;
+      inset: 0;
+      border-radius: inherit;
+      background:
+        radial-gradient(ellipse at 25% 35%, rgba(221, 204, 255, 0.35), transparent 35%),
+        radial-gradient(ellipse at 75% 65%, rgba(70, 83, 190, 0.55), transparent 45%),
+        radial-gradient(ellipse at 55% 20%, rgba(180, 154, 255, 0.25), transparent 40%);
+      filter: blur(18px);
+      animation: innerWarp 11s ease-in-out infinite alternate;
     }
 
-    /* A brief raised highlight gives the ripple a 3D surface effect */
+    /* Soft moving highlight */
 
     .blob::after {
       content: "";
       position: absolute;
-      inset: 4%;
+      inset: 8%;
       border-radius: inherit;
       background:
-        radial-gradient(ellipse at 50% 50%, transparent 28%, rgba(221, 204, 255, 0.0) 38%, rgba(221, 204, 255, 0.5) 44%, transparent 52%),
-        radial-gradient(ellipse at 35% 30%, rgba(255, 255, 255, 0.0), transparent 55%);
-      opacity: 0;
-      filter: blur(5px);
-      mix-blend-mode: screen;
-      transform: perspective(700px) rotateX(58deg) scale(0.22) translateY(12%);
-      transform-origin: center;
-      animation: rippleHighlight 22s ease-out infinite;
+        radial-gradient(
+          ellipse at 30% 25%,
+          rgba(255, 255, 255, 0.28),
+          transparent 38%
+        );
+      filter: blur(20px);
+      opacity: 0.7;
+      animation: highlightWarp 9s ease-in-out infinite alternate;
     }
 
     @keyframes blobFloat {
-      0%, 100% { transform: translate(-50%, -50%) translate3d(0, 0, 0); }
-      25% { transform: translate(-46%, -53%) translate3d(0, -32px, 0); }
-      50% { transform: translate(-53%, -47%) translate3d(0, 20px, 0); }
-      75% { transform: translate(-48%, -51%) translate3d(0, -18px, 0); }
+      0%, 100% {
+        translate: 0 0;
+      }
+      25% {
+        translate: 4% -5%;
+      }
+      50% {
+        translate: -4% 3%;
+      }
+      75% {
+        translate: 3% -3%;
+      }
     }
 
-    @keyframes blobMorph {
-      0% { border-radius: 45% 55% 60% 40%; scale: 1; }
-      50% { border-radius: 60% 40% 45% 55%; scale: 1.10; }
-      100% { border-radius: 40% 60% 55% 45%; scale: 0.96; }
-    }
+    @keyframes blobWarp {
+      0% {
+        border-radius: 45% 55% 60% 40% / 50% 40% 60% 50%;
+        scale: 1 1;
+        rotate: -8deg;
+      }
 
-    @keyframes occasional3DRipple {
-      0%, 70% {
-        opacity: 0;
-        transform: perspective(700px) rotateX(58deg) scale(0.18) rotateZ(-8deg);
+      20% {
+        border-radius: 65% 35% 45% 55% / 40% 65% 35% 60%;
+        scale: 1.18 0.82;
+        rotate: 5deg;
       }
-      73% {
-        opacity: 0.9;
-        transform: perspective(700px) rotateX(58deg) scale(0.28) rotateZ(-5deg);
+
+      40% {
+        border-radius: 35% 65% 55% 45% / 60% 35% 65% 40%;
+        scale: 0.82 1.2;
+        rotate: 14deg;
       }
-      88% {
-        opacity: 0.72;
-        transform: perspective(700px) rotateX(58deg) scale(1.35) rotateZ(5deg);
+
+      60% {
+        border-radius: 55% 45% 35% 65% / 35% 60% 40% 65%;
+        scale: 1.15 0.9;
+        rotate: -12deg;
       }
+
+      80% {
+        border-radius: 40% 60% 65% 35% / 65% 40% 60% 35%;
+        scale: 0.9 1.15;
+        rotate: 7deg;
+      }
+
       100% {
-        opacity: 0;
-        transform: perspective(700px) rotateX(58deg) scale(1.85) rotateZ(10deg);
+        border-radius: 45% 55% 60% 40% / 50% 40% 60% 50%;
+        scale: 1 1;
+        rotate: -8deg;
       }
     }
 
-    @keyframes rippleHighlight {
-      0%, 70% {
-        opacity: 0;
-        transform: perspective(700px) rotateX(58deg) scale(0.22) translateY(12%);
+    @keyframes innerWarp {
+      0% {
+        transform: translate(-8%, -5%) scale(1.1, 0.85) rotate(-12deg);
+        border-radius: 35% 65% 55% 45%;
       }
-      74% {
+
+      50% {
+        transform: translate(8%, 6%) scale(0.8, 1.2) rotate(15deg);
+        border-radius: 65% 35% 40% 60%;
+      }
+
+      100% {
+        transform: translate(-3%, 8%) scale(1.2, 0.9) rotate(-8deg);
+        border-radius: 45% 55% 65% 35%;
+      }
+    }
+
+    @keyframes highlightWarp {
+      0% {
+        transform: translate(-12%, -8%) scale(0.8, 1.1);
+        opacity: 0.35;
+      }
+
+      50% {
+        transform: translate(10%, 8%) scale(1.2, 0.75);
         opacity: 0.75;
-        transform: perspective(700px) rotateX(58deg) scale(0.35) translateY(8%);
       }
-      88% {
-        opacity: 0.4;
-        transform: perspective(700px) rotateX(58deg) scale(1.25) translateY(-3%);
-      }
+
       100% {
-        opacity: 0;
-        transform: perspective(700px) rotateX(58deg) scale(1.8) translateY(-8%);
+        transform: translate(-3%, 12%) scale(0.9, 1.15);
+        opacity: 0.45;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .blob, .blob::before, .blob::after { animation: none; }
-      .blob::before, .blob::after { opacity: 0; }
+      .blob,
+      .blob::before,
+      .blob::after {
+        animation: none;
+      }
     }
 
     @media (max-width: 640px) {
@@ -760,14 +791,13 @@
       .kills-list {
         max-width: 100%;
       }
-
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Small Server Status Indicator -->
+  <!-- Server Status Indicator -->
 
   <div class="status-bar">
     <div class="status-content">
@@ -823,7 +853,6 @@
 
         <a href="#trailer" class="trailer-button">Season 2 Trailer</a>
 
-        
         <a href="#teams" class="ghost">Check out the teams</a>
 
         <a href="#events" class="events-button">Weekly Events</a>
@@ -840,8 +869,6 @@
 
       <div class="top-players">
 
-        <!-- 2nd Place -->
-
         <div class="player-card second-place">
           <img
             src="https://user54606.na.imgto.link/public/20261111/b9b0830cb3ce416fe083727e-avatarbody4.avif"
@@ -852,8 +879,6 @@
           <h3>tiao9000Twitch</h3>
         </div>
 
-        <!-- 1st Place -->
-
         <div class="player-card first-place">
           <img
             src="https://user54606.na.imgto.link/public/20261111/be277e0a369bc7714295224b-avatarbody6.avif"
@@ -863,8 +888,6 @@
           <div class="player-place">1ST PLACE</div>
           <h3>Sicksike</h3>
         </div>
-
-        <!-- 3rd Place -->
 
         <div class="player-card third-place">
           <img
@@ -969,6 +992,7 @@
   <section class="block" id="news">
     <div class="wrap">
       <h2>News</h2>
+
       <div class="blob"></div>
 
       <div class="grid">
@@ -1135,10 +1159,7 @@
       }
     }
 
-    // Check immediately when the page loads
     updateServerStatus();
-
-    // Check again every 5 minutes
     setInterval(updateServerStatus, 300000);
   </script>
 
