@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1429,8 +1428,27 @@ async function loadLeaderboard() {
             return;
         }
 
-        data.entries.forEach((entry, index) => {
-            const mode = gameModes.find(item => item.name === entry.mode);
+        /* REMOVE DUPLICATE PLAYER + GAMEMODE ENTRIES */
+
+        const uniqueEntries = [];
+        const seenEntries = new Set();
+
+        data.entries.forEach(entry => {
+            const key =
+                `${String(entry.name).trim().toLowerCase()}-${String(entry.mode).trim().toLowerCase()}`;
+
+            if (seenEntries.has(key)) return;
+
+            seenEntries.add(key);
+            uniqueEntries.push(entry);
+        });
+
+        /* DISPLAY UNIQUE ENTRIES */
+
+        uniqueEntries.forEach((entry, index) => {
+            const mode = gameModes.find(
+                item => item.name.toLowerCase() === String(entry.mode).trim().toLowerCase()
+            );
 
             const row = document.createElement("div");
             row.className = "leaderboard-row";
@@ -1472,7 +1490,9 @@ async function loadLeaderboard() {
             list.appendChild(row);
         });
 
-    } catch {
+    } catch (error) {
+        console.error("Leaderboard error:", error);
+
         list.innerHTML =
             '<p class="leaderboard-message">LEADERBOARD UNAVAILABLE. TRY AGAIN LATER.</p>';
     }
