@@ -806,60 +806,53 @@ Object.values(gameSounds).forEach(sound => {
 });
 
 
-/* BOOST CLICK SOUND */
+/* DEDICATED CLICK SOUND POOL */
 
-let clickAudioContext = null;
-let boostedClickBuffer = null;
+const clickPool = Array.from({ length: 6 }, () => {
+    const audio = new Audio(gameSounds.click.src);
+    audio.preload = "auto";
+    audio.volume = 1;
+    audio.load();
+    return audio;
+});
 
-try {
-    clickAudioContext = new (window.AudioContext || window.webkitAudioContext)();
+let clickPosition = 0;
 
-    fetch(gameSounds.click.src)
-        .then(response => {
-            if (!response.ok) throw new Error("Could not load click sound");
-            return response.arrayBuffer();
-        })
-        .then(data => clickAudioContext.decodeAudioData(data))
-        .then(buffer => {
-            boostedClickBuffer = buffer;
-        })
-        .catch(() => {
-            console.log("Click sound amplification unavailable; using normal playback.");
-        });
-} catch (error) {
-    console.log("Web Audio unavailable; using normal click playback.");
+function playClick() {
+    const audio = clickPool[clickPosition];
+
+    clickPosition = (clickPosition + 1) % clickPool.length;
+
+    try {
+        audio.pause();
+        audio.currentTime = 0;
+
+        const playback = audio.play();
+
+        if (playback) {
+            playback.catch(error => {
+                console.warn("Click sound failed:", error);
+            });
+        }
+    } catch (error) {
+        console.warn("Click sound failed:", error);
+    }
 }
 
 
-/* PLAY SOUND */
+/* PLAY OTHER SOUNDS */
 
 function playSound(name) {
     const sound = gameSounds[name];
 
     if (!sound) return;
 
-    if (name === "click" && clickAudioContext && boostedClickBuffer) {
-        clickAudioContext.resume().then(() => {
-            const source = clickAudioContext.createBufferSource();
-            const gain = clickAudioContext.createGain();
-
-            source.buffer = boostedClickBuffer;
-            gain.gain.value = 7;
-
-            source.connect(gain);
-            gain.connect(clickAudioContext.destination);
-            source.start(0);
-        }).catch(() => {
-            const audio = sound.cloneNode();
-            audio.play().catch(() => {});
-        });
-
-        return;
-    }
-
     const audio = sound.cloneNode();
     audio.volume = sound.volume;
-    audio.play().catch(() => {});
+
+    audio.play().catch(error => {
+        console.warn("Sound playback failed:", name, error);
+    });
 }
 
 
@@ -872,7 +865,9 @@ function playFireworks() {
         playSound("firework2");
     };
 
-    first.play().catch(() => {});
+    first.play().catch(error => {
+        console.warn("Fireworks sound failed:", error);
+    });
 }
 
 
@@ -1130,7 +1125,7 @@ function startGame() {
 function chooseMode(mode, item) {
     if (selectionLocked) return;
 
-    playSound("click");
+    playClick();
 
     selectionLocked = true;
     selectedMode = mode;
