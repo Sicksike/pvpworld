@@ -6,9 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PvPWorld | Game Selector</title>
 <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
-
-<link rel="icon" type="image/avif"
-href="https://user54606.na.imgto.link/public/20261111/9f4dc652ec67205b06cb67bd-pvp-world-logo.avif">
+<link rel="icon" type="image/avif" href="https://user54606.na.imgto.link/public/20261111/9f4dc652ec67205b06cb67bd-pvp-world-logo.avif">
 
 <style>
 :root {
@@ -21,7 +19,6 @@ href="https://user54606.na.imgto.link/public/20261111/9f4dc652ec67205b06cb67bd-p
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
 html { scroll-behavior: smooth; }
 
 body {
@@ -283,9 +280,7 @@ h1 {
     color: var(--purple);
 }
 
-.mode-item.chosen {
-    z-index: 25;
-}
+.mode-item.chosen { z-index: 25; }
 
 /* POP ANIMATION */
 
@@ -401,9 +396,7 @@ h1 {
     animation: resultsAppear .7s ease forwards;
 }
 
-.final-screen.show {
-    display: flex;
-}
+.final-screen.show { display: flex; }
 
 @keyframes resultsAppear {
     from { opacity: 0; transform: translateY(25px) scale(.9); }
@@ -465,9 +458,7 @@ h1 {
     animation: resultsAppear .7s ease forwards;
 }
 
-.leaderboard-screen.show {
-    display: block;
-}
+.leaderboard-screen.show { display: block; }
 
 .leaderboard-heading {
     color: var(--purple);
@@ -504,15 +495,11 @@ h1 {
     user-select: none;
 }
 
-.mode-picker::-webkit-scrollbar {
-    height: 7px;
-}
-
+.mode-picker::-webkit-scrollbar { height: 7px; }
 .mode-picker::-webkit-scrollbar-track {
     background: #192536;
     border-radius: 10px;
 }
-
 .mode-picker::-webkit-scrollbar-thumb {
     background: var(--purple);
     border-radius: 10px;
@@ -581,12 +568,10 @@ h1 {
     outline: none;
 }
 
-.name-entry input:focus {
-    border-color: var(--purple);
-}
+.name-entry input:focus { border-color: var(--purple); }
 
 .name-entry button {
-    margin-top: 12px;
+    margin: 12px auto 0;
     display: block;
 }
 
@@ -628,10 +613,7 @@ h1 {
     gap: 7px;
 }
 
-.leaderboard-rank {
-    color: var(--purple);
-}
-
+.leaderboard-rank { color: var(--purple); }
 .leaderboard-count {
     color: var(--muted);
     text-align: right;
@@ -656,9 +638,7 @@ h1 {
 /* MOBILE */
 
 @media (max-width:600px) {
-    .header-content {
-        flex-direction: column;
-    }
+    .header-content { flex-direction: column; }
 
     .status-bar {
         flex-wrap: wrap;
@@ -695,23 +675,16 @@ h1 {
 
 <body>
 
-<!-- SERVER STATUS -->
-
 <div class="status-bar">
     <span class="status-dot" id="server-status-dot"></span>
     <span id="server-status">Checking server status...</span>
     <span id="player-count"></span>
 </div>
 
-<!-- HEADER -->
-
 <header>
     <div class="header-content">
         <div class="logo">PvPWorld</div>
-
-        <a href="index.html" class="back-button">
-            Back to Home
-        </a>
+        <a href="index.html" class="back-button">Back to Home</a>
     </div>
 </header>
 
@@ -749,8 +722,6 @@ h1 {
 
     </div>
 
-    <!-- FINAL RESULT -->
-
     <div class="final-screen" id="final-screen">
 
         <h2 class="final-heading">YOUR GAMEMODE IS:</h2>
@@ -767,8 +738,6 @@ h1 {
         </button>
 
     </div>
-
-    <!-- LEADERBOARD / MODE REPORT -->
 
     <div class="leaderboard-screen" id="leaderboard-screen">
 
@@ -831,12 +800,11 @@ const gameSounds = {
     firework2: new Audio("https://www.image2url.com/r2/default/audio/1794531023284-e6733b03-9d6b-4f51-bb4f-9268cabc699a.ogg")
 };
 
-const audio = sound.cloneNode();
-audio.volume = sound.volume;
-audio.currentTime = 0;
-
-audio.play().catch(() => {});
+Object.values(gameSounds).forEach(sound => {
+    sound.preload = "auto";
+    sound.load();
 });
+
 
 /* BOOST CLICK SOUND */
 
@@ -862,6 +830,9 @@ try {
     console.log("Web Audio unavailable; using normal click playback.");
 }
 
+
+/* PLAY SOUND */
+
 function playSound(name) {
     const sound = gameSounds[name];
 
@@ -879,27 +850,29 @@ function playSound(name) {
             gain.connect(clickAudioContext.destination);
             source.start(0);
         }).catch(() => {
-            sound.pause();
-            sound.currentTime = 0;
-            sound.play().catch(() => {});
+            const audio = sound.cloneNode();
+            audio.play().catch(() => {});
         });
 
         return;
     }
 
-    sound.pause();
-    sound.currentTime = 0;
-    sound.play().catch(() => {});
+    const audio = sound.cloneNode();
+    audio.volume = sound.volume;
+    audio.play().catch(() => {});
 }
 
+
+/* FIREWORK SEQUENCE */
+
 function playFireworks() {
-    const first = gameSounds.firework1;
+    const first = gameSounds.firework1.cloneNode();
 
     first.onended = () => {
         playSound("firework2");
     };
 
-    playSound("firework1");
+    first.play().catch(() => {});
 }
 
 
@@ -1310,8 +1283,6 @@ let pickerScrollStart = 0;
 let pickerMoved = false;
 let ignorePickerClick = false;
 
-/* Mouse wheel scrolls the picker horizontally - 3x speed */
-
 modePicker.addEventListener("wheel", event => {
     if (modePicker.scrollWidth <= modePicker.clientWidth) return;
 
@@ -1323,8 +1294,6 @@ modePicker.addEventListener("wheel", event => {
             : event.deltaY) * 3;
 }, { passive: false });
 
-/* Click and drag with a mouse */
-
 modePicker.addEventListener("pointerdown", event => {
     if (event.pointerType !== "mouse" || event.button !== 0) return;
 
@@ -1335,8 +1304,6 @@ modePicker.addEventListener("pointerdown", event => {
 
     modePicker.classList.add("dragging");
 });
-
-/* Track movement globally without capturing the pointer */
 
 window.addEventListener("pointermove", event => {
     if (!pickerIsDragging) return;
@@ -1369,8 +1336,6 @@ function stopPickerDrag() {
 
 window.addEventListener("pointerup", stopPickerDrag);
 window.addEventListener("pointercancel", stopPickerDrag);
-
-/* Prevent accidental clicks after dragging */
 
 modePicker.addEventListener("click", event => {
     if (ignorePickerClick) {
