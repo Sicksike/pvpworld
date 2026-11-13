@@ -1,4 +1,1216 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PvPWorld | Game Selector</title>
+<link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
+
+<link rel="icon" type="image/avif"
+href="https://user54606.na.imgto.link/public/20261111/9f4dc652ec67205b06cb67bd-pvp-world-logo.avif">
+
+<style>
+:root {
+    --background: #101722;
+    --card: #192536;
+    --border: #293548;
+    --purple: #a18bea;
+    --text: #f0f2f5;
+    --muted: #aab5c5;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    min-height: 100vh;
+    background: var(--background);
+    color: var(--text);
+    font-family: 'Minecraftia', monospace;
+    overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* SERVER STATUS */
+
+.status-bar {
+    background: #111b29;
+    border-bottom: 1px solid #293548;
+    padding: 10px 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: #aab5c5;
+    font-size: 10px;
+    text-align: center;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #888;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.status-dot.online {
+    background: #55d68b;
+    box-shadow: 0 0 8px rgba(85,214,139,.5);
+}
+
+.status-dot.offline {
+    background: #e45b66;
+    box-shadow: 0 0 8px rgba(228,91,102,.4);
+}
+
+#server-status { color: #f0f2f5; }
+#player-count { color: #aab5c5; }
+
+/* HEADER - MATCHES RULES.HTML */
+
+header {
+    background: #151f2d;
+    border-bottom: 1px solid #293548;
+    padding: 18px 0;
+}
+
+.header-content {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    color: #b9a4ff;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.back-button {
+    background: #202d40;
+    border: 1px solid #39485e;
+    padding: 11px 17px;
+    border-radius: 7px;
+    font-size: 10px;
+    transition: .2s ease;
+}
+
+.back-button:hover {
+    background: #35445d;
+    border-color: #a18bea;
+    transform: scale(1.04);
+}
+
+/* PAGE */
+
+.page {
+    width: 100%;
+    min-height: calc(100vh - 150px);
+    padding: 30px 15px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    margin: 12px 0 8px;
+    text-align: center;
+    font-size: clamp(22px,4vw,34px);
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    color: var(--muted);
+    text-align: center;
+    font-size: 11px;
+}
+
+.instruction {
+    margin: 22px 0 5px;
+    color: var(--purple);
+    text-align: center;
+    font-size: 10px;
+}
+
+.round-label {
+    margin-top: 18px;
+    color: var(--purple);
+    font-size: 11px;
+    text-align: center;
+}
+
+/* WHEEL AREA */
+
+.wheel-area {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    min-height: 650px;
+    position: relative;
+    margin-top: 5px;
+    padding-bottom: 75px;
+}
+
+.wheel-container {
+    width: min(96vw,90vh,1000px);
+    height: min(96vw,90vh,1000px);
+    max-width: 1000px;
+    max-height: 1000px;
+    position: relative;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    animation: wheelAppear .7s ease forwards;
+}
+
+.wheel-container.show { display: flex; }
+
+@keyframes wheelAppear {
+    from { opacity: 0; transform: scale(.75); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.wheel-ring {
+    position: absolute;
+    width: 96%;
+    height: 96%;
+    border: 1px solid rgba(161,139,234,.15);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.wheel-rotator {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 50%;
+    animation: slowSpin 45s linear infinite;
+}
+
+@keyframes slowSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* MODE ICONS */
+
+.mode-item {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 110px;
+    height: 125px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%,-50%);
+    cursor: pointer;
+}
+
+.mode-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: counterSpin 45s linear infinite;
+    transition: filter .2s;
+}
+
+@keyframes counterSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
+}
+
+.mode-item img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    image-rendering: pixelated;
+    filter: none;
+    transition: transform .25s ease, filter .25s ease;
+}
+
+.mode-item:hover { z-index: 20; }
+
+.mode-item:hover img {
+    transform: scale(1.3);
+    filter: drop-shadow(0 0 14px rgba(161,139,234,.85));
+}
+
+.mode-name {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 2px;
+    color: white;
+    font-size: 9px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    text-shadow: 0 2px 8px black;
+    transition: opacity .2s;
+}
+
+.mode-item:hover .mode-name { opacity: 1; }
+
+/* SELECTED MODE */
+
+.mode-item.chosen img {
+    filter: drop-shadow(0 0 18px rgba(161,139,234,1));
+    transform: scale(1.25);
+}
+
+.mode-item.chosen .mode-name {
+    opacity: 1;
+    color: var(--purple);
+}
+
+.mode-item.chosen {
+    z-index: 25;
+}
+
+/* POP ANIMATION */
+
+.mode-item.popping {
+    animation: modePop .4s ease forwards;
+    pointer-events: none;
+}
+
+@keyframes modePop {
+    0% { opacity: 1; scale: 1; }
+    50% { opacity: .7; scale: 1.3; }
+    100% { opacity: 0; scale: 0; }
+}
+
+/* START BUTTON */
+
+.start-button {
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    border: 2px solid var(--purple);
+    background: #192536;
+    color: white;
+    font-family: 'Minecraftia',sans-serif;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 0 35px rgba(161,139,234,.18);
+    transition: .25s;
+}
+
+.start-button:hover {
+    transform: scale(1.08);
+    background: #222f43;
+    box-shadow: 0 0 45px rgba(161,139,234,.4);
+}
+
+.start-button.pop { animation: popOut .35s ease forwards; }
+
+@keyframes popOut {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.25); opacity: .7; }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+/* BUTTONS */
+
+.wheel-actions {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    z-index: 30;
+}
+
+.continue-button,
+.reset-button,
+.play-again-button {
+    display: none;
+    padding: 15px 35px;
+    background: #192536;
+    color: white;
+    border: 1px solid var(--purple);
+    border-radius: 6px;
+    font-family: 'Minecraftia',sans-serif;
+    font-size: 11px;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(161,139,234,.15);
+    transition: .2s ease;
+}
+
+.continue-button.show,
+.reset-button.show,
+.play-again-button.show {
+    display: block;
+    animation: continueAppear .35s ease forwards;
+}
+
+.continue-button:hover,
+.reset-button:hover,
+.play-again-button:hover {
+    background: #26344a;
+    box-shadow: 0 0 25px rgba(161,139,234,.4);
+    transform: scale(1.05);
+}
+
+.reset-button {
+    color: var(--purple);
+    padding: 13px 22px;
+    font-size: 10px;
+}
+
+@keyframes continueAppear {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* FINAL SCREEN */
+
+.final-screen {
+    display: none;
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    padding: 35px 20px;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: resultsAppear .7s ease forwards;
+}
+
+.final-screen.show {
+    display: flex;
+}
+
+@keyframes resultsAppear {
+    from { opacity: 0; transform: translateY(25px) scale(.9); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.final-heading {
+    color: var(--purple);
+    font-size: clamp(18px,4vw,26px);
+    margin-bottom: 30px;
+}
+
+.final-card {
+    width: 100%;
+    max-width: 380px;
+    padding: 35px 20px;
+    border: 2px solid var(--purple);
+    border-radius: 14px;
+    background: rgba(25,37,54,.85);
+    box-shadow: 0 0 40px rgba(161,139,234,.2);
+}
+
+.final-card img {
+    width: 190px;
+    height: 190px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    filter: drop-shadow(0 0 15px rgba(161,139,234,.35));
+}
+
+.final-card h2 {
+    margin-top: 22px;
+    font-size: 17px;
+    font-weight: normal;
+    color: white;
+}
+
+.final-question {
+    margin-top: 35px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.play-again-button.show {
+    display: block;
+    width: fit-content;
+    margin: 22px auto 0;
+}
+
+/* LEADERBOARD SCREEN */
+
+.leaderboard-screen {
+    display: none;
+    width: 100%;
+    max-width: 850px;
+    margin: auto;
+    padding: 35px 15px;
+    text-align: center;
+    animation: resultsAppear .7s ease forwards;
+}
+
+.leaderboard-screen.show {
+    display: block;
+}
+
+.leaderboard-heading {
+    color: var(--purple);
+    font-size: clamp(17px,4vw,25px);
+    margin-bottom: 12px;
+}
+
+/* HORIZONTAL MODE PICKER */
+
+.mode-picker {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 18px;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 25px 10px;
+    margin: 20px 0;
+    scroll-behavior: smooth;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    touch-action: pan-x;
+    cursor: grab;
+    scrollbar-width: thin;
+    scrollbar-color: var(--purple) #192536;
+}
+
+.mode-picker.dragging {
+    cursor: grabbing;
+    scroll-behavior: auto;
+    scroll-snap-type: none;
+    user-select: none;
+}
+
+.mode-picker::-webkit-scrollbar {
+    height: 7px;
+}
+
+.mode-picker::-webkit-scrollbar-track {
+    background: #192536;
+    border-radius: 10px;
+}
+
+.mode-picker::-webkit-scrollbar-thumb {
+    background: var(--purple);
+    border-radius: 10px;
+}
+
+.report-mode {
+    flex: 0 0 85px;
+    min-width: 85px;
+    height: 90px;
+    border: 1px solid var(--border);
+    background: #192536;
+    border-radius: 9px;
+    cursor: pointer;
+    scroll-snap-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    transition: .2s;
+    color: white;
+}
+
+.report-mode:hover,
+.report-mode.selected {
+    border-color: var(--purple);
+    background: #29334b;
+    box-shadow: 0 0 15px rgba(161,139,234,.3);
+    transform: translateY(-4px);
+}
+
+.report-mode img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    pointer-events: none;
+}
+
+.report-mode span {
+    font-size: 7px;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.name-entry {
+    max-width: 400px;
+    margin: 15px auto 30px;
+    display: none;
+}
+
+.name-entry.show {
+    display: block;
+    animation: continueAppear .3s ease forwards;
+}
+
+.name-entry input {
+    width: 100%;
+    padding: 15px;
+    background: #101722;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: white;
+    font-family: 'Minecraftia', monospace;
+    font-size: 10px;
+    outline: none;
+}
+
+.name-entry input:focus {
+    border-color: var(--purple);
+}
+
+.name-entry button {
+    margin-top: 12px;
+}
+
+.leaderboard {
+    margin: 35px auto 0;
+    max-width: 650px;
+    text-align: left;
+}
+
+.leaderboard h2 {
+    text-align: center;
+    color: var(--purple);
+    font-size: 16px;
+    margin-bottom: 18px;
+}
+
+.leaderboard-row {
+    display: grid;
+    grid-template-columns: 40px 1fr 1fr 75px;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    margin: 7px 0;
+    background: #192536;
+    border: 1px solid #293548;
+    border-radius: 7px;
+    font-size: 8px;
+}
+
+.leaderboard-row img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.leaderboard-mode {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.leaderboard-rank {
+    color: var(--purple);
+}
+
+.leaderboard-count {
+    color: var(--muted);
+    text-align: right;
+}
+
+.leaderboard-message {
+    text-align: center;
+    color: var(--muted);
+    font-size: 9px;
+    margin: 15px 0;
+}
+
+/* FOOTER */
+
+.footer {
+    padding: 20px;
+    text-align: center;
+    color: #657286;
+    font-size: 9px;
+}
+
+/* MOBILE */
+
+@media (max-width:600px) {
+    .header-content {
+        flex-direction: column;
+    }
+
+    .status-bar {
+        flex-wrap: wrap;
+        gap: 7px;
+    }
+
+    .status-content { gap: 9px; font-size: 9px; }
+    .page { padding-top: 25px; }
+    .wheel-area { min-height: 470px; }
+    .wheel-container { width: 96vw; height: 96vw; }
+    .wheel-ring { width: 97%; height: 97%; }
+    .mode-item { width: 75px; height: 95px; }
+    .mode-item img { width: 65px; height: 65px; }
+    .mode-name { font-size: 7px; }
+    .start-button { width: 145px; height: 145px; font-size: 14px; }
+    .wheel-actions { bottom: 0; }
+    .continue-button { font-size: 9px; }
+    .reset-button { font-size: 9px; }
+    .final-card img { width: 145px; height: 145px; }
+    .final-card h2 { font-size: 13px; }
+
+    .leaderboard-row {
+        grid-template-columns: 25px 1fr 1fr 50px;
+        gap: 5px;
+        font-size: 7px;
+    }
+}
+
+@media (max-width:450px) {
+    h1 { font-size: 21px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SERVER STATUS -->
+
+<div class="status-bar">
+    <span class="status-dot" id="server-status-dot"></span>
+    <span id="server-status">Checking server status...</span>
+    <span id="player-count"></span>
+</div>
+
+<!-- HEADER -->
+
+<header>
+    <div class="header-content">
+        <div class="logo">PvPWorld</div>
+
+        <a href="index.html" class="back-button">
+            Back to Home
+        </a>
+    </div>
+</header>
+
+<main class="page">
+
+    <h1>GAME SELECTOR</h1>
+    <p class="subtitle">Find your next challenge.</p>
+
+    <p class="instruction" id="instruction">
+        Select a mode to advance to the next round.
+    </p>
+
+    <p class="round-label" id="round-label">ROUND 1</p>
+
+    <div class="wheel-area" id="wheel-area">
+
+        <button class="start-button" id="start-button" onclick="startGame()">
+            START<br>GAME
+        </button>
+
+        <div class="wheel-container" id="wheel-container">
+            <div class="wheel-ring"></div>
+            <div class="wheel-rotator" id="wheel-rotator"></div>
+        </div>
+
+        <div class="wheel-actions" id="wheel-actions">
+            <button class="continue-button" id="continue-button" onclick="continueGame()">
+                CONTINUE
+            </button>
+
+            <button class="reset-button" id="reset-button" onclick="resetGame()">
+                RESET MODES
+            </button>
+        </div>
+
+    </div>
+
+    <!-- FINAL RESULT -->
+
+    <div class="final-screen" id="final-screen">
+
+        <h2 class="final-heading">YOUR GAMEMODE IS:</h2>
+
+        <div class="final-card">
+            <img id="final-image" src="" alt="">
+            <h2 id="final-name"></h2>
+        </div>
+
+        <p class="final-question">WHAT WAS YOUR GAMEMODE?</p>
+
+        <button class="play-again-button show" onclick="showLeaderboardScreen()">
+            CONTINUE
+        </button>
+
+    </div>
+
+    <!-- LEADERBOARD / MODE REPORT -->
+
+    <div class="leaderboard-screen" id="leaderboard-screen">
+
+        <h2 class="leaderboard-heading">WHAT WAS YOUR GAMEMODE?</h2>
+        <p class="subtitle">Scroll sideways and select the mode you played.</p>
+
+        <div class="mode-picker" id="mode-picker"></div>
+
+        <div class="name-entry" id="name-entry">
+            <p class="instruction" id="selected-mode-label"></p>
+
+            <input
+                id="player-name"
+                type="text"
+                maxlength="16"
+                placeholder="ENTER YOUR MINECRAFT USERNAME"
+                autocomplete="off"
+            >
+
+            <button class="continue-button show" id="submit-button" onclick="submitLeaderboard()">
+                SUBMIT
+            </button>
+        </div>
+
+        <p class="leaderboard-message" id="leaderboard-message"></p>
+
+        <div class="leaderboard">
+            <h2>COMMUNITY LEADERBOARD</h2>
+            <div id="leaderboard-list">
+                <p class="leaderboard-message">Loading leaderboard...</p>
+            </div>
+        </div>
+
+        <button class="play-again-button show" onclick="resetGame()">
+            PLAY AGAIN
+        </button>
+
+    </div>
+
+</main>
+
+<footer class="footer">
+    PvPWorld © 2026
+</footer>
+
+<script>
+
+/* LEADERBOARD WORKER URL */
+
+const LEADERBOARD_API = "https://pvpworld-leaderboard.tiao9002.workers.dev";
+
+
+/* SERVER STATUS */
+
+async function updateServerStatus() {
+    const status = document.getElementById("server-status");
+    const players = document.getElementById("player-count");
+    const dot = document.getElementById("server-status-dot");
+
+    try {
+        const response = await fetch(
+            "https://api.mcsrvstat.us/3/play2.eternalzero.cloud:26419"
+        );
+
+        if (!response.ok) throw new Error("Status API unavailable");
+
+        const data = await response.json();
+
+        if (data.online === true) {
+            status.textContent = "Server Online";
+            dot.className = "status-dot online";
+
+            const online = data.players?.online ?? 0;
+            const max = data.players?.max ?? "?";
+
+            players.textContent = "• " + online + "/" + max + " Players Online";
+        } else {
+            status.textContent = "Server Offline";
+            dot.className = "status-dot offline";
+            players.textContent = "";
+        }
+
+    } catch (error) {
+        status.textContent = "Status Unavailable";
+        dot.className = "status-dot";
+        players.textContent = "";
+    }
+}
+
+updateServerStatus();
+setInterval(updateServerStatus, 300000);
+
+
+/* TEXTURE BASE URL */
+
+const textureBase =
+    "https://mcasset.cloud/1.21.11/assets/minecraft/textures/item/";
+
+
+/* GAME MODES */
+
+const gameModes = [
+    {
+        name: "Spear Mace",
+        image: "https://media.forgecdn.net/avatars/thumbnails/1678/399/256/256/639066907617132686.png"
+    },
+    {
+        name: "Mace",
+        image: "https://minecraft.wiki/images/Enchanted_Mace.gif?7c432"
+    },
+    {
+        name: "UHC",
+        image: "https://user54606.na.imgto.link/public/20261112/d64658ca17c25ad0a8b3cd68-image.avif"
+    },
+    {
+        name: "Sword",
+        image: "https://minecraft.wiki/images/Enchanted_Diamond_Sword.gif?f741f"
+    },
+    {
+        name: "Axe",
+        image: "https://user54606.na.imgto.link/public/20261112/ad2b2547cdbebc781fcb8ca1-image.avif"
+    },
+    {
+        name: "Crystal",
+        image: "https://user54606.na.imgto.link/public/20261112/82cf8fc49d2809038a3bc578-image.avif"
+    },
+    {
+        name: "Pot",
+        image: "https://user54606.na.imgto.link/public/20261112/1b5fc7ca69d09ddf7357fa5f-image.avif"
+    },
+    {
+        name: "Nethpot",
+        image: "https://minecraft.wiki/images/thumb/Enchanted_Netherite_Helmet_%28item%29.gif/120px-Enchanted_Netherite_Helmet_%28item%29.gif?0fb88"
+    },
+    {
+        name: "Cart",
+        image: "https://user54606.na.imgto.link/public/20261112/2e67c8091bfd6d78045a8504-image.avif"
+    },
+    {
+        name: "HT3 Cart",
+        image: "https://user54606.na.imgto.link/public/20261112/32c6420988ac5e64202a539e-image.avif"
+    },
+    {
+        name: "SMP",
+        image: "https://user54606.na.imgto.link/public/20261112/070c68f304f28a15e71f0458-image.avif"
+    },
+    {
+        name: "Diamond SMP",
+        image: "https://user54606.na.imgto.link/public/20261112/545efb1c38f8a9f0715e12ef-image.avif"
+    },
+    {
+        name: "Explosive Diarrhea",
+        image: "https://user54606.na.imgto.link/public/20261112/b03b5ad7daf79bc1a6aa7d67-image.avif"
+    }
+];
+
+
+/* RANDOM NUMBER GENERATOR */
+
+function randomIndex(max) {
+    if (window.crypto && window.crypto.getRandomValues) {
+        const randomValues = new Uint32Array(1);
+        window.crypto.getRandomValues(randomValues);
+        return randomValues[0] % max;
+    }
+
+    return Math.floor(Math.random() * max);
+}
+
+
+/* SHUFFLE */
+
+function shuffleArray(array) {
+    const shuffled = [...array];
+
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = randomIndex(i + 1);
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+
+    return shuffled;
+}
+
+
+/* GAME STATE */
+
+let currentRound = 1;
+let currentModes = [];
+let previousWinner = null;
+let selectedMode = null;
+let selectionLocked = false;
+let selectedReportMode = null;
+
+
+/* ROUND SETTINGS */
+
+function getRoundSize() {
+    if (currentRound === 1) return 5;
+    if (currentRound === 2) return 4;
+    if (currentRound === 3) return 3;
+    return 2;
+}
+
+
+/* BUILD ROUND MODES */
+
+function getRoundModes() {
+    const randomCount = currentRound === 1
+        ? 5
+        : getRoundSize() - 1;
+
+    const excludedNames = previousWinner
+        ? [previousWinner.name]
+        : [];
+
+    const randomModes = shuffleArray(
+        gameModes.filter(mode => !excludedNames.includes(mode.name))
+    ).slice(0, randomCount);
+
+    if (previousWinner) {
+        return [previousWinner, ...randomModes];
+    }
+
+    return randomModes;
+}
+
+
+/* CREATE WHEEL */
+
+function createWheel() {
+    const wheel = document.getElementById("wheel-rotator");
+    wheel.innerHTML = "";
+
+    currentModes = getRoundModes();
+    selectedMode = null;
+    selectionLocked = false;
+
+    const wheelSize = wheel.parentElement.getBoundingClientRect().width;
+    const radius = wheelSize * 0.425;
+
+    currentModes.forEach((mode, index) => {
+        const angle =
+            (index / currentModes.length) * Math.PI * 2 - Math.PI / 2;
+
+        const x = Math.cos(angle) * radius;
+        const y = Math.sin(angle) * radius;
+
+        const item = document.createElement("div");
+        item.className = "mode-item";
+
+        item.style.left = `calc(50% + ${x}px)`;
+        item.style.top = `calc(50% + ${y}px)`;
+
+        const content = document.createElement("div");
+        content.className = "mode-content";
+
+        const image = document.createElement("img");
+        image.src = mode.image;
+        image.alt = mode.name;
+        image.draggable = false;
+
+        image.onerror = function() {
+            this.onerror = null;
+            this.src = textureBase + "diamond.png";
+        };
+
+        const name = document.createElement("div");
+        name.className = "mode-name";
+        name.textContent = mode.name;
+
+        content.appendChild(image);
+        content.appendChild(name);
+        item.appendChild(content);
+        wheel.appendChild(item);
+
+        item.addEventListener("click", () => chooseMode(mode, item));
+    });
+}
+
+
+/* START GAME */
+
+function startGame() {
+    const button = document.getElementById("start-button");
+    const wheel = document.getElementById("wheel-container");
+
+    if (wheel.classList.contains("show")) return;
+
+    button.classList.add("pop");
+
+    setTimeout(() => {
+        button.style.display = "none";
+        wheel.classList.add("show");
+
+        document.getElementById("reset-button").classList.add("show");
+
+        createWheel();
+    }, 350);
+}
+
+
+/* CHOOSE MODE */
+
+function chooseMode(mode, item) {
+    if (selectionLocked) return;
+
+    selectionLocked = true;
+    selectedMode = mode;
+
+    const rotator = document.getElementById("wheel-rotator");
+
+    rotator.style.animationPlayState = "paused";
+
+    item.classList.add("chosen");
+
+    document.querySelectorAll(".mode-item").forEach(otherItem => {
+        if (otherItem !== item) {
+            otherItem.classList.add("popping");
+        }
+    });
+
+    document.getElementById("continue-button").classList.add("show");
+}
+
+
+/* CONTINUE TO NEXT ROUND */
+
+function continueGame() {
+    if (!selectedMode || !selectionLocked) return;
+
+    previousWinner = selectedMode;
+
+    document.getElementById("continue-button").classList.remove("show");
+
+    if (currentRound === 4) {
+        showFinalScreen();
+        return;
+    }
+
+    currentRound++;
+
+    document.getElementById("round-label").textContent =
+        "ROUND " + currentRound;
+
+    const wheel = document.getElementById("wheel-container");
+    const rotator = document.getElementById("wheel-rotator");
+
+    wheel.classList.remove("show");
+
+    rotator.style.animation = "none";
+    rotator.offsetHeight;
+    rotator.style.animation = "";
+    rotator.style.animationPlayState = "running";
+
+    setTimeout(() => {
+        wheel.classList.add("show");
+        createWheel();
+    }, 350);
+}
+
+
+/* FINAL SCREEN */
+
+function showFinalScreen() {
+    const wheelArea = document.getElementById("wheel-area");
+    const finalScreen = document.getElementById("final-screen");
+
+    document.getElementById("final-image").src = previousWinner.image;
+    document.getElementById("final-image").alt = previousWinner.name;
+
+    document.getElementById("final-image").onerror = function() {
+        this.onerror = null;
+        this.src = textureBase + "diamond.png";
+    };
+
+    document.getElementById("final-name").textContent = previousWinner.name;
+
+    wheelArea.style.display = "none";
+    document.getElementById("round-label").style.display = "none";
+    document.getElementById("instruction").style.display = "none";
+
+    finalScreen.classList.add("show");
+}
+
+
+/* SHOW MODE REPORT + LEADERBOARD */
+
+function showLeaderboardScreen() {
+    document.getElementById("final-screen").classList.remove("show");
+    document.getElementById("leaderboard-screen").classList.add("show");
+
+    const picker = document.getElementById("mode-picker");
+    picker.innerHTML = "";
+
+    selectedReportMode = null;
+    document.getElementById("name-entry").classList.remove("show");
+    document.getElementById("player-name").value = "";
+    document.getElementById("leaderboard-message").textContent = "";
+
+    gameModes.forEach(mode => {
+        const button = document.createElement("button");
+        button.className = "report-mode";
+        button.type = "button";
+
+        const image = document.createElement("img");
+        image.src = mode.image;
+        image.alt = mode.name;
+        image.onerror = function() {
+            this.onerror = null;
+            this.src = textureBase + "diamond.png";
+        };
+
+        const label = document.createElement("span");
+        label.textContent = mode.name;
+
+        button.appendChild(image);
+        button.appendChild(label);
+
+        button.addEventListener("click", () => {
+            selectedReportMode = mode;
+
+            document.querySelectorAll(".report-mode").forEach(item => {
+                item.classList.remove("selected");
+            });
+
+            button.classList.add("selected");
+
+            document.getElementById("name-entry").classList.add("show");
+            document.getElementById("selected-mode-label").textContent =
+                "SELECTED: " + mode.name;
+
+            document.getElementById("player-name").focus();
+        });
+
+        picker.appendChild(button);
+    });
+
+    picker.scrollLeft = 0;
+
+    loadLeaderboard();
+}
+
+
 /* MODE PICKER MOUSE DRAG + WHEEL SCROLL */
 
 const modePicker = document.getElementById("mode-picker");
@@ -77,3 +1289,189 @@ modePicker.addEventListener("click", event => {
         event.stopPropagation();
     }
 }, true);
+
+
+/* SUBMIT LEADERBOARD ENTRY */
+
+async function submitLeaderboard() {
+    const nameInput = document.getElementById("player-name");
+    const message = document.getElementById("leaderboard-message");
+    const button = document.getElementById("submit-button");
+
+    const name = nameInput.value.trim();
+
+    if (!selectedReportMode) {
+        message.textContent = "PLEASE SELECT A GAMEMODE.";
+        return;
+    }
+
+    if (!/^[a-zA-Z0-9_]{2,16}$/.test(name)) {
+        message.textContent =
+            "USE 2-16 CHARACTERS: LETTERS, NUMBERS OR UNDERSCORES.";
+        return;
+    }
+
+    if (LEADERBOARD_API.includes("PASTE_YOUR_WORKER_URL")) {
+        message.textContent = "LEADERBOARD IS NOT CONNECTED YET.";
+        return;
+    }
+
+    button.disabled = true;
+    button.textContent = "SUBMITTING...";
+    message.textContent = "";
+
+    try {
+        const response = await fetch(LEADERBOARD_API + "/submit", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: name,
+                mode: selectedReportMode.name
+            })
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.error || "Submission failed.");
+        }
+
+        message.textContent = "SUBMITTED TO THE LEADERBOARD!";
+        nameInput.value = "";
+
+        await loadLeaderboard();
+
+    } catch (error) {
+        message.textContent = error.message || "COULD NOT SUBMIT.";
+    } finally {
+        button.disabled = false;
+        button.textContent = "SUBMIT";
+    }
+}
+
+
+/* LOAD LEADERBOARD */
+
+async function loadLeaderboard() {
+    const list = document.getElementById("leaderboard-list");
+
+    if (LEADERBOARD_API.includes("PASTE_YOUR_WORKER_URL")) {
+        list.innerHTML =
+            '<p class="leaderboard-message">CONNECT THE LEADERBOARD WORKER TO DISPLAY RESULTS.</p>';
+        return;
+    }
+
+    try {
+        const response = await fetch(LEADERBOARD_API + "/leaderboard");
+
+        if (!response.ok) throw new Error("Leaderboard unavailable.");
+
+        const data = await response.json();
+
+        list.innerHTML = "";
+
+        if (!data.entries || data.entries.length === 0) {
+            list.innerHTML =
+                '<p class="leaderboard-message">NO SUBMISSIONS YET. BE THE FIRST!</p>';
+            return;
+        }
+
+        data.entries.forEach((entry, index) => {
+            const mode = gameModes.find(item => item.name === entry.mode);
+
+            const row = document.createElement("div");
+            row.className = "leaderboard-row";
+
+            const rank = document.createElement("span");
+            rank.className = "leaderboard-rank";
+            rank.textContent = "#" + (index + 1);
+
+            const player = document.createElement("span");
+            player.textContent = entry.name;
+
+            const modeCell = document.createElement("div");
+            modeCell.className = "leaderboard-mode";
+
+            if (mode) {
+                const image = document.createElement("img");
+                image.src = mode.image;
+                image.alt = "";
+                image.onerror = function() {
+                    this.onerror = null;
+                    this.src = textureBase + "diamond.png";
+                };
+                modeCell.appendChild(image);
+            }
+
+            const modeName = document.createElement("span");
+            modeName.textContent = entry.mode;
+            modeCell.appendChild(modeName);
+
+            const count = document.createElement("span");
+            count.className = "leaderboard-count";
+            count.textContent = entry.mode_count + " votes";
+
+            row.appendChild(rank);
+            row.appendChild(player);
+            row.appendChild(modeCell);
+            row.appendChild(count);
+
+            list.appendChild(row);
+        });
+
+    } catch {
+        list.innerHTML =
+            '<p class="leaderboard-message">LEADERBOARD UNAVAILABLE. TRY AGAIN LATER.</p>';
+    }
+}
+
+
+/* RESET / PLAY AGAIN */
+
+function resetGame() {
+    currentRound = 1;
+    currentModes = [];
+    previousWinner = null;
+    selectedMode = null;
+    selectionLocked = false;
+    selectedReportMode = null;
+
+    const wheelArea = document.getElementById("wheel-area");
+    const wheel = document.getElementById("wheel-container");
+    const rotator = document.getElementById("wheel-rotator");
+    const button = document.getElementById("start-button");
+
+    wheelArea.style.display = "flex";
+    wheel.classList.remove("show");
+
+    rotator.innerHTML = "";
+    rotator.style.animation = "none";
+    rotator.offsetHeight;
+    rotator.style.animation = "";
+    rotator.style.animationPlayState = "running";
+
+    button.classList.remove("pop");
+    button.style.display = "block";
+
+    document.getElementById("round-label").textContent = "ROUND 1";
+    document.getElementById("round-label").style.display = "block";
+
+    document.getElementById("instruction").style.display = "block";
+
+    document.getElementById("continue-button").classList.remove("show");
+    document.getElementById("reset-button").classList.remove("show");
+
+    document.getElementById("final-screen").classList.remove("show");
+    document.getElementById("leaderboard-screen").classList.remove("show");
+
+    document.getElementById("name-entry").classList.remove("show");
+    document.getElementById("player-name").value = "";
+    document.getElementById("leaderboard-message").textContent = "";
+}
+
+</script>
+
+</body>
+</html>
