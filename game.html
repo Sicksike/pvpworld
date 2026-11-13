@@ -831,9 +831,11 @@ const gameSounds = {
     firework2: new Audio("https://www.image2url.com/r2/default/audio/1794531023284-e6733b03-9d6b-4f51-bb4f-9268cabc699a.ogg")
 };
 
-Object.values(gameSounds).forEach(sound => {
-    sound.preload = "auto";
-    sound.load();
+const audio = sound.cloneNode();
+audio.volume = sound.volume;
+audio.currentTime = 0;
+
+audio.play().catch(() => {});
 });
 
 /* BOOST CLICK SOUND */
