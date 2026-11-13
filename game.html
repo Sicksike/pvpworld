@@ -71,7 +71,7 @@ a { color: inherit; text-decoration: none; }
 #server-status { color: #f0f2f5; }
 #player-count { color: #aab5c5; }
 
-/* HEADER - MATCHES RULES.HTML */
+/* HEADER */
 
 header {
     background: #151f2d;
@@ -820,6 +820,49 @@ h1 {
 const LEADERBOARD_API = "https://pvpworld-leaderboard.tiao9002.workers.dev";
 
 
+/* GAME SOUND EFFECTS */
+/* Replace the five placeholder URLs with your direct audio links. */
+
+const gameSounds = {
+    click: new Audio("https://www.image2url.com/r2/default/audio/1794531204087-8fe655f0-8b51-407d-aeeb-7b196a2891f3.mp3"),
+    chime: new Audio("https://www.image2url.com/r2/default/audio/1794531182915-47f562c5-95c0-499c-a356-ee0375e6d3f2.ogg"),
+    achievement: new Audio("https://www.image2url.com/r2/default/audio/1794531253323-527ff2a7-8930-47e4-9d3c-39f1e345d986.ogg"),
+    firework1: new Audio("https://www.image2url.com/r2/default/audio/1794531067282-58f589b9-a61f-4ecc-87c3-e0e7c587d019.ogg"),
+    firework2: new Audio("https://www.image2url.com/r2/default/audio/1794531023284-e6733b03-9d6b-4f51-bb4f-9268cabc699a.ogg")
+};
+
+Object.values(gameSounds).forEach(sound => {
+    sound.preload = "auto";
+});
+
+function playSound(name) {
+    const sound = gameSounds[name];
+
+    if (!sound || !sound.src || sound.src.includes("PASTE_")) return;
+
+    sound.currentTime = 0;
+    sound.play().catch(error => {
+        console.log("Sound could not play:", error);
+    });
+}
+
+function playFireworks() {
+    const firstFirework = gameSounds.firework1;
+    const secondFirework = gameSounds.firework2;
+
+    if (!firstFirework || !secondFirework) return;
+
+    if (!firstFirework.src || firstFirework.src.includes("PASTE_")) return;
+    if (!secondFirework.src || secondFirework.src.includes("PASTE_")) return;
+
+    firstFirework.onended = () => {
+        playSound("firework2");
+    };
+
+    playSound("firework1");
+}
+
+
 /* SERVER STATUS */
 
 async function updateServerStatus() {
@@ -1074,6 +1117,8 @@ function startGame() {
 function chooseMode(mode, item) {
     if (selectionLocked) return;
 
+    playSound("click");
+
     selectionLocked = true;
     selectedMode = mode;
 
@@ -1097,6 +1142,8 @@ function chooseMode(mode, item) {
 
 function continueGame() {
     if (!selectedMode || !selectionLocked) return;
+
+    playSound("chime");
 
     previousWinner = selectedMode;
 
@@ -1132,6 +1179,8 @@ function continueGame() {
 /* FINAL SCREEN */
 
 function showFinalScreen() {
+    playSound("achievement");
+
     const wheelArea = document.getElementById("wheel-area");
     const finalScreen = document.getElementById("final-screen");
 
@@ -1339,6 +1388,8 @@ async function submitLeaderboard() {
         }
 
         message.textContent = "SUBMITTED TO THE LEADERBOARD!";
+        playFireworks();
+
         nameInput.value = "";
 
         await loadLeaderboard();
