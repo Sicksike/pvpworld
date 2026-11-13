@@ -793,7 +793,7 @@ const LEADERBOARD_API = "https://pvpworld-leaderboard.tiao9002.workers.dev";
 /* GAME SOUND EFFECTS */
 
 const gameSounds = {
-    click: new Audio("https://mp3tourl.com/audio/1794532692914-37f592ce-27bc-47c0-8bb1-5eaab2587ad0.mp3"),
+    click: new Audio("https://mp3tourl.com/audio/1794535854929-0a86149f-36b1-45b4-9c3a-05dd41d6ec17.mp3"),
     chime: new Audio("https://mp3tourl.com/audio/1794532124436-4a8abb2f-025a-42e6-813d-fd13871158e4.ogg"),
     achievement: new Audio("https://www.image2url.com/r2/default/audio/1794531253323-527ff2a7-8930-47e4-9d3c-39f1e345d986.ogg"),
     firework1: new Audio("https://www.image2url.com/r2/default/audio/1794531067282-58f589b9-a61f-4ecc-87c3-e0e7c587d019.ogg"),
@@ -844,7 +844,7 @@ function playSound(name) {
             const gain = clickAudioContext.createGain();
 
             source.buffer = boostedClickBuffer;
-            gain.gain.value = 3.5;
+            gain.gain.value = 7;
 
             source.connect(gain);
             gain.connect(clickAudioContext.destination);
