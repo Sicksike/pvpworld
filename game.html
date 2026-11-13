@@ -829,39 +829,39 @@ const gameSounds = {
     achievement: new Audio("https://www.image2url.com/r2/default/audio/1794531253323-527ff2a7-8930-47e4-9d3c-39f1e345d986.ogg"),
     firework1: new Audio("https://www.image2url.com/r2/default/audio/1794531067282-58f589b9-a61f-4ecc-87c3-e0e7c587d019.ogg"),
     firework2: new Audio("https://www.image2url.com/r2/default/audio/1794531023284-e6733b03-9d6b-4f51-bb4f-9268cabc699a.ogg")
-};
+/* GAME SOUND EFFECTS */
 
 Object.values(gameSounds).forEach(sound => {
     sound.preload = "auto";
 });
 
+/* PRELOAD CLICK SOUND */
+
+gameSounds.click.load();
+
 function playSound(name) {
     const sound = gameSounds[name];
 
-    if (!sound || !sound.src || sound.src.includes("PASTE_")) return;
+    if (!sound) return;
+
+    if (sound.readyState < 2) return;
 
     sound.currentTime = 0;
-    sound.play().catch(error => {
-        console.log("Sound could not play:", error);
-    });
+    sound.play().catch(() => {});
 }
 
 function playFireworks() {
-    const firstFirework = gameSounds.firework1;
-    const secondFirework = gameSounds.firework2;
+    const first = gameSounds.firework1;
+    const second = gameSounds.firework2;
 
-    if (!firstFirework || !secondFirework) return;
+    if (!first || !second) return;
 
-    if (!firstFirework.src || firstFirework.src.includes("PASTE_")) return;
-    if (!secondFirework.src || secondFirework.src.includes("PASTE_")) return;
-
-    firstFirework.onended = () => {
+    first.onended = () => {
         playSound("firework2");
     };
 
     playSound("firework1");
 }
-
 
 /* SERVER STATUS */
 
